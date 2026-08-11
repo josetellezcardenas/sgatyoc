@@ -1,0 +1,26 @@
+{
+  "name": "SGATyOC · Asistencia",
+  "short_name": "SGATyOC",
+  "description": "Asistencia y coordinación de equipo · MD San Martín de Porres",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F4C81",
+  "theme_color": "#0F4C81",
+  "categories": ["business", "productivity"],
+  "lang": "es",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='96' fill='%230F4C81'/><path d='M256 70 L90 130 v140 c0 115 70 175 166 192 96-17 166-77 166-192 V130 Z' fill='none' stroke='white' stroke-width='18' stroke-linejoin='round'/><text x='256' y='295' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='64' fill='white' text-anchor='middle' letter-spacing='2'>SGATyOC</text><text x='256' y='360' font-family='Arial,Helvetica,sans-serif' font-weight='600' font-size='20' fill='%23FFFFFF' text-anchor='middle' letter-spacing='4' opacity='0.85'>ASISTENCIA</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='36' fill='%230F4C81'/><path d='M96 26 L34 48 v52 c0 43 26 65 62 72 36-7 62-29 62-72 V48 Z' fill='none' stroke='white' stroke-width='7' stroke-linejoin='round'/><text x='96' y='110' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='24' fill='white' text-anchor='middle' letter-spacing='1'>SGATyOC</text><text x='96' y='134' font-family='Arial,Helvetica,sans-serif' font-weight='600' font-size='8' fill='%23FFFFFF' text-anchor='middle' letter-spacing='2' opacity='0.85'>ASISTENCIA</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
