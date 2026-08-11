@@ -138,7 +138,7 @@ function flushQueue(){if(S.flushing)return;Cola.all().then(function(it){if(!it.l
 it.forEach(function(x){c=c.then(function(){return api(x);}).then(function(){return Cola.rm(x.id);}).then(refreshSyncUI);});
 c.then(function(){S.flushing=false;toast('ok',it.length+' marca(s) enviadas al sistema.');});});}
 window.addEventListener('online',function(){refreshSyncUI();flushQueue();});window.addEventListener('offline',refreshSyncUI);
-/* ---- LOGIN con Enter y teclado visible ---- */
+/* ---- LOGIN: Enter, teclado visible y SIN carrera de escrituras ---- */
 var pendingUser=null;
 var elDni=$('#loginDni'),elPin=$('#loginPin'),pinNewEl=$('#pinNew'),pinNew2El=$('#pinNew2');
 function kbScroll(el){if(!el)return;el.addEventListener('focus',function(){setTimeout(function(){el.scrollIntoView({block:'center',behavior:'smooth'});},250);});}
@@ -158,11 +158,12 @@ if(pin.length<4){box.textContent='Ingresa tu PIN.';box.classList.add('show');ret
 $('#loginNext').disabled=true;$('#loginNext').textContent='Verificando…';
 api({action:'login',dni:dni,pin:pin}).then(function(r){
 var u=r.user;if(!u){box.textContent='Credenciales inválidas.';box.classList.add('show');return;}
+var isNew=(pin==='0000'&&u.tipo!=='Kiosco');
 if(u.tipo!=='Kiosco'){
-if(u.device&&u.device!==devId()){box.textContent='PIN correcto, pero este dispositivo no está autorizado. Usa “Restablecer dispositivo” desde el Panel o el enlace de recuperación.';box.classList.add('show');return;}
-if(!u.device){api({action:'setDevice',dni:dni,dev:devId()}).catch(function(){});}}
-pendingUser={dni:u.dni,nom:u.nom,tipo:u.tipo,refri:u.refri,device:u.device||devId(),_isNewPin:(pin==='0000'&&u.tipo!=='Kiosco')};
-if(pendingUser._isNewPin){$('#loginForm').hidden=true;$('#pinChange').hidden=false;setTimeout(function(){pinNewEl&&pinNewEl.focus();},150);}
+if(u.device&&u.device!==devId()){box.textContent='PIN correcto, pero este dispositivo no está autorizado. Usa “Restablecer” desde el Panel o el enlace de recuperación.';box.classList.add('show');return;}
+if(!u.device&&!isNew){api({action:'setDevice',dni:dni,dev:devId()}).catch(function(){});}}
+pendingUser={dni:u.dni,nom:u.nom,tipo:u.tipo,refri:u.refri,device:u.device||devId(),_isNewPin:isNew};
+if(isNew){$('#loginForm').hidden=true;$('#pinChange').hidden=false;setTimeout(function(){pinNewEl&&pinNewEl.focus();},150);}
 else finishLogin(pendingUser);
 }).catch(function(e){console.error('login:',e);box.textContent='No se pudo verificar. Revisa tu conexión e intenta de nuevo.';box.classList.add('show');
 }).then(function(){$('#loginNext').disabled=false;$('#loginNext').textContent='Continuar';});});
@@ -175,6 +176,8 @@ if(a.length<4){box.textContent='El PIN debe tener 4 a 6 dígitos.';box.classList
 if(a!==b){box.textContent='Los PIN no coinciden.';box.classList.add('show');return;}
 $('#pinSave').disabled=true;$('#pinSave').textContent='Guardando…';
 api({action:'setPin',dni:pendingUser.dni,pin:a}).then(function(){
+return api({action:'setDevice',dni:pendingUser.dni,dev:devId()}).catch(function(){});
+}).then(function(){
 pendingUser._isNewPin=false;finishLogin(pendingUser);toast('ok','PIN actualizado correctamente.');
 }).catch(function(e){console.error('setPin:',e);box.textContent='No se pudo guardar el PIN. Reintenta.';box.classList.add('show');
 }).then(function(){$('#pinSave').disabled=false;$('#pinSave').textContent='Guardar y entrar';});});
