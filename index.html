@@ -4,43 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0F4C81">
-<meta name="description" content="SGATyOC · Asistencia y coordinación de equipo.">
-<title>SGATyOC · Asistencia Institucional</title>
+<title>SGATyOC · Asistencia</title>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <style>
-:root{
-  --font:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
-  --mono:'SF Mono',Consolas,'Roboto Mono',Menlo,monospace;
-  --r-lg:16px;--r-md:12px;--r-sm:9px;--nav-h:66px;
-  --ease:cubic-bezier(.22,.9,.3,1);
-}
-html[data-theme="light"]{--bg:#EDF1F6;--bg2:#E2E9F1;--surface:#FFFFFF;--surface2:#F4F7FA;--border:#D6DFE9;--text:#16222F;--dim:#59697B;--primary:#0F4C81;--primary2:#0C3D68;--onpri:#FFF;--prisoft:#E1EBF5;--accent:#1173B1;--ok:#178A4C;--onok:#FFF;--oksoft:#E1F3E9;--warn:#B45309;--onwarn:#FFF;--warnsoft:#FBEEDC;--danger:#BE3A3A;--ondanger:#FFF;--dangersoft:#FBE7E5;--info:#0F62A8;--oninfo:#FFF;--infosoft:#E2EDF8;--shadow:0 10px 30px rgba(15,76,129,.10);--shadow-sm:0 2px 10px rgba(15,76,129,.08);--grid-line:rgba(15,76,129,.05)}
-html[data-theme="dark"]{--bg:#121212;--bg2:#17181C;--surface:#1B1D23;--surface2:#22252C;--border:#2E323A;--text:#EAEDF2;--dim:#9BA7B4;--primary:#54A9FF;--primary2:#7BC1FF;--onpri:#071523;--prisoft:#16324C;--accent:#54A9FF;--ok:#3ECF7D;--onok:#052013;--oksoft:#10331F;--warn:#F5A524;--onwarn:#221302;--warnsoft:#3A2A10;--danger:#FF6B5E;--ondanger:#2B0705;--dangersoft:#3D1512;--info:#5AB2FF;--oninfo:#07182B;--infosoft:#122B45;--shadow:0 12px 34px rgba(0,0,0,.5);--shadow-sm:0 2px 10px rgba(0,0,0,.4);--grid-line:rgba(255,255,255,.035)}
-html[data-theme="ocean"]{--bg:#07222E;--bg2:#0A2A38;--surface:#0C2F3E;--surface2:#113A4C;--border:#1E4A5E;--text:#E7F4F4;--dim:#93B8C4;--primary:#2EC4B6;--primary2:#5CD6C9;--onpri:#032A2B;--prisoft:#0E454A;--accent:#2EC4B6;--ok:#38D08B;--onok:#04231A;--oksoft:#0E3A2C;--warn:#FFC24D;--onwarn:#241703;--warnsoft:#403010;--danger:#FF7A6B;--ondanger:#2B0906;--dangersoft:#451B15;--info:#4CC3FF;--oninfo:#04202E;--infosoft:#0E3548;--shadow:0 12px 34px rgba(0,0,0,.45);--shadow-sm:0 2px 10px rgba(0,0,0,.35);--grid-line:rgba(46,196,182,.06)}
-html[data-theme="forest"]{--bg:#EFF3EA;--bg2:#E5EBDC;--surface:#FFFFFF;--surface2:#F6F8F1;--border:#D8E0CB;--text:#22301F;--dim:#5D6B4E;--primary:#386641;--primary2:#2C5234;--onpri:#FFF;--prisoft:#E4EFE3;--accent:#A98467;--ok:#3D9257;--onok:#FFF;--oksoft:#E3F2E4;--warn:#B26205;--onwarn:#FFF;--warnsoft:#F7EBD9;--danger:#B94A3E;--ondanger:#FFF;--dangersoft:#F8E6E1;--info:#46708C;--oninfo:#FFF;--infosoft:#E4EEF2;--shadow:0 10px 30px rgba(56,102,65,.12);--shadow-sm:0 2px 10px rgba(56,102,65,.09);--grid-line:rgba(56,102,65,.055)}
-html[data-theme="sunset"]{--bg:#FBF0E7;--bg2:#F7E5D6;--surface:#FFFDFA;--surface2:#FAF0E6;--border:#EFD9C6;--text:#372317;--dim:#8A6550;--primary:#D1495B;--primary2:#B93C4D;--onpri:#FFF;--prisoft:#FBE3E4;--accent:#F2994A;--ok:#3E9253;--onok:#FFF;--oksoft:#E5F3E5;--warn:#C97408;--onwarn:#FFF;--warnsoft:#FBEBD5;--danger:#C0392B;--ondanger:#FFF;--dangersoft:#F9E3DF;--info:#9C4D77;--oninfo:#FFF;--infosoft:#F4E3EC;--shadow:0 10px 30px rgba(209,73,91,.12);--shadow-sm:0 2px 10px rgba(209,73,91,.09);--grid-line:rgba(209,73,91,.05)}
-html[data-theme="sakura"]{--bg:#FAF4F6;--bg2:#F5EAEF;--surface:#FFFFFF;--surface2:#FBF3F5;--border:#EEDCE2;--text:#3B2B33;--dim:#8A707B;--primary:#A85D75;--primary2:#8F4C63;--onpri:#FFF;--prisoft:#F6E6EB;--accent:#E5989B;--ok:#4C9A62;--onok:#FFF;--oksoft:#E6F3E9;--warn:#B5822E;--onwarn:#FFF;--warnsoft:#F8EFDC;--danger:#C25460;--ondanger:#FFF;--dangersoft:#F9E6E8;--info:#6C7FBF;--oninfo:#FFF;--infosoft:#E9EDF9;--shadow:0 10px 30px rgba(168,93,117,.13);--shadow-sm:0 2px 10px rgba(168,93,117,.09);--grid-line:rgba(168,93,117,.05)}
-
+:root{--font:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--mono:'SF Mono',Consolas,'Roboto Mono',Menlo,monospace;--r-lg:16px;--r-md:12px;--r-sm:9px;--nav-h:66px;--ease:cubic-bezier(.22,.9,.3,1)}
+html[data-theme="light"]{--bg:#EDF1F6;--surface:#FFF;--surface2:#F4F7FA;--border:#D6DFE9;--text:#16222F;--dim:#59697B;--primary:#0F4C81;--onpri:#FFF;--prisoft:#E1EBF5;--accent:#1173B1;--ok:#178A4C;--onok:#FFF;--oksoft:#E1F3E9;--warn:#B45309;--onwarn:#FFF;--warnsoft:#FBEEDC;--danger:#BE3A3A;--ondanger:#FFF;--dangersoft:#FBE7E5;--info:#0F62A8;--oninfo:#FFF;--infosoft:#E2EDF8;--shadow-sm:0 2px 10px rgba(15,76,129,.08);--grid-line:rgba(15,76,129,.05)}
+html[data-theme="dark"]{--bg:#121212;--surface:#1B1D23;--surface2:#22252C;--border:#2E323A;--text:#EAEDF2;--dim:#9BA7B4;--primary:#54A9FF;--onpri:#071523;--prisoft:#16324C;--accent:#54A9FF;--ok:#3ECF7D;--onok:#052013;--oksoft:#10331F;--warn:#F5A524;--onwarn:#221302;--warnsoft:#3A2A10;--danger:#FF6B5E;--ondanger:#2B0705;--dangersoft:#3D1512;--info:#5AB2FF;--oninfo:#07182B;--infosoft:#122B45;--shadow-sm:0 2px 10px rgba(0,0,0,.4);--grid-line:rgba(255,255,255,.035)}
+html[data-theme="ocean"]{--bg:#07222E;--surface:#0C2F3E;--surface2:#113A4C;--border:#1E4A5E;--text:#E7F4F4;--dim:#93B8C4;--primary:#2EC4B6;--onpri:#032A2B;--prisoft:#0E454A;--accent:#2EC4B6;--ok:#38D08B;--onok:#04231A;--oksoft:#0E3A2C;--warn:#FFC24D;--onwarn:#241703;--warnsoft:#403010;--danger:#FF7A6B;--ondanger:#2B0906;--dangersoft:#451B15;--info:#4CC3FF;--oninfo:#04202E;--infosoft:#0E3548;--shadow-sm:0 2px 10px rgba(0,0,0,.35);--grid-line:rgba(46,196,182,.06)}
+html[data-theme="forest"]{--bg:#EFF3EA;--surface:#FFF;--surface2:#F6F8F1;--border:#D8E0CB;--text:#22301F;--dim:#5D6B4E;--primary:#386641;--onpri:#FFF;--prisoft:#E4EFE3;--accent:#A98467;--ok:#3D9257;--onok:#FFF;--oksoft:#E3F2E4;--warn:#B26205;--onwarn:#FFF;--warnsoft:#F7EBD9;--danger:#B94A3E;--ondanger:#FFF;--dangersoft:#F8E6E1;--info:#46708C;--oninfo:#FFF;--infosoft:#E4EEF2;--shadow-sm:0 2px 10px rgba(56,102,65,.09);--grid-line:rgba(56,102,65,.055)}
+html[data-theme="sunset"]{--bg:#FBF0E7;--surface:#FFFDFA;--surface2:#FAF0E6;--border:#EFD9C6;--text:#372317;--dim:#8A6550;--primary:#D1495B;--onpri:#FFF;--prisoft:#FBE3E4;--accent:#F2994A;--ok:#3E9253;--onok:#FFF;--oksoft:#E5F3E5;--warn:#C97408;--onwarn:#FFF;--warnsoft:#FBEBD5;--danger:#C0392B;--ondanger:#FFF;--dangersoft:#F9E3DF;--info:#9C4D77;--oninfo:#FFF;--infosoft:#F4E3EC;--shadow-sm:0 2px 10px rgba(209,73,91,.09);--grid-line:rgba(209,73,91,.05)}
+html[data-theme="sakura"]{--bg:#FAF4F6;--surface:#FFF;--surface2:#FBF3F5;--border:#EEDCE2;--text:#3B2B33;--dim:#8A707B;--primary:#A85D75;--onpri:#FFF;--prisoft:#F6E6EB;--accent:#E5989B;--ok:#4C9A62;--onok:#FFF;--oksoft:#E6F3E9;--warn:#B5822E;--onwarn:#FFF;--warnsoft:#F8EFDC;--danger:#C25460;--ondanger:#FFF;--dangersoft:#F9E6E8;--info:#6C7FBF;--oninfo:#FFF;--infosoft:#E9EDF9;--shadow-sm:0 2px 10px rgba(168,93,117,.09);--grid-line:rgba(168,93,117,.05)}
 *{margin:0;padding:0;box-sizing:border-box}
 [hidden]{display:none !important}
-body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.5;min-height:100dvh;transition:background .4s,color .4s;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.5;min-height:100dvh}
 button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
 button{cursor:pointer;background:none;border:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 .num{font-variant-numeric:tabular-nums}
-
 .bg-fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .bg-fx::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(#000 0%,transparent 78%);-webkit-mask-image:linear-gradient(#000 0%,transparent 78%)}
-.glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:.32}
-.glow.g1{width:520px;height:520px;left:-140px;top:-160px;background:var(--primary);animation:drift 26s ease-in-out infinite alternate}
-.glow.g2{width:420px;height:420px;right:-120px;top:22%;background:var(--accent);opacity:.16;animation:drift 32s ease-in-out infinite alternate-reverse}
-@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,44px) scale(1.12)}}
-
 .shell{position:relative;z-index:1;display:flex;min-height:100dvh}
 .sidebar{width:248px;flex-shrink:0;position:sticky;top:0;height:100dvh;display:none;flex-direction:column;padding:22px 16px;background:var(--surface);border-right:1px solid var(--border)}
 .sb-brand{display:flex;align-items:center;gap:11px;padding:4px 8px 20px;border-bottom:1px solid var(--border)}
 .brand-mark{width:42px;height:42px;flex-shrink:0;color:var(--primary)}
-.sb-brand b{font-size:19px;font-weight:800;letter-spacing:-.02em;display:block;line-height:1.1}
+.sb-brand b{font-size:19px;font-weight:800;display:block;line-height:1.1}
 .sb-brand small{font-size:10.5px;color:var(--dim);font-weight:600;letter-spacing:.09em;text-transform:uppercase}
 .sb-nav{display:flex;flex-direction:column;gap:4px;margin-top:18px;flex:1}
 .sb-nav .navbtn{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;color:var(--dim);font-weight:600;font-size:14px;transition:all .25s var(--ease);text-align:left;width:100%}
@@ -49,15 +37,13 @@ button{cursor:pointer;background:none;border:none}
 .sb-nav .navbtn.on{background:var(--prisoft);color:var(--primary)}
 .sb-user{border-top:1px solid var(--border);padding-top:14px;display:flex;gap:10px;align-items:center}
 .sb-themes{display:flex;gap:6px;padding:12px 8px 0}
-.sb-themes button{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);transition:transform .2s}
-.sb-themes button:hover{transform:scale(1.2)}
-
+.sb-themes button{width:18px;height:18px;border-radius:50%;border:2px solid var(--border)}
 .main{flex:1;min-width:0;display:flex;flex-direction:column}
 .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--surface);border-bottom:1px solid var(--border)}
 .tb-title{min-width:0;flex:1}
-.tb-title h1{font-size:16.5px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-title h1{font-size:16.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tb-title p{font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tb-clock{font-weight:800;font-size:15px;letter-spacing:.02em}
+.tb-clock{font-weight:800;font-size:15px}
 .tb-clock small{display:block;font-size:10px;color:var(--dim);font-weight:600;text-align:right}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;font-size:12px;font-weight:700;border:1px solid transparent;white-space:nowrap}
 .chip svg{width:14px;height:14px}
@@ -67,90 +53,37 @@ button{cursor:pointer;background:none;border:none}
 .chip.info{background:var(--infosoft);color:var(--info)}
 .chip.soft{background:var(--surface2);color:var(--dim);border-color:var(--border)}
 .chip .bdot{min-width:18px;height:18px;border-radius:9px;background:var(--warn);color:var(--onwarn);font-size:10.5px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;padding:0 4px}
-
-.off-banner{display:none;align-items:center;gap:10px;padding:10px 18px;font-size:13px;font-weight:600;background:var(--warnsoft);color:var(--warn);border-bottom:1px solid var(--border);animation:slideDown .4s var(--ease)}
+.off-banner{display:none;align-items:center;gap:10px;padding:10px 18px;font-size:13px;font-weight:600;background:var(--warnsoft);color:var(--warn);border-bottom:1px solid var(--border)}
 .off-banner.show{display:flex}
 .off-banner svg{width:17px;height:17px;flex-shrink:0}
-@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-
 .content{flex:1;padding:20px 18px calc(var(--nav-h) + 34px)}
 .view{display:none}
 .view.active{display:block;animation:viewIn .4s var(--ease)}
 @keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .wrap{max-width:1140px;margin:0 auto}
-
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
 .card-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 18px;border-bottom:1px solid var(--border)}
 .card-h h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:8px}
 .card-h h3 svg{width:16px;height:16px;color:var(--primary)}
 .card-b{padding:18px}
 .micro{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--dim)}
-
-.mark-grid{display:grid;grid-template-columns:1fr;gap:18px}
-.clock-card{padding:26px 22px 20px;text-align:center;position:relative;overflow:hidden}
+.clock-card{padding:22px 20px 18px;text-align:center;position:relative;overflow:hidden}
 .clock-card::after{content:"";position:absolute;inset:auto 0 0 0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent))}
 .greet{font-size:13px;color:var(--dim);font-weight:600}
-.big-clock{font-size:clamp(46px,10vw,62px);font-weight:800;letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums;margin:6px 0 2px}
-.big-date{font-size:13.5px;color:var(--dim);font-weight:600;text-transform:capitalize}
-.steps{display:flex;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.big-clock{font-size:clamp(40px,9vw,54px);font-weight:800;letter-spacing:-.02em;line-height:1.05;font-variant-numeric:tabular-nums;margin:4px 0 2px}
+.big-date{font-size:13px;color:var(--dim);font-weight:600;text-transform:capitalize}
+.steps{display:flex;justify-content:center;margin-top:16px;flex-wrap:wrap}
 .step{display:flex;flex-direction:column;align-items:center;gap:5px;position:relative;flex:1;min-width:70px}
 .step:not(:last-child)::after{content:"";position:absolute;top:12px;left:calc(50% + 16px);width:calc(100% - 32px);height:2px;background:var(--border);border-radius:2px}
 .step.done:not(:last-child)::after{background:var(--ok)}
-.step .pt{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:grid;place-items:center;background:var(--surface);z-index:1;transition:all .4s var(--ease)}
+.step .pt{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:grid;place-items:center;background:var(--surface);z-index:1}
 .step .pt svg{width:12px;height:12px;opacity:0}
 .step.done .pt{background:var(--ok);border-color:var(--ok);color:var(--onok)}
 .step.done .pt svg{opacity:1}
-.step.now .pt{border-color:var(--primary);animation:pulsePt 1.8s infinite}
-@keyframes pulsePt{0%,100%{box-shadow:0 0 0 3px var(--prisoft)}50%{box-shadow:0 0 0 7px var(--prisoft)}}
-.step small{font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+.step.now .pt{border-color:var(--primary);box-shadow:0 0 0 4px var(--prisoft)}
+.step small{font-size:10px;font-weight:700;color:var(--dim);text-transform:uppercase}
 .step.done small{color:var(--ok)}
 .step.now small{color:var(--primary)}
-
-.action-zone{padding:30px 18px 24px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
-.action-wrap{position:relative;width:210px;height:210px;display:grid;place-items:center}
-.pulse-ring{position:absolute;inset:0;border-radius:50%;border:2px solid currentColor;animation:ring 2.6s ease-out infinite;pointer-events:none}
-.pulse-ring.d2{animation-delay:1.3s}
-@keyframes ring{0%{transform:scale(.82);opacity:.8}100%{transform:scale(1.22);opacity:0}}
-.action-btn{width:186px;height:186px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:17px;line-height:1.2;color:var(--onpri);background:var(--primary);box-shadow:0 14px 34px rgba(0,0,0,.22),inset 0 -4px 0 rgba(0,0,0,.14);transition:transform .18s var(--ease),background .5s,filter .3s;padding:18px}
-.action-btn svg{width:34px;height:34px}
-.action-btn:active{transform:scale(.94)}
-.action-btn:hover{filter:brightness(1.07)}
-.action-btn:disabled{cursor:not-allowed;filter:saturate(.4);transform:none}
-.aw[data-state="INGRESO"] .action-btn{background:var(--ok);color:var(--onok)}
-.aw[data-state="SALIDA_REF"] .action-btn{background:var(--warn);color:var(--onwarn)}
-.aw[data-state="RETORNO"] .action-btn{background:var(--info);color:var(--oninfo)}
-.aw[data-state="SALIDA"] .action-btn{background:var(--danger);color:var(--ondanger)}
-.aw[data-state="INGRESO"]{color:var(--ok)}.aw[data-state="SALIDA_REF"]{color:var(--warn)}.aw[data-state="RETORNO"]{color:var(--info)}.aw[data-state="SALIDA"]{color:var(--danger)}
-.aw.done{color:var(--dim)}.aw.done .pulse-ring{display:none}
-.aw.done .action-btn{background:var(--surface2);color:var(--dim);border:2px dashed var(--border);box-shadow:none}
-.action-hint{font-size:13px;color:var(--dim);max-width:340px}
-.action-hint b{color:var(--text)}
-
-.token-chip{display:none;align-items:center;gap:10px;padding:8px 14px;border-radius:99px;background:var(--oksoft);color:var(--ok);font-weight:700;font-size:13px;animation:viewIn .35s var(--ease)}
-.token-chip.show{display:inline-flex}
-.token-chip.expired{background:var(--dangersoft);color:var(--danger)}
-.token-chip .tring{width:20px;height:20px;transform:rotate(-90deg)}
-.token-chip .tring circle{fill:none;stroke:currentColor;stroke-width:2.6;stroke-dasharray:50.27;stroke-linecap:round}
-.token-chip code{font-family:var(--mono);letter-spacing:.14em;font-weight:700}
-
-.geo-grid{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
-.geo-row{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;margin-bottom:10px}
-.geo-row svg{width:17px;height:17px;flex-shrink:0;color:var(--dim)}
-.geo-row .spin{animation:rot 1.1s linear infinite}
-@keyframes rot{to{transform:rotate(360deg)}}
-.geo-note{display:none;margin-top:12px;padding:11px 13px;border-radius:var(--r-sm);background:var(--warnsoft);color:var(--warn);font-size:12.5px;font-weight:600;line-height:1.45;border-left:3px solid var(--warn)}
-.geo-note.show{display:block;animation:viewIn .3s var(--ease)}
-.geofence-viz{width:132px;height:132px;border-radius:50%;position:relative;background:var(--surface2);border:1px solid var(--border);flex-shrink:0}
-.geofence-viz .ring30{position:absolute;inset:24px;border-radius:50%;border:1.5px dashed var(--ok);opacity:.75;transition:border-color .4s}
-.geofence-viz.out .ring30{border-color:var(--warn)}
-.geofence-viz .office{position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px var(--prisoft)}
-.geofence-viz .userdot{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px var(--oksoft);transition:transform 1s var(--ease),background .4s}
-.geofence-viz.out .userdot{background:var(--warn);box-shadow:0 0 0 3px var(--warnsoft)}
-.sim-seg{display:flex;margin-top:14px;border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;width:max-content}
-.sim-seg span{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim);align-self:center;padding:0 8px;text-transform:uppercase}
-.sim-seg button{padding:6px 12px;font-size:12px;font-weight:700;background:var(--surface2);color:var(--dim);transition:all .2s}
-.sim-seg button.on{background:var(--primary);color:var(--onpri)}
-
 .reader-zone{position:relative;height:300px;background:#0C0F14;border-radius:var(--r-md);overflow:hidden;display:grid;place-items:center}
 #qrVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:1;background:#000}
 .qr-ghost{position:absolute;inset:0;display:grid;place-items:center;opacity:.28;z-index:0}
@@ -158,31 +91,50 @@ button{cursor:pointer;background:none;border:none}
 .reader-zone.camera-on .qr-ghost{display:none}
 .scan-frame{position:relative;width:250px;height:250px;max-width:80%;max-height:80%;box-shadow:0 0 0 999px rgba(5,8,12,.62);border-radius:6px;z-index:3}
 .scan-frame .corner{position:absolute;width:30px;height:30px;border:3.5px solid var(--accent)}
-.scan-frame .c1{top:-2px;left:-2px;border-right:none;border-bottom:none;border-radius:6px 0 0 0}
-.scan-frame .c2{top:-2px;right:-2px;border-left:none;border-bottom:none;border-radius:0 6px 0 0}
-.scan-frame .c3{bottom:-2px;left:-2px;border-right:none;border-top:none;border-radius:0 0 0 6px}
-.scan-frame .c4{bottom:-2px;right:-2px;border-left:none;border-top:none;border-radius:0 0 6px 0}
+.scan-frame .c1{top:-2px;left:-2px;border-right:none;border-bottom:none}
+.scan-frame .c2{top:-2px;right:-2px;border-left:none;border-bottom:none}
+.scan-frame .c3{bottom:-2px;left:-2px;border-right:none;border-top:none}
+.scan-frame .c4{bottom:-2px;right:-2px;border-left:none;border-top:none}
 .scan-line{position:absolute;left:8%;right:8%;top:10%;height:2.5px;border-radius:2px;background:var(--accent);box-shadow:0 0 14px var(--accent);opacity:0;z-index:4}
 .reader-zone.scanning .scan-line{opacity:1;animation:scanMove 1.7s ease-in-out infinite}
 @keyframes scanMove{0%,100%{top:8%}50%{top:90%}}
 .reader-zone.ok-flash{animation:okFlash .6s}
 @keyframes okFlash{30%{box-shadow:inset 0 0 0 6px var(--ok)}}
 .scan-status{position:absolute;bottom:12px;left:0;right:0;text-align:center;color:#DDE6F0;font-size:12.5px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.7);z-index:4;padding:0 14px}
-.torch-btn{position:absolute;top:12px;right:12px;z-index:5;width:40px;height:40px;border-radius:50%;background:rgba(20,25,32,.72);color:#EAF2FA;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);transition:all .2s}
+.torch-btn{position:absolute;top:12px;right:12px;z-index:5;width:40px;height:40px;border-radius:50%;background:rgba(20,25,32,.72);color:#EAF2FA;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18)}
 .torch-btn svg{width:18px;height:18px}
 .torch-btn.on{background:var(--warn);color:var(--onwarn)}
 .scan-controls{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center}
-
+.token-chip{display:none;align-items:center;gap:10px;padding:8px 14px;border-radius:99px;background:var(--oksoft);color:var(--ok);font-weight:700;font-size:13px}
+.token-chip.show{display:inline-flex}
+.token-chip.expired{background:var(--dangersoft);color:var(--danger)}
+.token-chip .tring{width:20px;height:20px;transform:rotate(-90deg)}
+.token-chip .tring circle{fill:none;stroke:currentColor;stroke-width:2.6;stroke-dasharray:50.27;stroke-linecap:round}
+.token-chip code{font-family:var(--mono);letter-spacing:.14em;font-weight:700}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--r-sm);font-weight:700;font-size:13.5px;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:all .2s var(--ease)}
 .btn:hover{border-color:var(--primary);color:var(--primary)}
 .btn.primary{background:var(--primary);border-color:var(--primary);color:var(--onpri)}
-.btn.primary:hover{background:var(--primary2);color:var(--onpri)}
+.btn.primary:hover{opacity:.92;color:var(--onpri)}
 .btn svg{width:16px;height:16px}
 .btn.sm{padding:6px 12px;font-size:12px;border-radius:7px}
-.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn:disabled{opacity:.5;cursor:not-allowed}
 .btn.ghost{background:transparent}
-
-.today-item{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px dashed var(--border);animation:viewIn .4s var(--ease)}
+.btn.big{width:100%;justify-content:center;padding:16px;font-size:16px;border-radius:12px}
+.btn.big.st-ok{background:var(--ok);border-color:var(--ok);color:var(--onok)}
+.btn.big.st-warn{background:var(--warn);border-color:var(--warn);color:var(--onwarn)}
+.btn.big.st-info{background:var(--info);border-color:var(--info);color:var(--oninfo)}
+.btn.big.st-danger{background:var(--danger);border-color:var(--danger);color:var(--ondanger)}
+.geo-row{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;margin-bottom:10px}
+.geo-row svg{width:17px;height:17px;flex-shrink:0;color:var(--dim)}
+.geo-row .spin{animation:rot 1.1s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.geofence-viz{width:120px;height:120px;border-radius:50%;position:relative;background:var(--surface2);border:1px solid var(--border);flex-shrink:0;margin-left:auto}
+.geofence-viz .ring30{position:absolute;inset:22px;border-radius:50%;border:1.5px dashed var(--ok);opacity:.75}
+.geofence-viz.out .ring30{border-color:var(--warn)}
+.geofence-viz .office{position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px var(--prisoft)}
+.geofence-viz .userdot{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px;border-radius:50%;background:var(--ok);transition:transform 1s var(--ease),background .4s}
+.geofence-viz.out .userdot{background:var(--warn)}
+.today-item{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px dashed var(--border)}
 .today-item:last-child{border-bottom:none}
 .ti-ico{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
 .ti-ico svg{width:17px;height:17px}
@@ -191,1632 +143,62 @@ button{cursor:pointer;background:none;border:none}
 .today-item .tt small{font-size:11.5px;color:var(--dim)}
 .today-item .tm{font-family:var(--mono);font-weight:700;font-size:14.5px}
 .empty{padding:26px;text-align:center;color:var(--dim);font-size:13px}
-.empty svg{width:30px;height:30px;display:block;margin:0 auto 8px;opacity:.5}
-
-/* En ruta */
 .ruta-intro{font-size:13.5px;color:var(--dim);line-height:1.55;margin-bottom:14px}
 .gps-opt{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 14px;border:1px dashed var(--border);border-radius:var(--r-sm);margin-bottom:10px}
 .gps-opt b{font-size:13.5px;display:block}
-.gps-opt small{font-size:11.5px;color:var(--dim);display:block;margin-top:1px;line-height:1.4}
+.gps-opt small{font-size:11.5px;color:var(--dim);display:block;margin-top:1px}
 .gps-state{font-size:12px;font-weight:700;margin:0 0 12px;color:var(--dim)}
 .chat-box{max-height:300px;min-height:120px;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:var(--surface2)}
-.msg{max-width:82%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.4;animation:viewIn .3s var(--ease)}
+.msg{max-width:82%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.4}
 .msg.coord{align-self:flex-start;background:var(--surface);border:1px solid var(--border)}
 .msg.user{align-self:flex-end;background:var(--primary);color:var(--onpri)}
 .msg small{display:block;font-size:10px;opacity:.7;margin-top:3px}
 .chat-input{display:flex;gap:8px;padding:12px 16px}
 .chat-input input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;outline:none;color:var(--text)}
-.chat-input input:focus{border-color:var(--primary)}
-
 .hist-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 .month-nav{display:flex;align-items:center;gap:6px}
-.month-nav .mn-btn{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);background:var(--surface);display:grid;place-items:center;transition:all .2s}
-.month-nav .mn-btn:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}
+.month-nav .mn-btn{width:34px;height:34px;border-radius:9px;border:1px solid var(--border);background:var(--surface);display:grid;place-items:center}
 .month-nav .mn-btn:disabled{opacity:.35;cursor:not-allowed}
 .month-nav .mn-btn svg{width:16px;height:16px}
 .month-label{font-size:17px;font-weight:800;min-width:170px;text-align:center;text-transform:capitalize}
 .sum-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
 .sum-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:13px 15px}
-.sum-item b{font-size:21px;font-weight:800;display:block;letter-spacing:-.02em}
+.sum-item b{font-size:21px;font-weight:800;display:block}
 .sum-item span{font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
-.hrow{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr 1fr .85fr;gap:8px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);font-size:13.5px;transition:background .2s}
-.hrow:hover{background:var(--surface2)}
-.hrow.head{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);background:var(--surface2);border-radius:var(--r-md) var(--r-md) 0 0;padding:10px 16px}
-.hrow.head:hover{background:var(--surface2)}
+.hrow{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr 1fr .85fr;gap:8px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border);font-size:13.5px}
+.hrow.head{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);background:var(--surface2);padding:10px 16px}
 .hcell{display:flex;align-items:center;gap:3px;min-width:0}
 .hcell b{font-family:var(--mono);font-weight:700}
 .hcell .dash{color:var(--dim);opacity:.6}
-.hdate b{font-family:var(--font);font-weight:700;font-size:13.5px;display:block;line-height:1.2}
+.hdate b{font-weight:700;font-size:13.5px;display:block}
 .hdate small{font-size:11px;color:var(--dim);text-transform:capitalize}
 .ot-pos{color:var(--ok);font-weight:800;font-family:var(--mono)}
-.ast{color:var(--primary);font-weight:800;font-size:15px;line-height:1;padding:1px 5px;border-radius:5px;transition:background .2s;position:relative;top:-3px}
-.ast:hover{background:var(--prisoft)}
+.ast{color:var(--primary);font-weight:800;font-size:15px;padding:1px 5px;border-radius:5px;position:relative;top:-3px}
 .legend{display:flex;gap:14px;flex-wrap:wrap;padding:12px 16px;font-size:12px;color:var(--dim);align-items:center}
 .legend .ast{top:0;pointer-events:none}
-
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
 .kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:16px;position:relative;overflow:hidden}
 .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--kc,var(--primary))}
-.kpi b{font-size:28px;font-weight:800;letter-spacing:-.03em;display:block;line-height:1.1}
+.kpi b{font-size:26px;font-weight:800;display:block;line-height:1.1}
 .kpi span{font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
-.kpi .k-ico{position:absolute;right:12px;top:12px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--surface2);color:var(--kc,var(--primary))}
-.kpi .k-ico svg{width:17px;height:17px}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--border);align-items:center}
-.search-box{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:0 12px;flex:1;min-width:200px;transition:border .2s}
-.search-box:focus-within{border-color:var(--primary)}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:0 12px;flex:1;min-width:180px}
 .search-box svg{width:15px;height:15px;color:var(--dim);flex-shrink:0}
 .search-box input{border:none;background:none;padding:9px 0;width:100%;font-size:13.5px;outline:none;color:var(--text)}
-select.ctl,input.ctl{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 12px;font-size:13.5px;color:var(--text);outline:none}
 .table-scroll{overflow-x:auto}
-.adm-table{width:100%;border-collapse:collapse;min-width:760px}
+.adm-table{width:100%;border-collapse:collapse;min-width:720px}
 .adm-table th{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);text-align:left;padding:11px 14px;background:var(--surface2);border-bottom:1px solid var(--border)}
 .adm-table td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:13.5px;vertical-align:middle}
-.adm-table tbody tr{transition:background .2s}
 .adm-table tbody tr:hover{background:var(--surface2)}
-.emp-cell{display:flex;align-items:center;gap:10px;min-width:200px}
+.emp-cell{display:flex;align-items:center;gap:10px;min-width:180px}
 .avatar{width:34px;height:34px;border-radius:9px;background:var(--prisoft);color:var(--primary);display:grid;place-items:center;font-weight:800;font-size:12.5px;flex-shrink:0}
 .emp-cell b{font-size:13.5px;display:block;line-height:1.25}
 .emp-cell small{font-size:11px;color:var(--dim)}
-.reg-chip{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.03em;white-space:nowrap}
-.reg-chip.r276{background:var(--infosoft);color:var(--info)}
-.reg-chip.rCAS{background:var(--prisoft);color:var(--primary)}
-.reg-flag{color:var(--primary);font-weight:800;margin-left:4px}
 .adm-cols{display:grid;grid-template-columns:1fr;gap:16px;margin-top:16px}
-.servir-item{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px dashed var(--border)}
+.servir-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px dashed var(--border)}
 .servir-item:last-child{border-bottom:none}
 .servir-item .si-t{flex:1}
 .servir-item b{font-size:13.5px;display:block}
-.servir-item small{font-size:12px;color:var(--dim);line-height:1.45;display:block;margin-top:2px}
-.switch{position:relative;width:42px;height:24px;flex-shrink:0;margin-top:2px}
-.switch input{opacity:0;width:100%;height:100%;position:absolute;cursor:pointer;z-index:2;margin:0}
-.switch .tr{position:absolute;inset:0;border-radius:99px;background:var(--border);transition:background .25s}
-.switch .tr::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.3);transition:transform .25s var(--ease)}
-.switch input:checked + .tr{background:var(--ok)}
-.switch input:checked + .tr::after{transform:translateX(18px)}
-.audit-item{padding:12px 0;border-bottom:1px dashed var(--border);font-size:12.5px}
-.audit-item:last-child{border:none}
-.audit-item .a-top{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:var(--dim);margin-bottom:3px}
-.audit-item code{font-family:var(--mono);background:var(--surface2);padding:1px 6px;border-radius:5px;font-size:11px;color:var(--primary);font-weight:700}
-
-.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.theme-card{border:2px solid var(--border);border-radius:var(--r-md);padding:14px;background:var(--surface);text-align:left;transition:all .25s var(--ease);position:relative}
-.theme-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-.theme-card.on{border-color:var(--primary);box-shadow:0 0 0 3px var(--prisoft)}
-.theme-card .sw{display:flex;gap:5px;margin-bottom:10px}
-.theme-card .sw i{width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,.12)}
-.theme-card b{font-size:13.5px;display:block}
-.theme-card small{font-size:11px;color:var(--dim)}
-.theme-card .chk{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--primary);color:var(--onpri);display:none;place-items:center}
-.theme-card.on .chk{display:grid}
-.theme-card .chk svg{width:11px;height:11px}
-.set-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px dashed var(--border)}
-.set-row:last-child{border:none}
-.set-row b{font-size:13.5px;display:block}
-.set-row small{font-size:12px;color:var(--dim);display:block;margin-top:1px}
-.norm-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
-
-.bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:30;height:calc(var(--nav-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);display:flex;background:var(--surface);border-top:1px solid var(--border);box-shadow:0 -6px 24px rgba(0,0,0,.07)}
-.bottomnav .navbtn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--dim);font-size:10.5px;font-weight:700;position:relative;transition:color .25s}
-.bottomnav .navbtn svg{width:22px;height:22px;transition:transform .3s var(--ease)}
-.bottomnav .navbtn.on{color:var(--primary)}
-.bottomnav .navbtn.on svg{transform:translateY(-2px) scale(1.08)}
-.bottomnav .navbtn.on::before{content:"";position:absolute;top:6px;width:44px;height:44px;border-radius:14px;background:var(--prisoft);z-index:-1;animation:navPop .35s var(--ease)}
-@keyframes navPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
-
-.overlay{position:fixed;inset:0;z-index:70;background:rgba(8,13,20,.58);display:none;align-items:flex-end;justify-content:center}
-.overlay.show{display:flex;animation:fadeIn .25s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{background:var(--surface);width:100%;max-width:520px;border-radius:20px 20px 0 0;max-height:92dvh;overflow:auto;animation:slideUp .4s var(--ease);box-shadow:var(--shadow)}
-@keyframes slideUp{from{transform:translateY(46px);opacity:0}to{transform:none;opacity:1}}
-.modal .m-head{display:flex;align-items:center;gap:12px;padding:20px 22px 0}
-.modal .m-head .m-ico{width:44px;height:44px;border-radius:12px;background:var(--prisoft);color:var(--primary);display:grid;place-items:center;flex-shrink:0}
-.modal .m-head .m-ico svg{width:22px;height:22px}
-.modal .m-head h2{font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
-.modal .m-head small{font-size:12px;color:var(--dim);font-weight:600}
-.modal .m-body{padding:16px 22px 22px}
-.m-close{margin-left:auto;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--dim);transition:all .2s;flex-shrink:0}
-.m-close:hover{background:var(--surface2);color:var(--text)}
-.m-close svg{width:16px;height:16px}
-.bullets{list-style:none;margin:12px 0;display:grid;gap:9px}
-.bullets li{display:flex;gap:9px;font-size:13px;line-height:1.45;color:var(--dim)}
-.bullets li svg{width:15px;height:15px;color:var(--ok);flex-shrink:0;margin-top:2px}
-.policy-box{display:none;margin-top:12px;padding:13px;background:var(--surface2);border-radius:var(--r-sm);font-size:12px;color:var(--dim);line-height:1.6;border:1px solid var(--border);max-height:170px;overflow:auto}
-.policy-box.show{display:block;animation:viewIn .3s var(--ease)}
-.fld{margin-bottom:14px}
-.fld label{display:block;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:6px}
-.fld label .req{color:var(--danger)}
-.fld input[type=text],.fld select,.fld textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 12px;font-size:14px;outline:none;color:var(--text)}
-.fld textarea{resize:vertical;min-height:76px}
-.tp-tabs{display:flex;gap:6px;margin-bottom:9px}
-.tp-tabs button{flex:1;padding:7px;border-radius:8px;font-size:12px;font-weight:700;background:var(--surface2);border:1px solid var(--border);color:var(--dim);transition:all .2s}
-.tp-tabs button.on{background:var(--prisoft);border-color:var(--primary);color:var(--primary)}
-.tp-manual{font-family:var(--mono);font-size:22px !important;text-align:center;letter-spacing:.3em;font-weight:700}
-.tp-prev{font-size:12px;color:var(--dim);margin-top:7px}
-.tp-prev b{color:var(--primary);font-family:var(--mono)}
-.form-err{display:none;background:var(--dangersoft);color:var(--danger);font-size:12.5px;font-weight:600;padding:9px 12px;border-radius:var(--r-sm);margin-bottom:12px}
-.form-err.show{display:block;animation:viewIn .25s}
-.note-box{background:var(--infosoft);color:var(--info);font-size:12px;font-weight:600;padding:10px 13px;border-radius:var(--r-sm);margin-bottom:14px;line-height:1.5;display:flex;gap:8px}
-.note-box svg{width:15px;height:15px;flex-shrink:0;margin-top:1px}
-
-.loading-ov{position:fixed;inset:0;z-index:90;background:rgba(8,13,20,.62);display:none;align-items:center;justify-content:center;flex-direction:column;gap:18px}
-.loading-ov.show{display:flex;animation:fadeIn .2s}
-.spinner{width:54px;height:54px;border-radius:50%;border:4px solid rgba(255,255,255,.18);border-top-color:var(--accent);animation:rot .85s linear infinite}
-.loading-ov p{color:#F2F6FA;font-weight:700;font-size:14.5px;text-align:center;padding:0 24px}
-.loading-ov small{color:rgba(242,246,250,.65);font-size:11.5px;margin-top:-10px}
-
-.toast-host{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h) + env(safe-area-inset-bottom) + 14px);z-index:95;display:flex;flex-direction:column;gap:8px;width:min(440px,calc(100% - 28px))}
-.toast{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--shadow);padding:13px 15px;display:flex;align-items:center;gap:11px;animation:toastIn .4s var(--ease);position:relative;overflow:hidden}
-@keyframes toastIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
-.toast.out{animation:toastOut .3s forwards}
-@keyframes toastOut{to{opacity:0;transform:translateY(12px)}}
-.toast .t-ico{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex-shrink:0}
-.toast .t-ico svg{width:16px;height:16px}
-.toast.ok .t-ico{background:var(--oksoft);color:var(--ok)}
-.toast.warn .t-ico{background:var(--warnsoft);color:var(--warn)}
-.toast.info .t-ico{background:var(--infosoft);color:var(--info)}
-.toast.danger .t-ico{background:var(--dangersoft);color:var(--danger)}
-.toast .t-msg{flex:1;font-size:13px;font-weight:600;line-height:1.35}
-.toast .t-act{color:var(--primary);font-weight:800;font-size:13px;padding:6px 10px;border-radius:7px;white-space:nowrap}
-.toast .t-act:hover{background:var(--prisoft)}
-.toast .t-bar{position:absolute;left:0;bottom:0;height:3px;background:var(--primary);width:100%;transform-origin:left;animation:shrink 5s linear forwards}
-.toast:hover .t-bar{animation-play-state:paused}
-@keyframes shrink{to{transform:scaleX(0)}}
-
-.popover{position:fixed;z-index:96;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);box-shadow:var(--shadow);padding:13px 15px;max-width:280px;font-size:12.5px;line-height:1.5;display:none;animation:popIn .22s var(--ease)}
-.popover.show{display:block}
-@keyframes popIn{from{opacity:0;transform:translateY(6px) scale(.96)}to{opacity:1;transform:none}}
-.popover b.p-t{display:block;font-size:12px;margin-bottom:2px;color:var(--primary)}
-.popover .p-row{display:flex;gap:7px;margin-top:5px;color:var(--dim)}
-.popover .p-row svg{width:13px;height:13px;flex-shrink:0;margin-top:2px}
-
-@media (min-width:920px){
-  .sidebar{display:flex}
-  .bottomnav{display:none}
-  .content{padding:26px 30px}
-  .modal{border-radius:18px;margin:auto}
-  .overlay{padding:24px;align-items:center}
-  .mark-grid{grid-template-columns:1.15fr .85fr;align-items:start}
-  .adm-cols{grid-template-columns:1fr 1fr}
-  .toast-host{left:auto;right:26px;transform:none;bottom:26px}
-}
-@media (max-width:700px){
-  .hrow{grid-template-columns:1fr 1fr;gap:9px;padding:13px 14px}
-  .hrow.head{display:none}
-  .hcell::before{content:attr(data-l);display:block;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);width:100%;margin-bottom:1px}
-  .hcell{flex-direction:column;align-items:flex-start;gap:1px}
-  .hdate{grid-column:1 / -1;flex-direction:row;align-items:baseline;gap:8px}
-  .hdate::before{display:none}
-  .tb-clock{display:none}
-  .geo-grid{grid-template-columns:1fr}
-  .geofence-viz{margin:0 auto}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
-}
-</style>
-</head>
-<body>
-
-<div class="bg-fx" aria-hidden="true"><div class="glow g1"></div><div class="glow g2"></div></div>
-
-<div class="shell">
-  <aside class="sidebar">
-    <div class="sb-brand">
-      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-        <path d="M24 3 6 10v13c0 11 7.6 18.5 18 22 10.4-3.5 18-11 18-22V10L24 3Z" fill="currentColor" opacity=".14"/>
-        <path d="M24 3 6 10v13c0 11 7.6 18.5 18 22 10.4-3.5 18-11 18-22V10L24 3Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
-        <circle cx="24" cy="23" r="9" stroke="currentColor" stroke-width="2.4"/>
-        <path d="M24 18v5l3.5 2.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-      </svg>
-      <div><b>SGATyOC</b><small>Asistencia · Coordinación</small></div>
-    </div>
-    <nav class="sb-nav" id="sideNav">
-      <button class="navbtn on" data-view="marcacion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM21 14v.01M14 21h.01M18 18h3v3"/></svg>Marcación</button>
-      <button class="navbtn" data-view="ruta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>En ruta</button>
-      <button class="navbtn" data-view="historial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Historial</button>
-      <button class="navbtn" data-view="admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M15.5 3.13a4 4 0 0 1 0 7.75"/></svg>Coordinación</button>
-      <button class="navbtn" data-view="ajustes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg>Ajustes</button>
-    </nav>
-    <div class="sb-themes" id="sideThemes" aria-label="Cambio rápido de tema"></div>
-    <div class="sb-user">
-      <div class="avatar" id="sbAvatar">—</div>
-      <div style="min-width:0"><b style="font-size:13px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="sbName">—</b><small style="font-size:11px;color:var(--dim)" id="sbCargo">—</small></div>
-    </div>
-  </aside>
-
-  <div class="main">
-    <header class="topbar">
-      <div class="tb-title">
-        <h1 id="tbTitle">Registro de Asistencia</h1>
-        <p>Subgerencia de Administración Tributaria y Orientación al Contribuyente</p>
-      </div>
-      <div class="tb-clock num" id="tbClock">--:--:--<small id="tbDate">—</small></div>
-      <span class="chip ok" id="chipNet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01M1.42 9a16 16 0 0 1 21.16 0"/></svg><span id="chipNetTxt">En línea</span></span>
-      <span class="chip info" id="chipSync" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg><span>Cola</span><span class="bdot" id="chipSyncN">0</span></span>
-    </header>
-
-    <div class="off-banner" id="offBanner" role="status">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.58 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-      <span style="flex:1"><b>Modo Offline.</b> Tus marcaciones se guardan localmente y se sincronizarán al recuperar la conexión.</span>
-      <span class="chip warn" id="offCount" hidden><span class="bdot" id="offCountN">0</span> pendientes</span>
-    </div>
-
-    <main class="content">
-
-      <!-- MARCACIÓN -->
-      <section class="view active" id="view-marcacion">
-        <div class="wrap mark-grid">
-          <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
-            <div class="card clock-card">
-              <div class="greet" id="greet">Bienvenido/a</div>
-              <div class="big-clock num" id="bigClock">--:--:--</div>
-              <div class="big-date" id="bigDate">—</div>
-              <div class="steps" id="steps">
-                <div class="step" data-s="INGRESO"><span class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><small>Ingreso</small></div>
-                <div class="step" data-s="SALIDA_REF"><span class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><small>Refrigerio</small></div>
-                <div class="step" data-s="RETORNO"><span class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><small>Retorno</small></div>
-                <div class="step" data-s="SALIDA"><span class="pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><small>Salida</small></div>
-              </div>
-            </div>
-            <div class="card action-zone">
-              <div class="action-wrap aw" id="actionWrap" data-state="INGRESO">
-                <span class="pulse-ring"></span><span class="pulse-ring d2"></span>
-                <button class="action-btn" id="actionBtn" aria-live="polite">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="actionIco"></svg>
-                  <span id="actionLbl">Registrar Ingreso</span>
-                </button>
-              </div>
-              <div class="token-chip" id="tokenChip" aria-live="polite">
-                <svg class="tring" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" id="tokenRing"/></svg>
-                <span>Token QR</span><code id="tokenCode">······</code><span class="num" id="tokenSecs">30 s</span>
-              </div>
-              <p class="action-hint" id="actionHint">Escanea el <b>QR dinámico</b> de la oficina para habilitar la marcación.</p>
-            </div>
-            <div class="card">
-              <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Ubicación y Geocerca</h3></div>
-              <div class="card-b">
-                <div class="geo-grid">
-                  <div>
-                    <div class="geo-row" id="gpsRow">
-                      <svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.2-8.56"/></svg>
-                      <span id="gpsTxt">Estabilizando señal GPS…</span>
-                    </div>
-                    <div class="geo-row" id="fenceRow">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
-                      <span id="fenceTxt">Verificando geocerca (radio 30 m)…</span>
-                    </div>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap" id="fenceChips">
-                      <span class="chip soft">Esperando GPS…</span>
-                    </div>
-                  </div>
-                  <div class="geofence-viz" id="geoViz" aria-hidden="true">
-                    <span class="ring30"></span><span class="office"></span><span class="userdot" id="userDot"></span>
-                  </div>
-                </div>
-                <div class="geo-note" id="geoNote">
-                  ⚠ Estás fuera del rango de la geocerca. Puedes marcar igualmente — la marca se enviará a Coordinación con la etiqueta <b>“Fuera de Rango”</b> para su justificación.
-                </div>
-                <div class="sim-seg" role="group" aria-label="Prueba de rango">
-                  <span>Prueba</span>
-                  <button type="button" id="simIn" class="on">En oficina</button>
-                  <button type="button" id="simOut">En la calle</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
-            <div class="card">
-              <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM21 14v.01M14 21h.01M18.5 18.5H21V21"/></svg>Escáner QR dinámico</h3></div>
-              <div class="card-b">
-                <div class="reader-zone" id="readerZone">
-                  <div class="qr-ghost" id="qrGhost"></div>
-                  <video id="qrVideo" playsinline muted></video>
-                  <button class="torch-btn" id="torchBtn" title="Linterna" aria-label="Activar linterna">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l1 5-2 2v11a2 2 0 0 1-2 2 2 2 0 0 1-2-2V9L8 7l1-5Z"/><path d="M12 13v2"/></svg>
-                  </button>
-                  <div class="scan-frame" id="reader">
-                    <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
-                    <div class="scan-line"></div>
-                  </div>
-                  <div class="scan-status" id="scanStatus">Apunta al QR dinámico de la entidad</div>
-                </div>
-                <div class="scan-controls">
-                  <button class="btn primary" id="scanBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Iniciar escaneo</button>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>Marcas de hoy</h3><span class="chip soft num" id="todayCount">0</span></div>
-              <div class="card-b" style="padding-top:8px;padding-bottom:8px" id="todayList">
-                <div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Aún no registras marcas hoy.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- EN RUTA -->
-      <section class="view" id="view-ruta">
-        <div class="wrap" style="max-width:720px">
-          <div class="card" id="rutaFormCard" style="margin-bottom:16px">
-            <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Reporte de incidencia en ruta</h3></div>
-            <div class="card-b">
-              <p class="ruta-intro">Si vas a llegar tarde por un imprevisto en el trayecto, genera un reporte. Coordinación lo recibe al instante y queda registrado para tu justificación.</p>
-              <div class="fld">
-                <label>Tipo de evento <span class="req">*</span></label>
-                <select id="incTipo">
-                  <option value="">— Seleccionar —</option>
-                  <option value="Tráfico congestionado">Tráfico congestionado</option>
-                  <option value="Obra en la vía">Obra en la vía</option>
-                  <option value="Accidente de tránsito">Accidente de tránsito</option>
-                  <option value="Falla de transporte público">Falla de transporte público</option>
-                  <option value="Condiciones climáticas">Condiciones climáticas</option>
-                  <option value="Otro">Otro</option>
-                </select>
-              </div>
-              <div class="fld">
-                <label>Detalle (opcional)</label>
-                <textarea id="incDesc" placeholder="Ej.: accidente a la altura del puente…"></textarea>
-              </div>
-              <div class="gps-opt">
-                <div><b>Adjuntar mi ubicación actual</b><small>Voluntario. Se captura solo al activarlo y se envía únicamente con este reporte.</small></div>
-                <label class="switch"><input type="checkbox" id="incGps"><span class="tr"></span></label>
-              </div>
-              <div class="gps-state" id="incGpsState" hidden></div>
-              <button class="btn primary" id="incSend" style="width:100%;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>Generar reporte y abrir chat</button>
-            </div>
-          </div>
-
-          <div class="card" id="rutaChatCard" hidden style="margin-bottom:16px">
-            <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat con Coordinación</h3><span class="chip soft num" id="chatReportId">—</span></div>
-            <div class="chat-box" id="chatBox"></div>
-            <div class="chat-input">
-              <input id="chatText" placeholder="Escribe un mensaje…" aria-label="Mensaje">
-              <button class="btn primary sm" id="chatSend">Enviar</button>
-            </div>
-            <div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap">
-              <button class="btn" id="waShare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4V4z"/></svg>Compartir por WhatsApp</button>
-              <button class="btn ghost" id="chatClose">Cerrar reporte</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Reportes recientes</h3></div>
-            <div class="card-b" style="padding-top:8px;padding-bottom:8px" id="rutaList"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- HISTORIAL -->
-      <section class="view" id="view-historial">
-        <div class="wrap">
-          <div class="hist-head">
-            <div>
-              <h2 style="font-size:20px;font-weight:800;letter-spacing:-.02em">Historial de Asistencia y Permanencia</h2>
-              <p style="font-size:12.5px;color:var(--dim)" id="histUser">—</p>
-            </div>
-            <div class="month-nav">
-              <button class="mn-btn" id="prevM" aria-label="Mes anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-              <span class="month-label" id="monthLabel">—</span>
-              <button class="mn-btn" id="nextM" aria-label="Mes siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-            </div>
-          </div>
-          <div class="sum-strip" id="histSummary"></div>
-          <div class="card">
-            <div class="hrow head" aria-hidden="true">
-              <span>Fecha</span><span>Ingreso</span><span>Salida refrig.</span><span>Retorno</span><span>Salida</span><span>Sobretiempo</span>
-            </div>
-            <div id="histBody"></div>
-            <div class="legend">
-              <span><span class="ast">*</span> Regularizado por la oficina — pulsa el asterisco para ver el detalle.</span>
-              <span class="chip soft">— Sin marca · Omisión</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- COORDINACIÓN -->
-      <section class="view" id="view-admin">
-        <div class="wrap">
-          <div class="kpis">
-            <div class="kpi" style="--kc:var(--ok)"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></span><b class="num" id="kPresentes">0</b><span>Presentes hoy</span></div>
-            <div class="kpi" style="--kc:var(--warn)"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span><b class="num" id="kTarde">0</b><span>Ingresos tardíos</span></div>
-            <div class="kpi" style="--kc:var(--info)"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9.7 4.6-1.3 8-4.7 8-9.7V6l-8-3Z"/></svg></span><b class="num" id="kExon">0</b><span>Exonerados SERVIR</span></div>
-            <div class="kpi" style="--kc:var(--danger)"><span class="k-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span><b class="num" id="kFalta">0</b><span>Faltas / omisiones</span></div>
-          </div>
-
-          <div class="card" style="margin-bottom:16px">
-            <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M15.5 3.13a4 4 0 0 1 0 7.75"/></svg>Equipo de la oficina</h3><span class="chip soft num" id="admCount">0</span></div>
-            <div class="toolbar">
-              <div class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg><input id="admSearch" placeholder="Buscar por DNI o apellidos…" aria-label="Buscar servidor"></div>
-              <select class="ctl" id="admRegimen" aria-label="Filtro de régimen laboral">
-                <option value="all">Todos los regímenes</option>
-                <option value="276">D. Leg. 276</option>
-                <option value="CAS">CAS · D.S. 1057</option>
-              </select>
-              <input type="date" class="ctl" id="admFecha" aria-label="Fecha de control">
-              <button class="btn primary" id="btnNuevaReg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Regularizar</button>
-            </div>
-            <div class="table-scroll">
-              <table class="adm-table">
-                <thead><tr><th>Servidor/a</th><th>Régimen</th><th>Área</th><th>Estado hoy</th><th>Ingreso</th><th></th></tr></thead>
-                <tbody id="admBody"></tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="adm-cols">
-            <div class="card">
-              <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9.7 4.6-1.3 8-4.7 8-9.7V6l-8-3Z"/></svg>Excepciones de Confianza · SERVIR</h3></div>
-              <div class="card-b" style="padding-top:6px;padding-bottom:6px" id="servirPanel"></div>
-            </div>
-            <div class="card">
-              <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>Bitácora de regularizaciones</h3></div>
-              <div class="card-b" style="padding-top:6px;padding-bottom:6px" id="auditList"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- AJUSTES -->
-      <section class="view" id="view-ajustes">
-        <div class="wrap" style="max-width:860px">
-          <div class="card" style="margin-bottom:16px">
-            <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>Apariencia</h3><span class="micro">6 temas</span></div>
-            <div class="card-b"><div class="theme-grid" id="themeGrid"></div></div>
-          </div>
-          <div class="card" style="margin-bottom:16px">
-            <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9.7 4.6-1.3 8-4.7 8-9.7V6l-8-3Z"/></svg>Privacidad · Ley N° 29733</h3></div>
-            <div class="card-b">
-              <div class="set-row">
-                <div><b>Política de protección de datos personales</b><small>Tratamiento efímero de la ubicación GPS y derechos ARCO.</small></div>
-                <button class="btn" id="btnPolicy">Ver política</button>
-              </div>
-              <div class="set-row">
-                <div><b>Restablecer consentimiento</b><small>Vuelve a mostrar la tarjeta de consentimiento GPS.</small></div>
-                <button class="btn" id="btnResetConsent">Restablecer</button>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="margin-bottom:16px">
-            <div class="card-h"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Herramientas de prueba</h3></div>
-            <div class="card-b">
-              <div class="set-row">
-                <div><b>Simular modo offline</b><small>Fuerza el modo offline para probar la cola de sincronización.</small></div>
-                <label class="switch"><input type="checkbox" id="tglOffline"><span class="tr"></span></label>
-              </div>
-              <div class="set-row">
-                <div><b>Reiniciar datos de la demo</b><small>Borra marcas locales, reportes, cola y bitácora de la sesión.</small></div>
-                <button class="btn" id="btnResetData">Reiniciar</button>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-b" style="font-size:12.5px;color:var(--dim)">
-              <b style="color:var(--text);font-size:13.5px">SGATyOC v1.3</b>
-              <div class="norm-chips">
-                <span class="chip soft">Ley N° 29733</span><span class="chip soft">D. Leg. 276</span><span class="chip soft">D.S. 1057 · CAS</span><span class="chip soft">SERVIR</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
-</div>
-
-<nav class="bottomnav" id="botNav" aria-label="Navegación principal">
-  <button class="navbtn on" data-view="marcacion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM21 14v.01M14 21h.01M18 18h3v3"/></svg>Marcación</button>
-  <button class="navbtn" data-view="ruta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>En ruta</button>
-  <button class="navbtn" data-view="historial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Historial</button>
-  <button class="navbtn" data-view="admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M15.5 3.13a4 4 0 0 1 0 7.75"/></svg>Panel</button>
-  <button class="navbtn" data-view="ajustes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg>Ajustes</button>
-</nav>
-
-<!-- Consentimiento -->
-<div class="overlay" id="consentModal" role="dialog" aria-modal="true" aria-labelledby="cTitle">
-  <div class="modal">
-    <div class="m-head">
-      <div class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9.7 4.6-1.3 8-4.7 8-9.7V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
-      <div><h2 id="cTitle">Consentimiento de ubicación</h2><small>Ley N° 29733 · Protección de Datos Personales</small></div>
-      <button class="m-close" id="consentClose" aria-label="Cerrar" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-    </div>
-    <div class="m-body">
-      <p style="font-size:13.5px;color:var(--dim);line-height:1.6">Para validar tu asistencia dentro de la geocerca de la oficina, SGATyOC necesita acceder a tu ubicación GPS <b style="color:var(--text)">únicamente en el instante exacto de cada marcación</b>.</p>
-      <ul class="bullets">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Captura <b>efímera</b>: se lee solo al marcar y se descarta después.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Sin seguimiento continuo ni geolocalización en segundo plano.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Se usa exclusivamente para verificar la geocerca y la trazabilidad de la asistencia.</span></li>
-      </ul>
-      <div class="policy-box" id="policyBox">
-        <b style="color:var(--text)">Política de privacidad (resumen)</b><br>
-        El titular del tratamiento es la Subgerencia de Administración Tributaria y Orientación al Contribuyente. Finalidad: verificación de asistencia, permanencia y trazabilidad laboral. Base legal: Ley N° 29733, D. Leg. 276, D.S. 1057 y directivas SERVIR. Los datos de ubicación (latitud, longitud y precisión) se capturan únicamente en el evento de marcación o en un reporte en ruta activado de forma voluntaria, y no se conservan como historial de desplazamiento. Puedes ejercer tus derechos ARCO ante la oficina. El marcado <b>no se bloquea</b> por encontrarse fuera de la geocerca; la marca se etiqueta para justificación posterior.
-      </div>
-      <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-        <button class="btn primary" id="btnConsentOk" style="flex:1;justify-content:center;padding:13px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Acepto el uso efímero de mi ubicación</button>
-        <button class="btn ghost" id="btnPolicy2">Leer política</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Regularización -->
-<div class="overlay" id="editModal" role="dialog" aria-modal="true" aria-labelledby="regTitle">
-  <div class="modal">
-    <div class="m-head">
-      <div class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
-      <div><h2 id="regTitle">Regularización manual</h2><small>El dato original no se borra · queda en bitácora</small></div>
-      <button class="m-close" id="regClose" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-    </div>
-    <div class="m-body">
-      <div class="note-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>Esta acción genera una fila en la bitácora y muestra el indicador (*) en la app del servidor.</div>
-      <div class="fld">
-        <label>Servidor/a <span class="req">*</span></label>
-        <select id="regEmp"></select>
-      </div>
-      <div class="fld">
-        <label>Marcación a regularizar <span class="req">*</span></label>
-        <select id="regTipo">
-          <option value="Ingreso">Ingreso</option>
-          <option value="Salida a refrigerio">Salida a refrigerio</option>
-          <option value="Retorno de refrigerio">Retorno de refrigerio</option>
-          <option value="Salida">Salida</option>
-        </select>
-      </div>
-      <div class="fld" id="fldTime">
-        <label>Nueva hora oficial <span class="req">*</span></label>
-        <div class="tp-tabs">
-          <button type="button" id="tpTabM" class="on">Manual · 4 dígitos</button>
-          <button type="button" id="tpTabS">Intervalos de 15 min</button>
-        </div>
-        <input type="text" class="tp-manual" id="tpManual" maxlength="5" inputmode="numeric" placeholder="HH:MM" aria-label="Hora manual en 4 dígitos">
-        <select id="tpSelect" style="display:none" aria-label="Intervalos de 15 minutos"></select>
-      </div>
-      <div class="tp-prev" style="margin:-6px 0 14px">Hora seleccionada: <b id="tpPrev">—</b></div>
-      <div class="fld" id="fldJust">
-        <label>Justificación <span class="req">*</span></label>
-        <select id="regJust">
-          <option value="">— Seleccionar —</option>
-          <option value="Omisión voluntaria">Omisión voluntaria de marcación</option>
-          <option value="Comisión de servicio">Comisión de servicio</option>
-          <option value="Enfermedad">Enfermedad (certificado médico)</option>
-          <option value="Licencia">Licencia autorizada</option>
-          <option value="Trabajo remoto">Trabajo remoto / teletrabajo</option>
-          <option value="Incidencia en ruta">Incidencia en ruta reportada</option>
-          <option value="Otro">Otro (requiere resolución)</option>
-        </select>
-      </div>
-      <div class="fld" id="fldDesc">
-        <label>Descripción / N° de Resolución <span class="req">*</span></label>
-        <textarea id="regDesc" placeholder="Ej.: Res. N° 124-2026 · Comisión de servicio…"></textarea>
-      </div>
-      <div class="form-err" id="regErr"></div>
-      <div style="display:flex;gap:10px">
-        <button class="btn" id="regCancel" style="flex:1;justify-content:center">Cancelar</button>
-        <button class="btn primary" id="regSubmit" style="flex:1.4;justify-content:center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Registrar regularización</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="loading-ov" id="loadingOv" aria-live="assertive"><div class="spinner"></div><p id="loadingMsg">Procesando marcado de forma segura…</p><small>No cierres la aplicación ni presiones dos veces</small></div>
-<div class="toast-host" id="toastHost" aria-live="polite"></div>
-<div class="popover" id="popover" role="tooltip"></div>
-
-<script>
-'use strict';
-window.addEventListener('error', function(ev){ console.error('[SGATyOC]', ev.message, ev.filename, ev.lineno); });
-
-var store = {
-  get: function(k, d){ try { var v = localStorage.getItem(k); return v === null ? d : v; } catch(e){ return d; } },
-  set: function(k, v){ try { localStorage.setItem(k, v); } catch(e){} },
-  del: function(k){ try { localStorage.removeItem(k); } catch(e){} }
-};
-
-var CONFIG = {
-  GAS_WEBAPP_URL: '',
-  OFICINA: { lat: -12.04637, lng: -77.04264, nombre: 'Sede Central' },
-  RADIO_M: 30,
-  TOKEN_VIDA_S: 30
-};
-
-function $(s){ return document.querySelector(s); }
-function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
-function pad(n){ return (n < 10 ? '0' : '') + n; }
-function fmtHM(min){ return pad(Math.floor(min/60)%24) + ':' + pad(min%60); }
-function parseHM(t){ var p = t.split(':'); return (+p[0])*60 + (+p[1]); }
-function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
-function haversineM(lat1,lon1,lat2,lon2){
-  var R=6371000, toRad=function(x){return x*Math.PI/180;};
-  var dLat=toRad(lat2-lat1), dLon=toRad(lon2-lon1);
-  var a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)*Math.sin(dLon/2);
-  return 2*R*Math.asin(Math.sqrt(a));
-}
-var MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-var DIAS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-function isoDate(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
-function TXID(){ return 'TX-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2,5).toUpperCase(); }
-function nowHM(){ var d=new Date(); return pad(d.getHours())+':'+pad(d.getMinutes()); }
-
-var EMPLEADOS=[
- {dni:'40112345',nom:'Aguilar Delgado, María Elena',reg:'276',area:'Dirección',cargo:'Directora',perfil:'dir'},
- {dni:'40845962',nom:'Quispe Huamán, Jorge Luis',reg:'276',area:'Administración Tributaria',cargo:'Jefe de Oficina',perfil:null},
- {dni:'45678912',nom:'Paredes Mamani, Luis A.',reg:'276',area:'Orientación al Contribuyente',cargo:'Analista',perfil:null,self:true},
- {dni:'41579279',nom:'Flores Castillo, Ana Sofía',reg:'CAS',area:'Orientación al Contribuyente',cargo:'Analista de Personal',perfil:null},
- {dni:'42312896',nom:'Mamani Flores, Ricardo',reg:'CAS',area:'Administración',cargo:'Asistente Administrativo',perfil:null},
- {dni:'43046513',nom:'Vargas Rojas, Carmen Diana',reg:'276',area:'Planeamiento',cargo:'Especialista en Presupuesto',perfil:null},
- {dni:'43780130',nom:'Castillo Mendoza, Héctor Raúl',reg:'276',area:'Asesoría Jurídica',cargo:'Jefe de Asesoría Jurídica',perfil:'fun'},
- {dni:'44513747',nom:'Rojas Ponce, Fiorella',reg:'CAS',area:'Logística',cargo:'Coordinadora de Abastecimiento',perfil:null},
- {dni:'45247364',nom:'Mendoza Ríos, Carlos Alberto',reg:'CAS',area:'Tecnologías',cargo:'Administrador de Redes',perfil:null},
- {dni:'45980981',nom:'Ponce Gutiérrez, Lucía',reg:'CAS',area:'Atención al Ciudadano',cargo:'Orientadora de Plataforma',perfil:null},
- {dni:'46714598',nom:'Gutiérrez Sánchez, Pedro Miguel',reg:'276',area:'Administración',cargo:'Contador',perfil:null},
- {dni:'47448215',nom:'Sánchez Espinoza, Valeria',reg:'CAS',area:'Administración Tributaria',cargo:'Asistente de Selección',perfil:null},
- {dni:'48181832',nom:'Espinoza Cabrera, Fernando',reg:'276',area:'Planeamiento',cargo:'Jefe de Planeamiento',perfil:null},
- {dni:'48915449',nom:'Cabrera Valdez, Rosa Angélica',reg:'CAS',area:'Dirección',cargo:'Secretaria de Dirección',perfil:'con'},
- {dni:'49649066',nom:'Valdez Ramos, Julio Andrés',reg:'CAS',area:'Logística',cargo:'Auxiliar de Almacén',perfil:null},
- {dni:'50382683',nom:'Ramos Medina, Patricia',reg:'CAS',area:'Asesoría Jurídica',cargo:'Abogada Asesora',perfil:null},
- {dni:'51116300',nom:'Medina Herrera, Óscar',reg:'CAS',area:'Tecnologías',cargo:'Soporte Técnico',perfil:null},
- {dni:'51849917',nom:'Herrera León, Claudia Milagros',reg:'276',area:'Atención al Ciudadano',cargo:'Coordinadora de Plataforma',perfil:null},
- {dni:'52583534',nom:'León Vega, Miguel Ángel',reg:'276',area:'Administración',cargo:'Mensajero',perfil:null},
- {dni:'53317151',nom:'Vega Campos, Elena Teresa',reg:'276',area:'Administración Tributaria',cargo:'Analista de Compensaciones',perfil:null},
- {dni:'54050768',nom:'Campos Silva, Raúl Ernesto',reg:'CAS',area:'Planeamiento',cargo:'Analista de Modernización',perfil:null},
- {dni:'54784385',nom:'Delgado Torres, Milagros',reg:'276',area:'Administración',cargo:'Archivista',perfil:null},
- {dni:'55517002',nom:'Torres Salazar, Diego Armando',reg:'CAS',area:'Tecnologías',cargo:'Desarrollador',perfil:null},
- {dni:'56251619',nom:'Salazar Paredes, Teresa',reg:'CAS',area:'Atención al Ciudadano',cargo:'Asistente de Trámite',perfil:null},
- {dni:'56985236',nom:'Chávez Quintana, Víctor Hugo',reg:'276',area:'Logística',cargo:'Responsable de Patrimonio',perfil:null},
- {dni:'57718853',nom:'Quintana Ríos, Gabriela',reg:'CAS',area:'Dirección',cargo:'Asistente de Gerencia',perfil:null},
- {dni:'58452470',nom:'Ríos Montoya, Andrés Avelino',reg:'276',area:'Asesoría Jurídica',cargo:'Analista Legal',perfil:null},
- {dni:'59186087',nom:'Montoya Cárdenas, Sofía',reg:'CAS',area:'Orientación al Contribuyente',cargo:'Asistente de Legajos',perfil:null}
-];
-EMPLEADOS.forEach(function(e,i){ e.id = 'SRV-' + pad(i+1); });
-var USER = EMPLEADOS.filter(function(e){ return e.self; })[0];
-function iniciales(n){ return n.split(',')[0].split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase(); }
-
-var hoy0 = new Date();
-var S = {
-  view: 'marcacion',
-  theme: store.get('sgatyoc_theme','light'),
-  consent: store.get('sgatyoc_consent','0') === '1',
-  today: [],
-  qr: null,
-  geo: { fix: null },
-  simGps: store.get('sgatyoc_gps','in'),
-  offlineSim: false,
-  month: { y: hoy0.getFullYear(), m: hoy0.getMonth() },
-  regularizados: {},
-  lastMark: null,
-  flushing: false,
-  exceptions: { dir:true, fun:true, con:true, soloPermanencia:true },
-  scan: { active:false, torch:false, timer:null, stream:null, track:null, cameraOn:false, skip:false },
-  inc: { fix:null, current:null },
-  incidents: []
-};
-(function(){
-  try { S.today = JSON.parse(store.get('sgatyoc_marks_'+isoDate(new Date()),'[]')) || []; } catch(e){ S.today = []; }
-  try { S.incidents = JSON.parse(store.get('sgatyoc_incidents','[]')) || []; } catch(e){ S.incidents = []; }
-})();
-var AUDIT = [
- {id:'AUD-1042',admin:'Coordinación',emp:'Paredes Mamani, Luis A.',campo:'Ingreso',ahora:'08:00',motivo:'Comisión de servicio',reso:'Res. N° 124-2026',fecha:'04/08/2026 09:12'},
- {id:'AUD-1039',admin:'Coordinación',emp:'Rojas Ponce, Fiorella',campo:'Salida',ahora:'17:30',motivo:'Enfermedad',reso:'Cert. Méd. 88213',fecha:'31/07/2026 16:05'}
-];
-
-var ICO = {
-  ok:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
-  warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg>',
-  info:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>',
-  danger:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>',
-  undo:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg>'
-};
-function toast(type, msg, opts){
-  opts = opts || {};
-  var host = $('#toastHost');
-  var el = document.createElement('div');
-  el.className = 'toast ' + type;
-  el.innerHTML = '<span class="t-ico">' + (ICO[type] || ICO.info) + '</span><span class="t-msg">' + msg + '</span>' +
-    (opts.undo ? '<button class="t-act">Deshacer</button>' : '') + '<span class="t-bar"></span>';
-  host.prepend(el);
-  var closed = false;
-  function kill(){ if(closed) return; closed = true; el.classList.add('out'); setTimeout(function(){ el.remove(); }, 300); }
-  if(opts.undo){ el.querySelector('.t-act').addEventListener('click', function(){ opts.undo(); kill(); }); }
-  setTimeout(kill, 5000);
-}
-var pop = $('#popover');
-function showPopover(html, anchor){
-  pop.innerHTML = html; pop.classList.add('show');
-  var r = anchor.getBoundingClientRect();
-  var pw = pop.offsetWidth, ph = pop.offsetHeight;
-  var x = Math.min(Math.max(8, r.left + r.width/2 - pw/2), window.innerWidth - pw - 8);
-  var y = r.top - ph - 10; if(y < 8) y = r.bottom + 10;
-  pop.style.left = x + 'px'; pop.style.top = y + 'px';
-}
-function hidePopover(){ pop.classList.remove('show'); }
-document.addEventListener('click', function(e){
-  var ast = e.target.closest ? e.target.closest('.ast[data-admin]') : null;
-  if(ast){
-    e.stopPropagation();
-    if(pop.classList.contains('show')){ hidePopover(); return; }
-    showPopover(
-      '<b class="p-t">Registro regularizado</b>' +
-      '<div class="p-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg><span>Modificado por: <b style="color:var(--text)">' + esc(ast.getAttribute('data-admin')) + '</b></span></div>' +
-      '<div class="p-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><span>Motivo: ' + esc(ast.getAttribute('data-mot')) + '</span></div>' +
-      '<div class="p-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9.7 4.6-1.3 8-4.7 8-9.7V6l-8-3Z"/></svg><span>Sustento: ' + esc(ast.getAttribute('data-reso') || '—') + ' · ' + esc(ast.getAttribute('data-fec') || '') + '</span></div>',
-      ast);
-    return;
-  }
-  if(!e.target.closest || !e.target.closest('#popover')) hidePopover();
-});
-
-function currentTotp(){
-  var w = Math.floor(Date.now()/30000);
-  var h = (w * 2654435761) >>> 0;
-  h = (h ^ (h >>> 13)) >>> 0;
-  var s = String(h % 1000000);
-  while(s.length < 6) s = '0' + s;
-  return s;
-}
-function tick(){
-  var d = new Date();
-  var hh = pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
-  $('#bigClock').textContent = hh;
-  var tbc = $('#tbClock'); if(tbc.firstChild && tbc.firstChild.nodeType === 3) tbc.firstChild.textContent = hh;
-  $('#bigDate').textContent = DIAS[d.getDay()]+', '+d.getDate()+' de '+MESES[d.getMonth()]+' de '+d.getFullYear();
-  $('#tbDate').textContent = pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear();
-  if(S.qr){
-    var rest = Math.max(0, Math.round((S.qr.exp - Date.now())/1000));
-    $('#tokenSecs').textContent = rest + ' s';
-    $('#tokenRing').style.strokeDashoffset = (50.27 * (1 - rest/CONFIG.TOKEN_VIDA_S)).toFixed(2);
-    if(rest <= 0){
-      S.qr = null;
-      var chip = $('#tokenChip');
-      chip.classList.add('expired');
-      $('#tokenCode').textContent = 'EXPIRADO';
-      setTimeout(function(){ chip.classList.remove('show','expired'); }, 2200);
-      updateActionUI();
-    }
-  }
-}
-setInterval(tick, 1000);
-
-function getFix(){
-  return new Promise(function(res){
-    setTimeout(function(){
-      if(S.simGps === 'in'){
-        res({ lat: CONFIG.OFICINA.lat + (Math.random()-.5)*1.2e-4, lng: CONFIG.OFICINA.lng + (Math.random()-.5)*1.2e-4, acc: Math.round(6+Math.random()*9) });
-      } else {
-        res({ lat: CONFIG.OFICINA.lat + 0.00125, lng: CONFIG.OFICINA.lng + 0.00042, acc: Math.round(11+Math.random()*14) });
-      }
-    }, 700 + Math.random()*800);
-  });
-}
-function stabilizeGPS(){
-  S.geo.fix = null;
-  $('#gpsRow').innerHTML = '<svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.2-8.56"/></svg><span>Estabilizando señal GPS…</span>';
-  $('#fenceTxt').textContent = 'Verificando geocerca (radio ' + CONFIG.RADIO_M + ' m)…';
-  $('#fenceChips').innerHTML = '<span class="chip soft">Esperando GPS…</span>';
-  getFix().then(function(fix){
-    fix.dist = Math.round(haversineM(fix.lat, fix.lng, CONFIG.OFICINA.lat, CONFIG.OFICINA.lng));
-    S.geo.fix = fix;
-    renderGeo();
-  });
-}
-function renderGeo(){
-  var f = S.geo.fix; if(!f) return;
-  var dentro = f.dist <= CONFIG.RADIO_M;
-  $('#gpsRow').innerHTML = '<svg style="color:var(--ok)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>Ubicación obtenida · Precisión: <b class="num">±' + f.acc + ' m</b></span>';
-  $('#fenceTxt').textContent = dentro
-    ? 'Dentro de Rango (' + CONFIG.OFICINA.nombre + ') · Distancia: ' + f.dist + ' m'
-    : 'Fuera de Rango · Distancia: +' + f.dist + ' m';
-  $('#fenceChips').innerHTML = dentro
-    ? '<span class="chip ok">' + ICO.ok + ' Dentro de Rango · Correcto</span><span class="chip soft num">' + f.dist + ' m de la sede</span>'
-    : '<span class="chip warn">' + ICO.warn + ' Fuera de Rango · Advertencia</span><span class="chip soft num">+' + f.dist + ' m</span>';
-  $('#geoNote').classList.toggle('show', !dentro);
-  var viz = $('#geoViz'); viz.classList.toggle('out', !dentro);
-  var ang = 38 * Math.PI / 180, rad = Math.min(f.dist, 140) / 140 * 54;
-  $('#userDot').style.transform = 'translate(' + (Math.cos(ang)*rad).toFixed(1) + 'px,' + (-Math.sin(ang)*rad).toFixed(1) + 'px)';
-  $('#simIn').classList.toggle('on', S.simGps === 'in');
-  $('#simOut').classList.toggle('on', S.simGps === 'out');
-}
-$('#simIn').addEventListener('click', function(){ S.simGps = 'in'; store.set('sgatyoc_gps','in'); stabilizeGPS(); });
-$('#simOut').addEventListener('click', function(){ S.simGps = 'out'; store.set('sgatyoc_gps','out'); stabilizeGPS(); });
-
-/* ---------- Escáner QR ---------- */
-var qrCanvas = document.createElement('canvas');
-var qctx = qrCanvas.getContext('2d', { willReadFrequently: true });
-function qrGhostSVG(){
-  var rnd = mulberry32(20260811), n = 21, out = '';
-  function inFinder(r,c){ return (r<7&&c<7)||(r<7&&c>=n-7)||(r>=n-7&&c<7); }
-  function finder(x,y){ out += '<rect x="'+x+'" y="'+y+'" width="7" height="7" fill="#fff"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" fill="#0C0F14"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" fill="#fff"/>'; }
-  finder(0,0); finder(n-7,0); finder(0,n-7);
-  for(var r=0;r<n;r++) for(var c=0;c<n;c++){ if(inFinder(r,c)) continue; if(rnd() > .52) out += '<rect x="'+c+'" y="'+r+'" width="1" height="1" fill="#fff"/>'; }
-  return '<svg viewBox="0 0 21 21" shape-rendering="crispEdges">' + out + '</svg>';
-}
-function updateScanUI(){
-  var b = $('#scanBtn'), st = $('#scanStatus');
-  $('#readerZone').classList.toggle('scanning', S.scan.active);
-  if(S.scan.active){
-    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>Detener';
-    b.classList.remove('primary');
-  } else {
-    st.textContent = 'Apunta al QR dinámico de la entidad';
-    b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Iniciar escaneo';
-    b.classList.add('primary');
-  }
-}
-function cameraErrMsg(err){
-  var n = err && err.name ? err.name : '';
-  if(n === 'NotAllowedError' || n === 'PermissionDeniedError') return 'Permiso de cámara denegado. Habilítalo en el candado de la barra de direcciones.';
-  if(n === 'NotFoundError' || n === 'DevicesNotFoundError') return 'No se encontró ninguna cámara en este dispositivo.';
-  if(n === 'NotReadableError' || n === 'TrackStartError') return 'La cámara está siendo usada por otra aplicación.';
-  if(n === 'SecurityError') return 'El navegador bloqueó la cámara: se requiere HTTPS o localhost.';
-  return 'No se pudo iniciar la cámara' + (n ? ' (' + n + ')' : '') + '.';
-}
-function startScan(){
-  if(S.scan.active) return;
-  S.scan.active = true; S.scan.cameraOn = false;
-  updateScanUI();
-  $('#scanStatus').textContent = 'Solicitando acceso a la cámara…';
-  if(!window.isSecureContext){ fallbackSim('La cámara requiere HTTPS o localhost. Modo simulado activo.'); return; }
-  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){ fallbackSim('Este navegador no permite acceso a la cámara. Modo simulado activo.'); return; }
-  if(!window.jsQR){ fallbackSim('No se cargó el decodificador jsQR. Modo simulado activo.'); return; }
-  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false })
-    .then(function(stream){
-      if(!S.scan.active){ stream.getVideoTracks().forEach(function(t){ try{ t.stop(); }catch(e){} }); return; }
-      S.scan.stream = stream; S.scan.track = stream.getVideoTracks()[0];
-      var v = $('#qrVideo');
-      v.srcObject = stream; v.muted = true; v.setAttribute('playsinline','');
-      v.style.display = 'block';
-      $('#readerZone').classList.add('camera-on');
-      v.play().catch(function(){});
-      S.scan.cameraOn = true;
-      $('#scanStatus').textContent = 'Cámara activa — apunta al código QR dentro del marco';
-      requestAnimationFrame(scanLoop);
-    })
-    .catch(function(err){ fallbackSim(cameraErrMsg(err) + ' · Modo simulado activo.'); });
-}
-function scanLoop(){
-  if(!S.scan.active || !S.scan.cameraOn) return;
-  S.scan.skip = !S.scan.skip;
-  if(S.scan.skip){ requestAnimationFrame(scanLoop); return; }
-  var v = $('#qrVideo');
-  if(v.readyState >= 2 && v.videoWidth > 0){
-    var cw = v.videoWidth, ch = v.videoHeight;
-    var scale = Math.min(1, 640 / cw);
-    var w = Math.max(1, Math.round(cw * scale)), h = Math.max(1, Math.round(ch * scale));
-    qrCanvas.width = w; qrCanvas.height = h;
-    qctx.drawImage(v, 0, 0, w, h);
-    var found = null;
-    try { found = jsQR(qctx.getImageData(0, 0, w, h).data, w, h, { inversionAttempts: 'dontInvert' }); } catch(e){}
-    if(found && found.data){ onQRDetected(found.data); return; }
-  }
-  requestAnimationFrame(scanLoop);
-}
-function onQRDetected(data){
-  var token = null;
-  try { var p = JSON.parse(data); if(p && p.totp) token = String(p.totp); } catch(e){}
-  if(!token) token = currentTotp();
-  qrDecoded(token);
-}
-function stopCamera(){
-  if(S.scan.track){ try { S.scan.track.stop(); } catch(e){} }
-  S.scan.track = null; S.scan.stream = null; S.scan.cameraOn = false;
-  var v = $('#qrVideo');
-  if(v){ v.srcObject = null; v.style.display = 'none'; }
-  $('#readerZone').classList.remove('camera-on');
-  $('#torchBtn').classList.remove('on');
-  S.scan.torch = false;
-}
-function fallbackSim(msg){
-  $('#scanStatus').textContent = msg;
-  toast('warn', msg);
-  S.scan.timer = setTimeout(function(){ if(S.scan.active) qrDecoded(currentTotp()); }, 2500);
-}
-function stopScan(){
-  S.scan.active = false;
-  clearTimeout(S.scan.timer);
-  stopCamera();
-  updateScanUI();
-}
-function qrDecoded(token){
-  stopScan();
-  var z = $('#readerZone');
-  z.classList.add('ok-flash'); setTimeout(function(){ z.classList.remove('ok-flash'); }, 650);
-  S.qr = { code: token, exp: Date.now() + CONFIG.TOKEN_VIDA_S * 1000 };
-  $('#tokenCode').textContent = S.qr.code;
-  var chip = $('#tokenChip'); chip.classList.remove('expired'); chip.classList.add('show');
-  $('#scanStatus').textContent = 'QR validado ✓ Token activo por ' + CONFIG.TOKEN_VIDA_S + ' s';
-  toast('ok', 'QR dinámico validado. Marcación habilitada.');
-  updateActionUI();
-}
-$('#scanBtn').addEventListener('click', function(){ if(S.scan.active) stopScan(); else startScan(); });
-$('#torchBtn').addEventListener('click', function(){
-  if(!S.scan.active){ toast('info', 'Inicia el escaneo primero para usar la linterna.'); return; }
-  var track = S.scan.track;
-  if(!track){ toast('info', 'Linterna no disponible en modo simulado.'); return; }
-  var caps = {};
-  try { caps = track.getCapabilities ? track.getCapabilities() : {}; } catch(e){}
-  if(!caps.torch){ toast('warn', 'Esta cámara no soporta linterna.'); return; }
-  var want = !S.scan.torch;
-  track.applyConstraints({ advanced: [{ torch: want }] }).then(function(){
-    S.scan.torch = want;
-    $('#torchBtn').classList.toggle('on', want);
-  }).catch(function(){ toast('warn', 'No se pudo controlar la linterna.'); });
-});
-
-/* ---------- Jornada ---------- */
-var ORDER = ['INGRESO','SALIDA_REF','RETORNO','SALIDA'];
-var LABEL = { INGRESO:'Registrar Ingreso', SALIDA_REF:'Iniciar Refrigerio', RETORNO:'Retornar de Refrigerio', SALIDA:'Registrar Salida' };
-var MINI = { INGRESO:'Ingreso', SALIDA_REF:'S. Refrigerio', RETORNO:'Retorno', SALIDA:'Salida' };
-var ICONS = {
-  INGRESO:'<path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>',
-  SALIDA_REF:'<path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4Z"/>',
-  RETORNO:'<path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>',
-  SALIDA:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
-  DONE:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/>'
-};
-var MCOL = { INGRESO:'var(--ok)', SALIDA_REF:'var(--warn)', RETORNO:'var(--info)', SALIDA:'var(--danger)' };
-var MSOF = { INGRESO:'var(--oksoft)', SALIDA_REF:'var(--warnsoft)', RETORNO:'var(--infosoft)', SALIDA:'var(--dangersoft)' };
-function nextType(){
-  var have = S.today.map(function(m){ return m.type; });
-  for(var i=0;i<ORDER.length;i++){ if(have.indexOf(ORDER[i]) === -1) return ORDER[i]; }
-  return 'DONE';
-}
-function updateActionUI(){
-  var st = nextType();
-  var w = $('#actionWrap'), b = $('#actionBtn'), lbl = $('#actionLbl'), hint = $('#actionHint');
-  w.dataset.state = st;
-  w.classList.toggle('done', st === 'DONE');
-  if(st === 'DONE'){
-    b.disabled = true;
-    lbl.textContent = 'Jornada Completa';
-    $('#actionIco').innerHTML = ICONS.DONE;
-    hint.innerHTML = '<b>✓ Jornada cerrada correctamente.</b> Revisa tu historial.';
-  } else {
-    b.disabled = false;
-    lbl.textContent = LABEL[st];
-    $('#actionIco').innerHTML = ICONS[st];
-    hint.innerHTML = (S.qr && S.qr.exp > Date.now())
-      ? 'Token activo. Presiona el botón para marcar <b>en un solo toque</b>.'
-      : 'Escanea el <b>QR dinámico</b> de la oficina para habilitar la marcación.';
-  }
-  $$('#steps .step').forEach(function(sp){
-    var t = sp.dataset.s;
-    var done = S.today.some(function(m){ return m.type === t; });
-    sp.classList.toggle('done', done);
-    sp.classList.toggle('now', !done && t === st);
-  });
-  renderToday();
-}
-function renderToday(){
-  var box = $('#todayList');
-  $('#todayCount').textContent = S.today.length;
-  if(!S.today.length){
-    box.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Aún no registras marcas hoy.</div>';
-    return;
-  }
-  box.innerHTML = S.today.map(function(m){
-    return '<div class="today-item">' +
-      '<span class="ti-ico" style="background:' + MSOF[m.type] + ';color:' + MCOL[m.type] + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>' +
-      '<span class="tt"><b>' + MINI[m.type] + '</b><small>' + (m.offline ? 'Guardado local · pendiente' : 'Sincronizado') + ' · GPS ±' + m.geo.acc + ' m ' + (m.fuera ? '· <b style="color:var(--warn)">Fuera de Rango</b>' : '· En rango') + '</small></span>' +
-      '<span class="chip soft num" style="padding:3px 8px">' + m.token + '</span>' +
-      '<span class="tm num">' + m.hora + '</span></div>';
-  }).join('');
-}
-
-function sendToGAS(payload){
-  if(CONFIG.GAS_WEBAPP_URL){
-    return fetch(CONFIG.GAS_WEBAPP_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    }).then(function(r){ return r.json(); }).catch(function(){ return { ok:true }; });
-  }
-  return new Promise(function(res){ setTimeout(function(){ res({ ok:true, id: TXID() }); }, 1300 + Math.random()*1000); });
-}
-function saveToday(){ store.set('sgatyoc_marks_' + isoDate(new Date()), JSON.stringify(S.today)); }
-function showLoading(on, msg){
-  $('#loadingMsg').textContent = msg || 'Procesando marcado de forma segura…';
-  $('#loadingOv').classList.toggle('show', !!on);
-}
-
-$('#actionBtn').addEventListener('click', function(){
-  var st = nextType();
-  if(st === 'DONE') return;
-  if(!S.qr || S.qr.exp <= Date.now()){
-    toast('warn', 'Primero escanea el QR dinámico de la entidad.');
-    document.getElementById('readerZone').scrollIntoView({ behavior:'smooth', block:'center' });
-    if(!S.scan.active) startScan();
-    return;
-  }
-  var btn = $('#actionBtn');
-  btn.disabled = true;
-  showLoading(true);
-  var p = S.geo.fix ? Promise.resolve(S.geo.fix) : getFix();
-  p.then(function(fix){
-    var dist = (fix.dist != null) ? fix.dist : Math.round(haversineM(fix.lat, fix.lng, CONFIG.OFICINA.lat, CONFIG.OFICINA.lng));
-    var fuera = dist > CONFIG.RADIO_M;
-    var mark = {
-      type: st, hora: nowHM(),
-      geo: { lat: +fix.lat.toFixed(6), lng: +fix.lng.toFixed(6), acc: fix.acc, dist: dist },
-      fuera: fuera, token: S.qr.code, offline: !netOk(), id: TXID()
-    };
-    var payload = {
-      app:'SGATyOC', tx: mark.id,
-      servidor: { id: USER.id, dni: USER.dni, nombres: USER.nom },
-      tipo: st, tokenQR: S.qr.code,
-      geo: { lat: fix.lat, lng: fix.lng, prec: fix.acc, distM: dist },
-      fueraRango: fuera,
-      tsLocal: new Date().toISOString()
-    };
-    var after;
-    if(netOk()){ after = sendToGAS(payload).then(function(){ mark.offline = false; }); }
-    else { after = Cola.push(payload).then(function(){ mark.offline = true; }); }
-    return after.then(function(){
-      S.today.push(mark); saveToday();
-      S.lastMark = mark; S.qr = null;
-      $('#tokenChip').classList.remove('show');
-      updateActionUI(); refreshSyncUI();
-      if(mark.offline){
-        toast('warn', '<b>' + MINI[st] + '</b> guardado localmente. Se sincronizará automáticamente.');
-      } else {
-        toast('ok', '<b>' + MINI[st] + '</b> registrado a las <b class="num">' + mark.hora + '</b>' + (fuera ? ' · etiquetado <b>Fuera de Rango</b>' : '') + '.', { undo: undoLast });
-      }
-    });
-  }).catch(function(err){
-    console.error('Marcación:', err);
-    toast('danger', 'Ocurrió un error al procesar la marcación. Reintenta.');
-  }).then(function(){
-    showLoading(false);
-    btn.disabled = false;
-    updateActionUI();
-  });
-});
-function undoLast(){
-  if(!S.lastMark) return;
-  var m = S.lastMark;
-  S.today = S.today.filter(function(x){ return x.id !== m.id; });
-  saveToday(); S.lastMark = null;
-  if(m.offline){
-    Cola.all().then(function(items){
-      var it = items.filter(function(i){ return i.tx === m.id; })[0];
-      if(it) return Cola.remove(it.id).then(refreshSyncUI);
-    });
-  }
-  updateActionUI(); refreshSyncUI();
-  toast('info', 'Marcación deshecha. Se registró la reversión.');
-}
-
-/* ---------- Cola offline ---------- */
-var Cola = {
-  db: null, useIDB: false,
-  init: function(){
-    return new Promise(function(res){
-      try {
-        if(!window.indexedDB) throw new Error('sin IDB');
-        var rq = indexedDB.open('sgatyoc_queue', 1);
-        rq.onupgradeneeded = function(e){
-          var d = e.target.result;
-          if(!d.objectStoreNames.contains('cola')) d.createObjectStore('cola', { keyPath:'id', autoIncrement:true });
-        };
-        rq.onsuccess = function(e){ Cola.db = e.target.result; Cola.useIDB = true; res(); };
-        rq.onerror = function(){ Cola.useIDB = false; res(); };
-      } catch(e){ Cola.useIDB = false; res(); }
-    });
-  },
-  push: function(item){
-    if(this.useIDB){
-      return new Promise(function(res){
-        var tx = Cola.db.transaction('cola','readwrite');
-        tx.objectStore('cola').add(item);
-        tx.oncomplete = res; tx.onerror = res;
-      });
-    }
-    var a = this._ls(); a.push(Object.assign({ id:'L'+Date.now()+Math.random().toString(16).slice(2) }, item));
-    store.set('sgatyoc_cola', JSON.stringify(a));
-    return Promise.resolve();
-  },
-  all: function(){
-    if(this.useIDB){
-      return new Promise(function(res){
-        try {
-          var rq = Cola.db.transaction('cola','readonly').objectStore('cola').getAll();
-          rq.onsuccess = function(){ res(rq.result || []); };
-          rq.onerror = function(){ res([]); };
-        } catch(e){ res([]); }
-      });
-    }
-    return Promise.resolve(this._ls());
-  },
-  remove: function(id){
-    if(this.useIDB){
-      return new Promise(function(res){
-        var tx = Cola.db.transaction('cola','readwrite');
-        tx.objectStore('cola').delete(id);
-        tx.oncomplete = res; tx.onerror = res;
-      });
-    }
-    store.set('sgatyoc_cola', JSON.stringify(this._ls().filter(function(x){ return x.id !== id; })));
-    return Promise.resolve();
-  },
-  _ls: function(){ try { return JSON.parse(store.get('sgatyoc_cola','[]')) || []; } catch(e){ return []; } }
-};
-function netOk(){ return navigator.onLine && !S.offlineSim; }
-function refreshSyncUI(){
-  return Cola.all().then(function(items){
-    var n = items.length;
-    $('#chipSync').hidden = n === 0; $('#chipSyncN').textContent = n;
-    $('#offCount').hidden = n === 0; $('#offCountN').textContent = n;
-    $('#offBanner').classList.toggle('show', !netOk());
-    $('#chipNet').className = 'chip ' + (netOk() ? 'ok' : 'warn');
-    $('#chipNetTxt').textContent = netOk() ? 'En línea' : 'Offline';
-    return n;
-  });
-}
-function flushQueue(){
-  if(S.flushing) return;
-  Cola.all().then(function(items){
-    if(!items.length || !netOk()) return;
-    S.flushing = true;
-    var chain = Promise.resolve();
-    items.forEach(function(it){
-      chain = chain.then(function(){ return sendToGAS(Object.assign({ sync:true }, it)); })
-                   .then(function(){ return Cola.remove(it.id); })
-                   .then(refreshSyncUI)
-                   .then(function(){ return new Promise(function(r){ setTimeout(r, 320); }); });
-    });
-    chain.then(function(){
-      S.flushing = false;
-      S.today.forEach(function(m){ m.offline = false; });
-      saveToday(); renderToday();
-      toast('ok', items.length + ' marca(s) sincronizada(s).');
-    });
-  });
-}
-window.addEventListener('online', function(){ refreshSyncUI(); flushQueue(); });
-window.addEventListener('offline', function(){ refreshSyncUI(); });
-$('#tglOffline').addEventListener('change', function(e){
-  S.offlineSim = e.target.checked;
-  refreshSyncUI();
-  if(netOk()){ toast('info', 'Conexión restablecida. Sincronizando cola…'); flushQueue(); }
-  else toast('warn', 'Modo offline simulado activado.');
-});
-
-/* ---------- Incidencias en ruta ---------- */
-function saveIncidents(){ store.set('sgatyoc_incidents', JSON.stringify(S.incidents)); }
-$('#incGps').addEventListener('change', function(e){
-  var st = $('#incGpsState');
-  if(e.target.checked){
-    if(!navigator.geolocation){ st.hidden=false; st.style.color='var(--warn)'; st.textContent='Este dispositivo no dispone de geolocalización.'; e.target.checked=false; return; }
-    st.hidden=false; st.style.color='var(--dim)'; st.textContent='Solicitando ubicación…';
-    navigator.geolocation.getCurrentPosition(function(pos){
-      S.inc.fix = { lat:+pos.coords.latitude.toFixed(6), lng:+pos.coords.longitude.toFixed(6), acc:Math.round(pos.coords.accuracy) };
-      st.style.color='var(--ok)';
-      st.textContent='Ubicación adjunta · precisión ±' + S.inc.fix.acc + ' m';
-    }, function(err){
-      e.target.checked=false; S.inc.fix=null;
-      st.style.color='var(--warn)';
-      st.textContent = err.code===1 ? 'Permiso denegado; el reporte continuará sin ubicación.' : 'No se pudo obtener la ubicación; el reporte continuará sin ella.';
-    }, { enableHighAccuracy:true, timeout:10000, maximumAge:30000 });
-  } else { S.inc.fix=null; st.hidden=true; }
-});
-$('#incSend').addEventListener('click', function(){
-  var tipo = $('#incTipo').value;
-  if(!tipo){ toast('warn','Selecciona el tipo de evento.'); return; }
-  var d = new Date();
-  var inc = {
-    id: 'INC-' + String(Date.now()).slice(-6),
-    ts: pad(d.getDate())+'/'+pad(d.getMonth()+1)+' '+pad(d.getHours())+':'+pad(d.getMinutes()),
-    tipo: tipo, desc: $('#incDesc').value.trim(),
-    geo: S.inc.fix, user: USER.nom, msgs: []
-  };
-  S.incidents.unshift(inc); saveIncidents();
-  addMsg(inc, 'coord', 'Recibimos tu reporte ' + inc.id + ' (' + tipo + '). Queda registrado para tu justificación. Cuéntanos cómo sigue la situación.');
-  openChat(inc);
-  renderRutaList();
-  $('#incDesc').value=''; $('#incTipo').value=''; $('#incGps').checked=false; $('#incGpsState').hidden=true; S.inc.fix=null;
-  toast('ok','Reporte <b>'+inc.id+'</b> generado.');
-});
-function openChat(inc){
-  $('#rutaFormCard').hidden = true;
-  $('#rutaChatCard').hidden = false;
-  $('#chatReportId').textContent = inc.id;
-  S.inc.current = inc.id;
-  renderChat(inc);
-}
-function renderChat(inc){
-  $('#chatBox').innerHTML = inc.msgs.map(function(m){
-    return '<div class="msg ' + (m.who==='user'?'user':'coord') + '">' + esc(m.text) + '<small>' + (m.who==='user'?'Tú':'Coordinación') + ' · ' + m.h + '</small></div>';
-  }).join('');
-  var box=$('#chatBox'); box.scrollTop = box.scrollHeight;
-}
-function addMsg(inc, who, text){
-  var d=new Date();
-  inc.msgs.push({ who:who, text:text, h: pad(d.getHours())+':'+pad(d.getMinutes()) });
-  saveIncidents();
-  if(S.inc.current===inc.id && !$('#rutaChatCard').hidden) renderChat(inc);
-}
-function sendChat(){
-  var t=$('#chatText').value.trim(); if(!t) return;
-  var inc = S.incidents.filter(function(i){return i.id===S.inc.current;})[0]; if(!inc) return;
-  addMsg(inc,'user',t); $('#chatText').value='';
-  setTimeout(function(){
-    var reps=[ 'Gracias por el aviso. Lo registramos para tu justificación.', 'Recibido. Avísanos cuando llegues a la oficina.', 'OK. Si el retraso aumenta, actualizamos tu hora estimada.' ];
-    addMsg(inc,'coord', reps[inc.msgs.length % reps.length]);
-  }, 1200);
-}
-$('#chatSend').addEventListener('click', sendChat);
-$('#chatText').addEventListener('keydown', function(e){ if(e.key==='Enter') sendChat(); });
-$('#chatClose').addEventListener('click', function(){
-  $('#rutaChatCard').hidden = true;
-  $('#rutaFormCard').hidden = false;
-  S.inc.current = null;
-});
-$('#waShare').addEventListener('click', function(){
-  var inc = S.incidents.filter(function(i){return i.id===S.inc.current;})[0]; if(!inc) return;
-  var txt = 'Reporte ' + inc.id + ' · ' + inc.tipo + ' · ' + inc.ts +
-    (inc.desc ? ' · ' + inc.desc : '') +
-    (inc.geo ? ' · Ubicación: https://maps.google.com/?q=' + inc.geo.lat + ',' + inc.geo.lng : ' · Sin ubicación adjunta') +
-    ' · SGATyOC';
-  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
-});
-function renderRutaList(){
-  var box=$('#rutaList');
-  if(!S.incidents.length){ box.innerHTML='<div class="empty">Sin reportes todavía.</div>'; return; }
-  box.innerHTML = S.incidents.slice(0,8).map(function(i){
-    return '<div class="today-item"><span class="ti-ico" style="background:var(--warnsoft);color:var(--warn)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span>' +
-      '<span class="tt"><b>' + esc(i.tipo) + '</b><small>' + i.id + ' · ' + i.ts + ' · ' + (i.geo?'con ubicación':'sin ubicación') + '</small></span>' +
-      '<button class="btn sm" data-openinc="' + i.id + '">Abrir</button></div>';
-  }).join('');
-}
-$('#rutaList').addEventListener('click', function(e){
-  var b=e.target.closest ? e.target.closest('[data-openinc]') : null;
-  if(!b) return;
-  var inc=S.incidents.filter(function(i){return i.id===b.getAttribute('data-openinc');})[0];
-  if(inc) openChat(inc);
-});
-
-/* ---------- Historial ---------- */
-function genMonth(y, m){
-  var out = [], rnd = mulberry32(y*100 + m + 42);
-  var now = new Date(), isCur = y === now.getFullYear() && m === now.getMonth();
-  var days = new Date(y, m+1, 0).getDate();
-  for(var d=1; d<=days; d++){
-    var dt = new Date(y, m, d), wd = dt.getDay();
-    if(wd === 0 || wd === 6) continue;
-    if(isCur && d > now.getDate()) continue;
-    var ing = 480 + Math.floor(rnd()*45) - 10;
-    var ref = 780 + Math.floor(rnd()*20) - 10;
-    var ret = ref + 42 + Math.floor(rnd()*16);
-    var sal = 1020 + Math.floor(rnd()*75) - 20;
-    var mods = null, omision = false;
-    if(d % 9 === 3 && !(isCur && d === now.getDate())){ sal = null; ret = null; omision = true; }
-    if(d % 7 === 2 && !(isCur && d === now.getDate())){
-      ing = 480;
-      mods = { admin:'Coordinación', motivo:'Comisión de servicio', reso:'Res. N° 124-2026', fec: pad(d)+'/'+pad(m+1)+'/'+y };
-    }
-    if(isCur && d === now.getDate()){
-      function g(t){ var mk = S.today.filter(function(x){ return x.type === t; })[0]; return mk ? parseHM(mk.hora) : null; }
-      ing = g('INGRESO'); ref = g('SALIDA_REF'); ret = g('RETORNO'); sal = g('SALIDA'); mods = null; omision = false;
-    }
-    var ot = null, per = null;
-    if(ing != null && sal != null){
-      var b = (ref != null && ret != null) ? (ret - ref) : 0;
-      per = (sal - ing) - b;
-      var extra = per - 480;
-      if(extra > 0) ot = '+' + Math.floor(extra/60) + ':' + pad(extra % 60);
-    }
-    out.push({ d:d, dt:dt, ing:ing, ref:ref, ret:ret, sal:sal, ot:ot, per:per, mods:mods, omision:omision });
-  }
-  return out;
-}
-function renderHistory(){
-  var y = S.month.y, m = S.month.m;
-  $('#monthLabel').textContent = MESES[m] + ' ' + y;
-  $('#histUser').textContent = USER.nom + ' · DNI ' + USER.dni;
-  var now = new Date();
-  var enActual = y === now.getFullYear() && m === now.getMonth();
-  $('#nextM').disabled = enActual;
-  var rows = genMonth(y, m).slice().reverse();
-  function cell(v, r){
-    var t = (v != null) ? fmtHM(v) : '<span class="dash">—</span>';
-    var ast = r.mods ? '<button class="ast" data-admin="' + esc(r.mods.admin) + '" data-mot="' + esc(r.mods.motivo) + '" data-reso="' + esc(r.mods.reso) + '" data-fec="' + esc(r.mods.fec) + '" aria-label="Ver detalle de regularización">*</button>' : '';
-    return t + ast;
-  }
-  $('#histBody').innerHTML = rows.map(function(r){
-    var esHoy = enActual && r.d === now.getDate();
-    return '<div class="hrow">' +
-      '<span class="hcell hdate"><b>' + r.dt.getDate() + ' ' + MESES[m].slice(0,3) + '.</b><small>' + DIAS[r.dt.getDay()].slice(0,3) + (r.omision ? ' · <b style="color:var(--danger)">Omisión</b>' : '') + (esHoy ? ' · <b style="color:var(--primary)">Hoy</b>' : '') + '</small></span>' +
-      '<span class="hcell" data-l="Ingreso"><b class="num">' + cell(r.ing, r) + '</b></span>' +
-      '<span class="hcell" data-l="Salida refrig."><b class="num">' + cell(r.ref, r) + '</b></span>' +
-      '<span class="hcell" data-l="Retorno"><b class="num">' + cell(r.ret, r) + '</b></span>' +
-      '<span class="hcell" data-l="Salida"><b class="num">' + cell(r.sal, r) + '</b></span>' +
-      '<span class="hcell" data-l="Sobretiempo">' + (r.ot ? '<span class="ot-pos">' + r.ot + '</span>' : '<span class="dash">—</span>') + '</span>' +
-    '</div>';
-  }).join('');
-  var lab = rows.length;
-  var seg = rows.reduce(function(a,r){ return a + (r.per || 0); }, 0);
-  var extra = rows.reduce(function(a,r){ if(!r.ot) return a; var p = r.ot.slice(1).split(':'); return a + (+p[0])*60 + (+p[1]); }, 0);
-  var om = rows.filter(function(r){ return r.omision; }).length;
-  var reg = rows.filter(function(r){ return r.mods; }).length;
-  $('#histSummary').innerHTML =
-    '<div class="sum-item"><b class="num">' + lab + '</b><span>Días laborados</span></div>' +
-    '<div class="sum-item"><b class="num">' + Math.floor(seg/60) + 'h ' + pad(seg%60) + 'm</b><span>Horas efectivas</span></div>' +
-    '<div class="sum-item"><b class="num" style="color:var(--ok)">' + (extra ? Math.floor(extra/60) + 'h ' + pad(extra%60) + 'm' : '0h 00m') + '</b><span>Sobretiempo</span></div>' +
-    '<div class="sum-item"><b class="num" style="color:' + (om ? 'var(--danger)' : 'inherit') + '">' + om + '</b><span>Omisión de marca</span></div>' +
-    '<div class="sum-item"><b class="num" style="color:var(--primary)">' + reg + '</b><span>Regularizadas *</span></div>';
-}
-$('#prevM').addEventListener('click', function(){ S.month.m--; if(S.month.m < 0){ S.month.m = 11; S.month.y--; } renderHistory(); });
-$('#nextM').addEventListener('click', function(){ S.month.m++; if(S.month.m > 11){ S.month.m = 0; S.month.y++; } renderHistory(); });
-
-/* ---------- Panel ---------- */
-function estadoDe(e){
-  if(e.perfil && S.exceptions[e.perfil]) return { k:'EXO', t:'Exonerado SERVIR' };
-  if(e.dni === '54784385') return { k:'FAL', t:'Falta' };
-  var h = parseInt(e.dni.slice(-2), 10);
-  if(h % 9 === 0) return { k:'TAR', t:'Tarde' };
-  return { k:'PRE', t:'Presente' };
-}
-function horaIngreso(e){
-  var st = estadoDe(e).k;
-  if(st === 'EXO' || st === 'FAL') return '—';
-  var r = mulberry32(parseInt(e.dni, 10))();
-  var base = st === 'TAR' ? 535 + Math.floor(r*18) : 472 + Math.floor(r*16);
-  return fmtHM(base);
-}
-function renderAdmin(){
-  var q = $('#admSearch').value.trim().toLowerCase();
-  var reg = $('#admRegimen').value;
-  var list = EMPLEADOS.filter(function(e){
-    if(reg !== 'all' && e.reg !== reg) return false;
-    if(q){ var ape = e.nom.split(',')[0].toLowerCase(); if(e.dni.indexOf(q) === -1 && ape.indexOf(q) === -1) return false; }
-    return true;
-  });
-  $('#admCount').textContent = list.length + ' servidores';
-  $('#kPresentes').textContent = EMPLEADOS.filter(function(e){ return estadoDe(e).k === 'PRE'; }).length;
-  $('#kTarde').textContent = EMPLEADOS.filter(function(e){ return estadoDe(e).k === 'TAR'; }).length;
-  $('#kFalta').textContent = EMPLEADOS.filter(function(e){ return estadoDe(e).k === 'FAL'; }).length;
-  $('#kExon').textContent = EMPLEADOS.filter(function(e){ return estadoDe(e).k === 'EXO'; }).length;
-  $('#admBody').innerHTML = list.map(function(e){
-    var st = estadoDe(e);
-    var chip = st.k === 'PRE' ? 'ok' : st.k === 'TAR' ? 'warn' : st.k === 'FAL' ? 'danger' : 'info';
-    return '<tr>' +
-      '<td><div class="emp-cell"><span class="avatar">' + iniciales(e.nom) + '</span><span><b>' + esc(e.nom) + (S.regularizados[e.dni] ? '<span class="reg-flag" title="Regularizado hoy">*</span>' : '') + '</b><small>DNI ' + e.dni + ' · ' + esc(e.cargo) + '</small></span></div></td>' +
-      '<td><span class="reg-chip ' + (e.reg === '276' ? 'r276' : 'rCAS') + '">' + (e.reg === '276' ? 'D. Leg. 276' : 'CAS 1057') + '</span></td>' +
-      '<td style="color:var(--dim);font-size:12.5px">' + esc(e.area) + '</td>' +
-      '<td><span class="chip ' + chip + '">' + (st.k === 'PRE' ? ICO.ok : st.k === 'TAR' ? ICO.warn : '') + st.t + '</span></td>' +
-      '<td class="num" style="font-family:var(--mono);font-weight:700">' + horaIngreso(e) + '</td>' +
-      '<td style="text-align:right"><button class="btn sm" data-reg="' + e.dni + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Regularizar</button></td>' +
-    '</tr>';
-  }).join('') || '<tr><td colspan="6"><div class="empty">Sin resultados para los filtros aplicados.</div></td></tr>';
-  renderServir(); renderAudit();
-}
-$('#admSearch').addEventListener('input', renderAdmin);
-$('#admRegimen').addEventListener('change', renderAdmin);
-$('#admBody').addEventListener('click', function(e){
-  var b = e.target.closest ? e.target.closest('[data-reg]') : null;
-  if(b) openRegModal(b.getAttribute('data-reg'));
-});
-$('#btnNuevaReg').addEventListener('click', function(){ openRegModal(null); });
-
-function renderServir(){
-  var perfiles = [
-    { k:'dir', n:'Dirección', d:'Eximidos del marcado diario; solo control de permanencia y comisiones.', c: EMPLEADOS.filter(function(e){ return e.perfil === 'dir'; }).length },
-    { k:'fun', n:'Funcionarios de nivel superior', d:'Registro solo para permanencia o comisiones de servicio oficiales.', c: EMPLEADOS.filter(function(e){ return e.perfil === 'fun'; }).length },
-    { k:'con', n:'Personal de Confianza (SERVIR)', d:'Exonerados conforme a las directivas de SERVIR.', c: EMPLEADOS.filter(function(e){ return e.perfil === 'con'; }).length }
-  ];
-  $('#servirPanel').innerHTML = perfiles.map(function(p){
-    return '<div class="servir-item"><div class="si-t"><b>' + p.n + ' <span class="chip soft num" style="margin-left:4px">' + p.c + '</span></b><small>' + p.d + '</small></div>' +
-      '<label class="switch" title="Eximir del marcado diario"><input type="checkbox" data-ex="' + p.k + '" ' + (S.exceptions[p.k] ? 'checked' : '') + '><span class="tr"></span></label></div>';
-  }).join('') +
-  '<div class="servir-item"><div class="si-t"><b>Visualización restringida</b><small>Mostrar únicamente permanencia y comisiones oficiales para exonerados.</small></div>' +
-  '<label class="switch"><input type="checkbox" data-ex="soloPermanencia" ' + (S.exceptions.soloPermanencia ? 'checked' : '') + '><span class="tr"></span></label></div>';
-}
-$('#servirPanel').addEventListener('change', function(e){
-  var k = e.target.getAttribute('data-ex'); if(!k) return;
-  S.exceptions[k] = e.target.checked;
-  renderAdmin();
-});
-
-function renderAudit(){
-  $('#auditList').innerHTML = AUDIT.map(function(a){
-    return '<div class="audit-item"><div class="a-top"><code>' + a.id + '</code><span>' + esc(a.fecha) + '</span></div>' +
-      '<div><b>' + esc(a.emp) + '</b> · ' + esc(a.campo) + ' → <b class="num">' + esc(a.ahora) + '</b></div>' +
-      '<div style="color:var(--dim);margin-top:2px">' + esc(a.motivo) + ' · ' + esc(a.reso) + ' · por <b>' + esc(a.admin) + '</b></div></div>';
-  }).join('');
-}
-
-/* ---------- Regularización ---------- */
-var reg = { time: null };
-function buildIntervals(){
-  var html = '';
-  for(var m = 360; m <= 1305; m += 15) html += '<option value="' + fmtHM(m) + '">' + fmtHM(m) + '</option>';
-  $('#tpSelect').innerHTML = html;
-}
-function setTpMode(mode){
-  $('#tpTabM').classList.toggle('on', mode === 'manual');
-  $('#tpTabS').classList.toggle('on', mode === 'interval');
-  $('#tpManual').style.display = mode === 'manual' ? '' : 'none';
-  $('#tpSelect').style.display = mode === 'interval' ? '' : 'none';
-}
-function openRegModal(dni){
-  $('#regEmp').innerHTML = EMPLEADOS.map(function(e){
-    return '<option value="' + e.dni + '" ' + (dni === e.dni ? 'selected' : '') + '>' + esc(e.nom) + ' · DNI ' + e.dni + '</option>';
-  }).join('');
-  $('#tpManual').value = ''; $('#tpSelect').selectedIndex = -1;
-  reg.time = null; $('#tpPrev').textContent = '—';
-  $('#regJust').value = ''; $('#regDesc').value = '';
-  $('#regErr').classList.remove('show');
-  setTpMode('manual');
-  $('#editModal').classList.add('show');
-}
-function closeRegModal(){ $('#editModal').classList.remove('show'); }
-$('#regClose').addEventListener('click', closeRegModal);
-$('#regCancel').addEventListener('click', closeRegModal);
-$('#editModal').addEventListener('click', function(e){ if(e.target.id === 'editModal') closeRegModal(); });
-$('#tpTabM').addEventListener('click', function(){ setTpMode('manual'); });
-$('#tpTabS').addEventListener('click', function(){ setTpMode('interval'); });
-$('#tpManual').addEventListener('input', function(e){
-  var v = e.target.value.replace(/\D/g, '').slice(0, 4);
-  if(v.length >= 3) v = v.slice(0,2) + ':' + v.slice(2);
-  e.target.value = v;
-  if(v.length === 5){
-    var h = +v.slice(0,2), mi = +v.slice(3);
-    reg.time = (h < 24 && mi < 60) ? v : null;
-    $('#tpPrev').textContent = reg.time || 'hora inválida';
-  } else { reg.time = null; $('#tpPrev').textContent = '—'; }
-});
-$('#tpSelect').addEventListener('change', function(e){
-  reg.time = e.target.value || null;
-  $('#tpPrev').textContent = reg.time || '—';
-});
-$('#regSubmit').addEventListener('click', function(){
-  var btn = $('#regSubmit');
-  if(btn.disabled) return;
-  var just = $('#regJust').value, desc = $('#regDesc').value.trim();
-  var errs = [];
-  if(!reg.time) errs.push('Ingresa la nueva hora oficial.');
-  if(!just) errs.push('Selecciona la justificación.');
-  if(desc.length < 8) errs.push('Describe el sustento o el N° de Resolución (mín. 8 caracteres).');
-  var box = $('#regErr');
-  if(errs.length){ box.innerHTML = errs.join('<br>'); box.classList.add('show'); return; }
-  box.classList.remove('show');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner" style="width:16px;height:16px;border-width:2.5px"></span>&nbsp;Registrando…';
-  setTimeout(function(){
-    var emp = EMPLEADOS.filter(function(e){ return e.dni === $('#regEmp').value; })[0];
-    var nId = 1043 + (AUDIT.length - 2);
-    var d = new Date();
-    AUDIT.unshift({
-      id: 'AUD-' + nId, admin: 'Coordinación', emp: emp.nom,
-      campo: $('#regTipo').value, ahora: reg.time, motivo: just,
-      reso: desc.length > 40 ? desc.slice(0,40) + '…' : desc,
-      fecha: pad(d.getDate()) + '/' + pad(d.getMonth()+1) + '/' + d.getFullYear() + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes())
-    });
-    S.regularizados[emp.dni] = true;
-    renderAdmin(); closeRegModal();
-    btn.disabled = false;
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Registrar regularización';
-    toast('ok', 'Regularización registrada · <b>AUD-' + nId + '</b>.');
-  }, 950);
-});
-
-/* ---------- Navegación ---------- */
-var TITLES = { marcacion:'Registro de Asistencia', ruta:'Reporte en ruta', historial:'Historial y Permanencia', admin:'Panel de coordinación', ajustes:'Ajustes' };
-function go(view){
-  S.view = view;
-  $$('.view').forEach(function(v){ v.classList.toggle('active', v.id === 'view-' + view); });
-  $$('.navbtn').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-view') === view); });
-  $('#tbTitle').textContent = TITLES[view];
-  hidePopover();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  if(view === 'historial') renderHistory();
-  if(view === 'admin') renderAdmin();
-  if(view === 'ruta') renderRutaList();
-}
-$('#botNav').addEventListener('click', function(e){
-  var b = e.target.closest ? e.target.closest('[data-view]') : null;
-  if(b) go(b.getAttribute('data-view'));
-});
-$('#sideNav').addEventListener('click', function(e){
-  var b = e.target.closest ? e.target.closest('[data-view]') : null;
-  if(b) go(b.getAttribute('data-view'));
-});
-
-/* ---------- Temas ---------- */
-var THEMES = [
- { id:'light',  n:'Light',  d:'Institucional por defecto', c:['#0F4C81','#FFFFFF','#D6DFE9'] },
- { id:'dark',   n:'Dark',   d:'Alta legibilidad nocturna', c:['#54A9FF','#121212','#2E323A'] },
- { id:'ocean',  n:'Ocean',  d:'Azul profundo y aguamarina', c:['#2EC4B6','#07222E','#1E4A5E'] },
- { id:'forest', n:'Forest', d:'Verde orgánico y tierra', c:['#386641','#EFF3EA','#A98467'] },
- { id:'sunset', n:'Sunset', d:'Cálidos de atardecer', c:['#D1495B','#FBF0E7','#F2994A'] },
- { id:'sakura', n:'Sakura', d:'Suaves y limpios', c:['#A85D75','#FAF4F6','#E5989B'] }
-];
-function applyTheme(id){
-  S.theme = id;
-  document.documentElement.setAttribute('data-theme', id);
-  store.set('sgatyoc_theme', id);
-  $$('#themeGrid .theme-card').forEach(function(c){ c.classList.toggle('on', c.getAttribute('data-t') === id); });
-}
-function buildThemeUI(){
-  $('#themeGrid').innerHTML = THEMES.map(function(t){
-    return '<button class="theme-card" data-t="' + t.id + '">' +
-      '<span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>' +
-      '<span class="sw">' + t.c.map(function(x){ return '<i style="background:' + x + '"></i>'; }).join('') + '</span>' +
-      '<b>' + t.n + '</b><small>' + t.d + '</small></button>';
-  }).join('');
-  $('#sideThemes').innerHTML = THEMES.map(function(t){
-    return '<button data-t="' + t.id + '" title="Tema ' + t.n + '" style="background:' + t.c[0] + '"></button>';
-  }).join('');
-  $('#themeGrid').addEventListener('click', function(e){
-    var b = e.target.closest ? e.target.closest('[data-t]') : null;
-    if(b) applyTheme(b.getAttribute('data-t'));
-  });
-  $('#sideThemes').addEventListener('click', function(e){
-    var b = e.target.closest ? e.target.closest('[data-t]') : null;
-    if(b) applyTheme(b.getAttribute('data-t'));
-  });
-}
-
-/* ---------- Consentimiento y ajustes ---------- */
-function showConsent(){
-  $('#consentModal').classList.add('show');
-  $('#btnConsentOk').style.display = S.consent ? 'none' : '';
-  $('#consentClose').style.display = S.consent ? '' : 'none';
-}
-function hideConsent(){ $('#consentModal').classList.remove('show'); }
-$('#btnConsentOk').addEventListener('click', function(){
-  S.consent = true;
-  store.set('sgatyoc_consent', '1');
-  hideConsent();
-  toast('ok', 'Consentimiento registrado conforme a la <b>Ley N° 29733</b>.');
-  stabilizeGPS();
-});
-$('#consentClose').addEventListener('click', hideConsent);
-$('#consentModal').addEventListener('click', function(e){ if(e.target.id === 'consentModal' && S.consent) hideConsent(); });
-$('#btnPolicy2').addEventListener('click', function(){ $('#policyBox').classList.toggle('show'); });
-$('#btnPolicy').addEventListener('click', function(){ $('#policyBox').classList.add('show'); showConsent(); });
-$('#btnResetConsent').addEventListener('click', function(){
-  store.del('sgatyoc_consent'); S.consent = false;
-  $('#policyBox').classList.remove('show');
-  showConsent();
-});
-$('#btnResetData').addEventListener('click', function(){
-  S.today = []; saveToday(); S.lastMark = null; S.regularizados = {}; S.incidents = []; saveIncidents();
-  Cola.all().then(function(items){
-    var chain = Promise.resolve();
-    items.forEach(function(it){ chain = chain.then(function(){ return Cola.remove(it.id); }); });
-    return chain;
-  }).then(function(){
-    AUDIT = AUDIT.slice(0, 2);
-    updateActionUI(); refreshSyncUI(); renderAdmin(); renderHistory(); renderRutaList();
-    toast('info', 'Datos de demostración reiniciados.');
-  });
-});
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ hidePopover(); closeRegModal(); if(S.consent) hideConsent(); }
-});
-
-/* ---------- INIT ---------- */
-try {
-  buildThemeUI(); applyTheme(S.theme);
-  buildIntervals();
-  $('#qrGhost').innerHTML = qrGhostSVG();
-  $('#sbName').textContent = USER.nom.split(',')[0];
-  $('#sbCargo').textContent = USER.cargo;
-  $('#sbAvatar').textContent = iniciales(USER.nom);
-  $('#greet').textContent = (new Date().getHours() < 12 ? 'Buenos días' : 'Buenas tardes') + ', ' + USER.nom.split(',')[0];
-  $('#admFecha').value = isoDate(new Date());
-  $('#tglOffline').checked = S.offlineSim;
-  tick(); updateScanUI(); updateActionUI(); renderHistory(); renderAdmin(); renderRutaList();
-  Cola.init().then(refreshSyncUI).then(function(){ if(netOk()) flushQueue(); });
-  if(S.consent) stabilizeGPS(); else showConsent();
-} catch(err){
-  console.error('SGATyOC init:', err);
-  var d = document.createElement('div');
-  d.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;background:#BE3A3A;color:#fff;padding:12px 16px;border-radius:10px;z-index:999;font:13px sans-serif';
-  d.textContent = 'Error de inicialización: ' + err.message;
-  document.body.appendChild(d);
-}
-</script>
-</body>
-</html>
+.servir-item small{font-size:12px;color:var(--dim);display:block;margin-top:1px}
+.switch{position:relative;width:42px;height:24px;flex-shrink:0}
+.switch input{opacity:0;width:100%;height:100%;position:absolute;cursor:pointer;z-index:2
