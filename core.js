@@ -16,11 +16,12 @@ function isoDate(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.get
 function TXID(){return 'TX-'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,5).toUpperCase();}
 function nowHM(){var d=new Date();return pad(d.getHours())+':'+pad(d.getMinutes());}
 var TIPOS=['Subgerente','Coordinación','Plataforma','Oficina','Jornada diferenciada','Kiosco'];
+var USER=null;
+var USUARIOS=[];
 function devId(){var d=store.get('sgatyoc_devid','');if(!d){d='DEV-'+Math.random().toString(36).slice(2,10).toUpperCase();store.set('sgatyoc_devid',d);}return d;}
 function refriLbl(r){return r==='13-14'?'13:00–14:00':'14:00–15:00';}
 function iniciales(n){return n.split(',')[0].split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();}
 function canManage(){return USER&&(USER.tipo==='Subgerente'||USER.tipo==='Coordinación');}
-var USUARIOS=[];
 var hoy0=new Date();
 var S={view:'marcacion',theme:store.get('sgatyoc_theme','light'),consent:store.get('sgatyoc_consent','0')==='1',today:[],qr:null,geo:{fix:null},offlineSim:false,month:{y:hoy0.getFullYear(),m:hoy0.getMonth()},lastMark:null,flushing:false,scan:{active:false,torch:false,timer:null,stream:null,track:null,cameraOn:false,skip:false},inc:{fix:null,current:null},incidents:[],allMarks:[]};
 (function(){try{S.today=JSON.parse(store.get('sgatyoc_marks_'+isoDate(new Date()),'[]'))||[];}catch(e){S.today=[];}
@@ -140,7 +141,7 @@ function flushQueue(){if(S.flushing)return;Cola.all().then(function(it){if(!it.l
 it.forEach(function(x){c=c.then(function(){return api(x);}).then(function(){return Cola.rm(x.id);}).then(refreshSyncUI);});
 c.then(function(){S.flushing=false;toast('ok',it.length+' marca(s) enviadas al sistema.');});});}
 window.addEventListener('online',function(){refreshSyncUI();flushQueue();});window.addEventListener('offline',refreshSyncUI);
-/* ---- LOGIN: Enter, teclado visible y SIN carrera de escrituras ---- */
+/* ---- LOGIN: sin bloqueo por dispositivo (solo registro para auditoría) ---- */
 var pendingUser=null;
 var elDni=$('#loginDni'),elPin=$('#loginPin'),pinNewEl=$('#pinNew'),pinNew2El=$('#pinNew2');
 function kbScroll(el){if(!el)return;el.addEventListener('focus',function(){setTimeout(function(){el.scrollIntoView({block:'center',behavior:'smooth'});},250);});}
@@ -161,12 +162,9 @@ $('#loginNext').disabled=true;$('#loginNext').textContent='Verificando…';
 api({action:'login',dni:dni,pin:pin}).then(function(r){
 var u=r.user;if(!u){box.textContent='Credenciales inválidas.';box.classList.add('show');return;}
 var isNew=(pin==='0000'&&u.tipo!=='Kiosco');
-if(u.tipo!=='Kiosco'){
-if(u.device&&u.device!==devId()){box.textContent='PIN correcto, pero este dispositivo no está autorizado. Usa “Restablecer” desde el Panel o el enlace de recuperación.';box.classList.add('show');return;}
-if(!u.device&&!isNew){api({action:'setDevice',dni:dni,dev:devId()}).catch(function(){});}}
-pendingUser={dni:u.dni,nom:u.nom,tipo:u.tipo,refri:u.refri,device:u.device||devId(),_isNewPin:isNew};
+pendingUser={dni:u.dni,nom:u.nom,tipo:u.tipo,refri:u.refri,device:u.device||'',_isNewPin:isNew};
 if(isNew){$('#loginForm').hidden=true;$('#pinChange').hidden=false;setTimeout(function(){pinNewEl&&pinNewEl.focus();},150);}
-else finishLogin(pendingUser);
+else{finishLogin(pendingUser);api({action:'setDevice',dni:u.dni,dev:devId()}).catch(function(e){console.warn('device:',e);});}
 }).catch(function(e){console.error('login:',e);box.textContent='No se pudo verificar. Revisa tu conexión e intenta de nuevo.';box.classList.add('show');
 }).then(function(){$('#loginNext').disabled=false;$('#loginNext').textContent='Continuar';});});
 if(pinNewEl){pinNewEl.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
@@ -178,9 +176,8 @@ if(a.length<4){box.textContent='El PIN debe tener 4 a 6 dígitos.';box.classList
 if(a!==b){box.textContent='Los PIN no coinciden.';box.classList.add('show');return;}
 $('#pinSave').disabled=true;$('#pinSave').textContent='Guardando…';
 api({action:'setPin',dni:pendingUser.dni,pin:a}).then(function(){
-return api({action:'setDevice',dni:pendingUser.dni,dev:devId()}).catch(function(){});
-}).then(function(){
 pendingUser._isNewPin=false;finishLogin(pendingUser);toast('ok','PIN actualizado correctamente.');
+api({action:'setDevice',dni:pendingUser.dni,dev:devId()}).catch(function(e){console.warn('device:',e);});
 }).catch(function(e){console.error('setPin:',e);box.textContent='No se pudo guardar el PIN. Reintenta.';box.classList.add('show');
 }).then(function(){$('#pinSave').disabled=false;$('#pinSave').textContent='Guardar y entrar';});});
 function finishLogin(u){USER=u;
