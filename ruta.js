@@ -12,7 +12,7 @@ var d=new Date();var inc={id:'INC-'+String(Date.now()).slice(-6),fecha:isoDate(d
 var pay={action:'incident',id:inc.id,dni:USER.dni,fecha:inc.fecha,hora:inc.ts,tipo:tipo,detalle:inc.desc,lat:inc.geo?inc.geo.lat:'',lng:inc.geo?inc.geo.lng:''};
 S.incidents.unshift(inc);saveInc();
 addMsg(inc,'coord','Reporte '+inc.id+' registrado. Coordinación y Subgerencia pueden leer este chat.');
-openChat(inc);renderRuta();$('#incDesc').value='';$('#incTipo').value='';if(elIncGps)elIncGps.checked=false;var st=$('#incGpsState');if(st)st.hidden=true;S.inc.fix=null;
+openChat(inc);renderRuta();$('#incDesc').value='';$('#incTipo').value='';if(elIncGps)elIncGps.checked=false;var st2=$('#incGpsState');if(st2)st2.hidden=true;S.inc.fix=null;
 if(netOk()){api(pay).then(function(){toast('ok','Reporte <b>'+inc.id+'</b> enviado al sistema.');}).catch(function(){toast('warn','Reporte <b>'+inc.id+'</b> guardado en el teléfono. Se enviará al recuperar conexión.');});}
 else toast('warn','Reporte <b>'+inc.id+'</b> guardado en el teléfono.');});
 function openChat(inc){$('#rutaFormCard').hidden=true;$('#rutaChatCard').hidden=false;$('#chatReportId').textContent=inc.id;S.inc.current=inc.id;renderChat(inc);}
@@ -27,10 +27,11 @@ var txt='Reporte '+inc.id+' · '+inc.tipo+' · '+inc.ts+(inc.desc?' · '+inc.des
 window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');});
 function renderRuta(){var f=$('#rutaDate').value||isoDate(new Date());$('#rutaDate').value=f;
 var list=S.incidents.filter(function(i){return i.fecha===f&&(canManage()||i.dni===USER.dni);});
+if(!$('#rutaList'))return;
 if(!list.length){$('#rutaList').innerHTML='<div class="empty">Sin reportes en esta fecha.</div>';return;}
 $('#rutaList').innerHTML=list.map(function(i){return '<div class="today-item"><span class="ti-ico" style="background:var(--warnsoft);color:var(--warn)">!</span><span class="tt"><b>'+esc(i.tipo)+'</b><small>'+i.id+' · '+i.ts+' · '+esc(i.user||'')+(i.geo?' · con ubicación':'')+'</small></span><button class="btn sm" data-openinc="'+i.id+'">Abrir</button></div>';}).join('');}
 var elRutaDate=$('#rutaDate');if(elRutaDate)elRutaDate.addEventListener('change',renderRuta);
-$('#rutaList').addEventListener('click',function(e){var b=e.target.closest?e.target.closest('[data-openinc]'):null;if(!b)return;var inc=S.incidents.filter(function(i){return i.id===b.getAttribute('data-openinc');})[0];if(inc)openChat(inc);});
+on('#rutaList',function(e){var b=e.target.closest?e.target.closest('[data-openinc]'):null;if(!b)return;var inc=S.incidents.filter(function(i){return i.id===b.getAttribute('data-openinc');})[0];if(inc)openChat(inc);});
 /* ---- Historial (lee de S.allMarks y REGHIST, sincronizados de Sheets) ---- */
 function renderHistory(){var y=S.month.y,m=S.month.m;$('#monthLabel').textContent=MESES[m]+' '+y;
 $('#histUser').textContent=USER.nom+' · DNI '+USER.dni;
@@ -60,8 +61,8 @@ return '<div class="hrow"><span class="hcell hdate"><b>'+r.dt.getDate()+' '+MESE
 '<span class="hcell" data-l="Salida"><b class="num">'+cell(r.sal,r)+'</b></span>'+
 '<span class="hcell" data-l="Sobretiempo">'+(r.ot?'<span class="ot-pos">'+r.ot+'</span>':'<span class="dash">—</span>')+'</span></div>';}).join('')||'<div class="empty">Sin marcas este mes.</div>';
 var lab=rows.length,seg=rows.reduce(function(a,r){return a+(r.per||0);},0);
-var ex=rows.reduce(function(a,r){if(!r.ot)return a;var p=r.ot.slice(1).split(':');return a+(+p[0])*60+(+p[1]);},0);
+var ex2=rows.reduce(function(a,r){if(!r.ot)return a;var p=r.ot.slice(1).split(':');return a+(+p[0])*60+(+p[1]);},0);
 var om=rows.filter(function(r){return r.omision;}).length;
-$('#histSummary').innerHTML='<div class="sum-item"><b class="num">'+lab+'</b><span>Días laborados</span></div><div class="sum-item"><b class="num">'+Math.floor(seg/60)+'h '+pad(seg%60)+'m</b><span>Horas efectivas</span></div><div class="sum-item"><b class="num" style="color:var(--ok)">'+(ex?Math.floor(ex/60)+'h '+pad(ex%60)+'m':'0h 00m')+'</b><span>Sobretiempo</span></div><div class="sum-item"><b class="num" style="color:'+(om?'var(--danger)':'inherit')+'">'+om+'</b><span>Sin marca</span></div>';}
+$('#histSummary').innerHTML='<div class="sum-item"><b class="num">'+lab+'</b><span>Días laborados</span></div><div class="sum-item"><b class="num">'+Math.floor(seg/60)+'h '+pad(seg%60)+'m</b><span>Horas efectivas</span></div><div class="sum-item"><b class="num" style="color:var(--ok)">'+(ex2?Math.floor(ex2/60)+'h '+pad(ex2%60)+'m':'0h 00m')+'</b><span>Sobretiempo</span></div><div class="sum-item"><b class="num" style="color:'+(om?'var(--danger)':'inherit')+'">'+om+'</b><span>Sin marca</span></div>';}
 on('#prevM',function(){S.month.m--;if(S.month.m<0){S.month.m=11;S.month.y--;}renderHistory();});
 on('#nextM',function(){S.month.m++;if(S.month.m>11){S.month.m=0;S.month.y++;}renderHistory();});
