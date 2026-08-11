@@ -1,33 +1,38 @@
-<!DOCTYPE html><html lang="es" data-theme="light"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0F4C81"><title>SGATyOC · Asistencia</title>
+<meta name="theme-color" content="#0F4C81">
+<title>SGATyOC · Asistencia</title>
 <link rel="stylesheet" href="styles.css">
-<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
- <link rel="manifest" href="/manifest.json">
+<link rel="manifest" href="/manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SGATyOC">
 <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='36' fill='%230F4C81'/><text x='96' y='125' font-family='Arial' font-weight='900' font-size='30' fill='white' text-anchor='middle'>SGATyOC</text></svg>">
-</head><body>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
 <div class="overlay show" id="loginBox"><div class="modal" style="max-width:420px">
 <div class="m-head"><div class="m-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><h2>Iniciar sesión</h2><small>SGATyOC · San Martín de Porres</small></div></div>
 <div class="m-body">
- <div id="loginForm">
-  <div class="fld"><label>DNI</label><input type="text" id="loginDni" maxlength="8" inputmode="numeric" placeholder="8 dígitos"></div>
-  <div class="fld" id="fldPin" hidden><label>PIN</label><input type="password" id="loginPin" maxlength="6" inputmode="numeric" placeholder="PIN numérico"></div>
-  <div class="form-err" id="loginErr"></div>
-  <label class="chk-row"><input type="checkbox" id="loginRemember" checked> Recordar este equipo</label>
-  <button class="btn primary big" id="loginNext">Continuar</button>
- </div>
- <div id="pinChange" hidden>
-  <p style="font-size:13px;color:var(--dim);margin-bottom:12px">Por seguridad, crea tu PIN personal (4 a 6 dígitos).</p>
-  <div class="fld"><label>Nuevo PIN</label><input type="password" id="pinNew" maxlength="6" inputmode="numeric"></div>
-  <div class="fld"><label>Repite el PIN</label><input type="password" id="pinNew2" maxlength="6" inputmode="numeric"></div>
-  <div class="form-err" id="pinErr"></div>
-  <button class="btn primary big" id="pinSave">Guardar y entrar</button>
- </div>
+<div id="loginForm">
+<div class="fld"><label>DNI</label><input type="text" id="loginDni" maxlength="8" inputmode="numeric" placeholder="8 dígitos"></div>
+<div class="fld" id="fldPin" hidden><label>PIN</label><input type="password" id="loginPin" maxlength="6" inputmode="numeric" placeholder="PIN numérico"></div>
+<div class="form-err" id="loginErr"></div>
+<label class="chk-row"><input type="checkbox" id="loginRemember" checked> Recordar este equipo</label>
+<button class="btn primary big" id="loginNext">Continuar</button>
+</div>
+<div id="pinChange" hidden>
+<p style="font-size:13px;color:var(--dim);margin-bottom:12px">Por seguridad, crea tu PIN personal (4 a 6 dígitos).</p>
+<div class="fld"><label>Nuevo PIN</label><input type="password" id="pinNew" maxlength="6" inputmode="numeric"></div>
+<div class="fld"><label>Repite el PIN</label><input type="password" id="pinNew2" maxlength="6" inputmode="numeric"></div>
+<div class="form-err" id="pinErr"></div>
+<button class="btn primary big" id="pinSave">Guardar y entrar</button>
+</div>
 </div></div></div>
 <div class="shell" id="appShell" hidden>
 <aside class="sidebar"><div class="sb-brand"><svg class="brand-mark" viewBox="0 0 48 48" fill="none"><path d="M24 3 6 10v13c0 11 7.6 18.5 18 22 10.4-3.5 18-11 18-22V10L24 3Z" fill="currentColor" opacity=".14"/><path d="M24 3 6 10v13c0 11 7.6 18.5 18 22 10.4-3.5 18-11 18-22V10L24 3Z" stroke="currentColor" stroke-width="2.4"/><circle cx="24" cy="23" r="9" stroke="currentColor" stroke-width="2.4"/><path d="M24 18v5l3.5 2.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><div><b>SGATyOC</b><small>Asistencia</small></div></div>
@@ -36,61 +41,53 @@
 <div class="off-banner" id="offBanner"><span style="flex:1"><b>Sin conexión.</b> Tus marcas se guardan en este teléfono y se enviarán al recuperar la conexión.</span><span class="chip warn" id="offCount" hidden><span class="bdot" id="offCountN">0</span></span></div>
 <main class="content">
 <section class="view active" id="view-marcacion"><div class="wrap narrow">
- <div class="card clock-card"><div class="greet" id="greet">—</div><div class="big-clock num" id="bigClock">--:--:--</div><div class="big-date" id="bigDate">—</div><div style="margin-top:8px"><span class="chip soft" id="myRefri">Refrigerio: —</span></div>
- <div class="steps" id="steps"><div class="step" data-s="INGRESO"><span class="pt">✓</span><small>Ingreso</small></div><div class="step" data-s="SALIDA_REF"><span class="pt">✓</span><small>Refrigerio</small></div><div class="step" data-s="RETORNO"><span class="pt">✓</span><small>Retorno</small></div><div class="step" data-s="SALIDA"><span class="pt">✓</span><small>Salida</small></div></div></div>
- <div class="card"><div class="card-h"><h3>Escanea el QR de la oficina</h3></div><div class="card-b">
-  <div class="reader-zone" id="readerZone"><div class="qr-ghost" id="qrGhost"></div><video id="qrVideo" playsinline muted></video><button class="torch-btn" id="torchBtn">⚡</button><div class="scan-frame"><span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span><div class="scan-line"></div></div><div class="scan-status" id="scanStatus">Apunta al QR de la oficina</div></div>
-  <div class="scan-controls"><button class="btn primary" id="scanBtn">Iniciar escaneo</button><span class="token-chip" id="tokenChip"><code id="tokenCode">······</code><span class="num" id="tokenSecs">30 s</span></span></div>
- </div></div>
- <button class="btn primary big" id="actionBtn">Registrar Ingreso</button>
- <p class="hint-c" id="actionHint">Requiere leer el QR de la oficina.</p>
- <div class="card"><div class="card-h"><h3>Tu ubicación al marcar</h3></div><div class="card-b"><div style="display:flex;gap:14px;align-items:center"><div style="flex:1"><div class="geo-row" id="gpsRow"><span>Estabilizando señal…</span></div><div class="geo-row" id="fenceRow" style="margin-bottom:0"><span id="fenceTxt">Verificando distancia…</span></div></div><div class="geofence-viz" id="geoViz"><span class="ring30"></span><span class="office"></span><span class="userdot" id="userDot"></span></div></div></div></div>
- <div class="card"><div class="card-h"><h3>Marcas de hoy</h3><span class="chip soft num" id="todayCount">0</span></div><div class="card-b thin" id="todayList"><div class="empty">Aún no registras marcas hoy.</div></div></div>
+<div class="card clock-card"><div class="greet" id="greet">—</div><div class="big-clock num" id="bigClock">--:--:--</div><div class="big-date" id="bigDate">—</div><div style="margin-top:8px"><span class="chip soft" id="myRefri">Refrigerio: —</span></div>
+<div class="steps" id="steps"><div class="step" data-s="INGRESO"><span class="pt">✓</span><small>Ingreso</small></div><div class="step" data-s="SALIDA_REF"><span class="pt">✓</span><small>Refrigerio</small></div><div class="step" data-s="RETORNO"><span class="pt">✓</span><small>Retorno</small></div><div class="step" data-s="SALIDA"><span class="pt">✓</span><small>Salida</small></div></div></div>
+<div class="card"><div class="card-h"><h3>Escanea el QR de la oficina</h3></div><div class="card-b">
+<div class="reader-zone" id="readerZone"><div class="qr-ghost" id="qrGhost"></div><video id="qrVideo" playsinline muted></video><button class="torch-btn" id="torchBtn">⚡</button><div class="scan-frame"><span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span><div class="scan-line"></div></div><div class="scan-status" id="scanStatus">Apunta al QR de la oficina</div></div>
+<div class="scan-controls"><button class="btn primary" id="scanBtn">Iniciar escaneo</button><span class="token-chip" id="tokenChip"><code id="tokenCode">······</code><span class="num" id="tokenSecs">30 s</span></span></div>
+</div></div>
+<button class="btn primary big" id="actionBtn">Registrar Ingreso</button>
+<p class="hint-c" id="actionHint">Requiere leer el QR de la oficina.</p>
+<div class="card"><div class="card-h"><h3>Tu ubicación al marcar</h3></div><div class="card-b"><div style="display:flex;gap:14px;align-items:center"><div style="flex:1"><div class="geo-row" id="gpsRow"><span>Estabilizando señal…</span></div><div class="geo-row" id="fenceRow" style="margin-bottom:0"><span id="fenceTxt">Verificando distancia…</span></div></div><div class="geofence-viz" id="geoViz"><span class="ring30"></span><span class="office"></span><span class="userdot" id="userDot"></span></div></div></div></div>
+<div class="card"><div class="card-h"><h3>Marcas de hoy</h3><span class="chip soft num" id="todayCount">0</span></div><div class="card-b thin" id="todayList"><div class="empty">Aún no registras marcas hoy.</div></div></div>
 </div></section>
 <section class="view" id="view-ruta"><div class="wrap narrow">
- <div class="card" id="rutaFormCard" style="margin-bottom:16px"><div class="card-h"><h3>Reporte de incidencia en ruta</h3></div><div class="card-b">
-  <p class="ruta-intro">Si vas a llegar tarde por un imprevisto, genera un reporte. Coordinación lo recibe al instante y queda como sustento.</p>
-  <div class="fld"><label>Tipo de evento *</label><select id="incTipo"><option value="">— Seleccionar —</option><option>Tráfico congestionado</option><option>Obra en la vía</option><option>Accidente de tránsito</option><option>Falla de transporte público</option><option>Otro</option></select></div>
-  <div class="fld"><label>Detalle (opcional)</label><textarea id="incDesc"></textarea></div>
-  <div class="gps-opt"><div><b>Adjuntar mi ubicación actual</b><small>Voluntario. Se captura solo al activarlo.</small></div><label class="switch"><input type="checkbox" id="incGps"><span class="tr"></span></label></div>
-  <div class="gps-state" id="incGpsState" hidden></div>
-  <button class="btn primary big" id="incSend">Generar reporte y abrir chat</button>
- </div></div>
- <div class="card" id="rutaChatCard" hidden style="margin-bottom:16px"><div class="card-h"><h3>Chat del reporte</h3><span class="chip soft num" id="chatReportId">—</span></div><div class="chat-box" id="chatBox"></div><div class="chat-input"><input id="chatText" placeholder="Escribe un mensaje…"><button class="btn primary sm" id="chatSend">Enviar</button></div><div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:10px"><button class="btn" id="waShare">Compartir por WhatsApp</button><button class="btn ghost" id="chatClose">Cerrar</button></div></div>
- <div class="card"><div class="card-h"><h3>Reportes del día</h3><input type="date" class="ctl" id="rutaDate"></div><div class="card-b thin" id="rutaList"></div></div>
+<div class="card" id="rutaFormCard" style="margin-bottom:16px"><div class="card-h"><h3>Reporte de incidencia en ruta</h3></div><div class="card-b">
+<p class="ruta-intro">Si vas a llegar tarde por un imprevisto, genera un reporte. Coordinación lo recibe al instante y queda como sustento.</p>
+<div class="fld"><label>Tipo de evento *</label><select id="incTipo"><option value="">— Seleccionar —</option><option>Tráfico congestionado</option><option>Obra en la vía</option><option>Accidente de tránsito</option><option>Falla de transporte público</option><option>Otro</option></select></div>
+<div class="fld"><label>Detalle (opcional)</label><textarea id="incDesc"></textarea></div>
+<div class="gps-opt"><div><b>Adjuntar mi ubicación actual</b><small>Voluntario. Se captura solo al activarlo.</small></div><label class="switch"><input type="checkbox" id="incGps"><span class="tr"></span></label></div>
+<div class="gps-state" id="incGpsState" hidden></div>
+<button class="btn primary big" id="incSend">Generar reporte y abrir chat</button>
+</div></div>
+<div class="card" id="rutaChatCard" hidden style="margin-bottom:16px"><div class="card-h"><h3>Chat del reporte</h3><span class="chip soft num" id="chatReportId">—</span></div><div class="chat-box" id="chatBox"></div><div class="chat-input"><input id="chatText" placeholder="Escribe un mensaje…"><button class="btn primary sm" id="chatSend">Enviar</button></div><div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:10px"><button class="btn" id="waShare">Compartir por WhatsApp</button><button class="btn ghost" id="chatClose">Cerrar</button></div></div>
+<div class="card"><div class="card-h"><h3>Reportes del día</h3><input type="date" class="ctl" id="rutaDate"></div><div class="card-b thin" id="rutaList"></div></div>
 </div></section>
 <section class="view" id="view-historial"><div class="wrap">
- <div class="hist-head"><div><h2>Mi historial</h2><p id="histUser" style="font-size:12.5px;color:var(--dim)">—</p></div><div class="month-nav"><button class="mn-btn" id="prevM">‹</button><span class="month-label" id="monthLabel">—</span><button class="mn-btn" id="nextM">›</button></div></div>
- <div class="sum-strip" id="histSummary"></div>
- <div class="card"><div class="hrow head"><span>Fecha</span><span>Ingreso</span><span>Sal. refr.</span><span>Retorno</span><span>Salida</span><span>Extra</span></div><div id="histBody"></div><div class="legend"><span><span class="ast">*</span> Hora justificada por Coordinación — pulsa el asterisco.</span></div></div>
+<div class="hist-head"><div><h2>Mi historial</h2><p id="histUser" style="font-size:12.5px;color:var(--dim)">—</p></div><div class="month-nav"><button class="mn-btn" id="prevM">‹</button><span class="month-label" id="monthLabel">—</span><button class="mn-btn" id="nextM">›</button></div></div>
+<div class="sum-strip" id="histSummary"></div>
+<div class="card"><div class="hrow head"><span>Fecha</span><span>Ingreso</span><span>Sal. refr.</span><span>Retorno</span><span>Salida</span><span>Extra</span></div><div id="histBody"></div><div class="legend"><span><span class="ast">*</span> Hora justificada por Coordinación — pulsa el asterisco.</span></div></div>
 </div></section>
 <section class="view" id="view-admin"><div class="wrap">
- <div id="adminLocked" class="card lock-box" hidden><h3>Acceso restringido</h3><p>Solo Coordinación y Subgerencia.</p></div>
- <div id="adminContent" hidden>
-  <div class="kpis"><div class="kpi" style="--kc:var(--ok)"><b class="num" id="kPresentes">0</b><span>Presentes</span></div><div class="kpi" style="--kc:var(--warn)"><b class="num" id="kTarde">0</b><span>Tardíos</span></div><div class="kpi" style="--kc:var(--danger)"><b class="num" id="kFalta">0</b><span>Faltas</span></div><div class="kpi" style="--kc:var(--info)"><b class="num" id="kTotal">0</b><span>Personas</span></div></div>
-  <div class="card" style="margin-bottom:16px"><div class="card-h"><h3>Personas de la oficina</h3><span class="chip soft num" id="admCount">0</span></div>
-   <div class="toolbar"><div class="search-box"><input id="admSearch" placeholder="Buscar DNI o apellidos…"></div><button class="btn primary" id="btnNuevoUser">Nueva persona</button><button class="btn" id="btnKiosk">Kiosco QR</button><button class="btn" id="btnExport">Exportar Excel</button></div>
-   <div class="toolbar" style="border-top:none"><label class="chk-row" style="margin:0"><input type="checkbox" id="selAll"> Seleccionar todo</label><select class="ctl" id="selGroup"><option value="13-14">Refrigerio 13–14</option><option value="14-15">Refrigerio 14–15</option></select><button class="btn sm" id="btnGroupApply">Asignar a seleccionados</button></div>
-   <div class="table-scroll"><table class="adm-table"><thead><tr><th></th><th>Persona</th><th>Tipo</th><th>Refrigerio</th><th>Estado</th><th></th></tr></thead><tbody id="admBody"></tbody></table></div>
-  </div>
-  <div class="card"><div class="card-h"><h3>Historial de justificaciones</h3></div><div class="card-b thin" id="auditList"></div></div>
- </div>
+<div id="adminLocked" class="card lock-box" hidden><h3>Acceso restringido</h3><p>Solo Coordinación y Subgerencia.</p></div>
+<div id="adminContent" hidden>
+<div class="kpis"><div class="kpi" style="--kc:var(--ok)"><b class="num" id="kPresentes">0</b><span>Presentes</span></div><div class="kpi" style="--kc:var(--warn)"><b class="num" id="kTarde">0</b><span>Tardíos</span></div><div class="kpi" style="--kc:var(--danger)"><b class="num" id="kFalta">0</b><span>Faltas</span></div><div class="kpi" style="--kc:var(--info)"><b class="num" id="kTotal">0</b><span>Personas</span></div></div>
+<div class="card" style="margin-bottom:16px"><div class="card-h"><h3>Personas de la oficina</h3><span class="chip soft num" id="admCount">0</span></div>
+<div class="toolbar"><div class="search-box"><input id="admSearch" placeholder="Buscar DNI o apellidos…"></div><button class="btn primary" id="btnNuevoUser">Nueva persona</button><button class="btn" id="btnKiosk">Kiosco QR</button><button class="btn" id="btnExport">Exportar Excel</button></div>
+<div class="toolbar" style="border-top:none"><label class="chk-row" style="margin:0"><input type="checkbox" id="selAll"> Seleccionar todo</label><select class="ctl" id="selGroup"><option value="13-14">Refrigerio 13–14</option><option value="14-15">Refrigerio 14–15</option></select><button class="btn sm" id="btnGroupApply">Asignar a seleccionados</button></div>
+<div class="table-scroll"><table class="adm-table"><thead><tr><th></th><th>Persona</th><th>Tipo</th><th>Refrigerio</th><th>Estado</th><th></th></tr></thead><tbody id="admBody"></tbody></table></div></div>
+<div class="card"><div class="card-h"><h3>Historial de justificaciones</h3></div><div class="card-b thin" id="auditList"></div></div>
 </div></section>
 <section class="view" id="view-ajustes"><div class="wrap narrow">
- <div class="card" style="margin-bottom:16px"><div class="card-h"><h3>Tu perfil</h3></div><div class="card-b"><div class="set-row"><div><b id="pfName">—</b><small id="pfMeta">—</small></div><button class="btn" id="btnLogout">Cerrar sesión</button></div></div></div>
- <div class="card" style="margin-bottom:16px"><div class="card-h"><h3>Apariencia</h3></div><div class="card-b"><div class="theme-grid" id="themeGrid"></div></div></div>
- <div class="card"><div class="card-h"><h3>Privacidad</h3></div><div class="card-b"><div class="set-row" style="border:none"><div><b>Política de protección de datos</b><small>Ley N° 29733 · derechos ARCO.</small></div><button class="btn" id="btnPolicy">Ver</button></div></div></div>
+<div class="card" style="margin-bottom:16px"><div class="card-h"><h3>Tu perfil</h3></div><div class="card-b"><div class="set-row"><div><b id="pfName">—</b><small id="pfMeta">—</small></div><button class="btn" id="btnLogout">Cerrar sesión</button></div></div></div>
+<div class="card" style="margin-bottom:16px"><div class="card-h"><h3>Apariencia</h3></div><div class="card-b"><div class="theme-grid" id="themeGrid"></div></div></div>
+<div class="card" style="margin-bottom:16px"><div class="card-h"><h3>Privacidad</h3></div><div class="card-b"><div class="set-row" style="border:none"><div><b>Política de protección de datos</b><small>Ley N° 29733 · derechos ARCO.</small></div><button class="btn" id="btnPolicy">Ver</button></div></div></div>
+<div class="card"><div class="card-h"><h3>Instalación</h3></div><div class="card-b">
+<div class="set-row" style="border:none"><div><b>Instalar en el teléfono</b><small>Añade un ícono al escritorio para abrir la app como si fuera nativa. Funciona incluso sin internet.</small></div><button class="btn primary" id="btnInstall" hidden>Instalar</button></div>
+<div class="set-row" id="installedMsg" hidden style="border-top:1px dashed var(--border);margin-top:14px;padding-top:14px"><div><b>Ya está instalada</b><small>Se abrirá desde el ícono del escritorio aunque no haya internet.</small></div></div>
+</div></div>
 </div></section>
- <div class="set-row" style="border-top:1px dashed var(--border);padding-top:14px">
-  <div>
-    <b>Instalar en el teléfono</b>
-    <small>Añade un ícono al escritorio para abrir la app como si fuera nativa. Funciona incluso sin internet.</small>
-  </div>
-  <button class="btn primary" id="btnInstall" hidden>Instalar</button>
-</div>
-<div class="set-row" id="installedMsg" hidden>
-  <div><b>Ya está instalada</b><small>Se abrirá desde el ícono del escritorio aunque no haya internet.</small></div>
-</div>
 </main></div></div>
 <nav class="bottomnav" id="botNav" hidden></nav>
 <div class="overlay" id="consentModal"><div class="modal"><div class="m-head"><div class="m-ico">📍</div><div><h2>Consentimiento de ubicación</h2><small>Ley N° 29733</small></div><button class="m-close" id="consentClose" style="display:none">✕</button></div><div class="m-body"><p style="font-size:13.5px;color:var(--dim)">La ubicación se lee <b>solo al marcar</b> y se descarta después. No hay seguimiento continuo.</p><div class="policy-box" id="policyBox">Responsable: Subgerencia de Administración Tributaria y Orientación al Contribuyente · MD San Martín de Porres. Finalidad: verificar asistencia y gestionar incidencias. La ubicación se captura solo al marcar o en un reporte voluntario. Derechos ARCO ante la oficina.</div><div style="display:flex;gap:10px;margin-top:14px"><button class="btn primary" id="btnConsentOk" style="flex:1;justify-content:center">Acepto</button><button class="btn ghost" id="btnPolicy2">Política</button></div></div></div></div>
@@ -99,7 +96,9 @@
 <div class="overlay" id="kioskModal"><div class="modal" style="max-width:420px"><div class="m-head"><div class="m-ico">🔳</div><div><h2>Kiosco QR</h2><small>Código de la oficina</small></div><button class="m-close" id="kioskClose">✕</button></div><div class="m-body" style="text-align:center"><canvas id="kioskCanvas" style="width:260px;height:260px;margin:0 auto;background:#fff;border-radius:12px"></canvas><div class="kiosk-code num" id="kioskCode">······</div><div class="micro" id="kioskSecs">Cambia en 30 s</div><p style="font-size:12px;color:var(--dim);margin-top:8px">Mantén esta pantalla visible. Cada persona la escanea al marcar.</p></div></div></div>
 <div class="loading-ov" id="loadingOv"><div class="spinner"></div><p>Procesando…</p></div>
 <div class="toast-host" id="toastHost"></div><div class="popover" id="popover"></div>
-<script src="core.js"></script><script src="ruta.js"></script><script src="panel.js">/* ---- Instalación PWA ---- */
+<script src="core.js"></script><script src="ruta.js"></script><script src="panel.js"></script>
+<script>
+/* ---- Instalación PWA ---- */
 var deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',function(e){
   e.preventDefault();deferredPrompt=e;
@@ -119,12 +118,11 @@ on('#btnInstall',async function(){
   deferredPrompt=null;
   $('#btnInstall').hidden=true;
 });
-/* Detectar si ya está instalada (modo standalone) */
 if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){
   var b=$('#btnInstall');if(b)b.hidden=true;
   var m=$('#installedMsg');if(m)m.hidden=false;
 }
-/* ---- Registro del Service Worker ---- */
+/* ---- Service Worker ---- */
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
     navigator.serviceWorker.register('/sw.js').then(function(reg){
