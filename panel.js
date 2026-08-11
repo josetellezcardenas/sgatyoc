@@ -89,3 +89,12 @@ var u=USUARIOS.filter(function(x){return x.dni===dni;})[0];
 if(u){USER=u;$('#loginBox').classList.remove('show');enterApp();}
 Cola.init().then(refreshSyncUI).then(function(){if(netOk())flushQueue();});
 }catch(err){console.error('boot:',err);toast('danger','Error de arranque: '+err.message);}})();
+/* Restablecer PIN desde el Panel */
+(function(){var mb=$('#userModal .m-body');if(!mb)return;
+var row=document.createElement('div');row.className='fld';
+row.innerHTML='<label>Seguridad</label><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" id="uResetPin" type="button">Restablecer PIN a 0000</button><button class="btn sm" id="uResetDev2" type="button">Liberar dispositivo</button></div>';
+mb.insertBefore(row,$('#userErr'));
+on('#uResetPin',function(){if(!editingDni){toast('warn','Guarda primero a la persona.');return;}
+api({action:'resetPin',dni:editingDni}).then(function(){toast('ok','PIN restablecido a 0000 y dispositivo liberado.');}).catch(function(){toast('danger','No se pudo restablecer el PIN.');});});
+on('#uResetDev2',function(){if(!editingDni){toast('warn','Guarda primero a la persona.');return;}
+api({action:'resetDevice',dni:editingDni}).then(function(){var u=USUARIOS.filter(function(x){return x.dni===editingDni;})[0];if(u)u.device='';$('#uDevTxt').textContent='Sin dispositivo autorizado';toast('ok','Dispositivo liberado.');}).catch(function(){toast('danger','No se pudo liberar el dispositivo.');});});})();
