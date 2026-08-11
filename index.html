@@ -8,9 +8,7 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="manifest" href="/manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SGATyOC">
-<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='36' fill='%230F4C81'/><text x='96' y='125' font-family='Arial' font-weight='900' font-size='30' fill='white' text-anchor='middle'>SGATyOC</text></svg>">
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -49,7 +47,7 @@
 </div></div>
 <button class="btn primary big" id="actionBtn">Registrar Ingreso</button>
 <p class="hint-c" id="actionHint">Requiere leer el QR de la oficina.</p>
-<div class="card"><div class="card-h"><h3>Tu ubicación al marcar</h3></div><div class="card-b"><div style="display:flex;gap:14px;align-items:center"><div style="flex:1"><div class="geo-row" id="gpsRow"><span>Estabilizando señal…</span></div><div class="geo-row" id="fenceRow" style="margin-bottom:0"><span id="fenceTxt">Verificando distancia…</span></div></div><div class="geofence-viz" id="geoViz"><span class="ring30"></span><span class="office"></span><span class="userdot" id="userDot"></span></div></div></div></div>
+<div class="card"><div class="card-h"><h3>Tu ubicación al marcar</h3></div><div class="card-b"><div style="display:flex;gap:14px;align-items:center"><div style="flex:1"><div class="geo-row" id="gpsRow"><span>Obteniendo ubicación…</span></div><div class="geo-row" id="fenceRow" style="margin-bottom:0"><span id="fenceTxt">Verificando distancia…</span></div></div><div class="geofence-viz" id="geoViz"><span class="ring30"></span><span class="office"></span><span class="userdot" id="userDot"></span></div></div></div></div>
 <div class="card"><div class="card-h"><h3>Marcas de hoy</h3><span class="chip soft num" id="todayCount">0</span></div><div class="card-b thin" id="todayList"><div class="empty">Aún no registras marcas hoy.</div></div></div>
 </div></section>
 <section class="view" id="view-ruta"><div class="wrap narrow">
@@ -92,45 +90,16 @@
 <nav class="bottomnav" id="botNav" hidden></nav>
 <div class="overlay" id="consentModal"><div class="modal"><div class="m-head"><div class="m-ico">📍</div><div><h2>Consentimiento de ubicación</h2><small>Ley N° 29733</small></div><button class="m-close" id="consentClose" style="display:none">✕</button></div><div class="m-body"><p style="font-size:13.5px;color:var(--dim)">La ubicación se lee <b>solo al marcar</b> y se descarta después. No hay seguimiento continuo.</p><div class="policy-box" id="policyBox">Responsable: Subgerencia de Administración Tributaria y Orientación al Contribuyente · MD San Martín de Porres. Finalidad: verificar asistencia y gestionar incidencias. La ubicación se captura solo al marcar o en un reporte voluntario. Derechos ARCO ante la oficina.</div><div style="display:flex;gap:10px;margin-top:14px"><button class="btn primary" id="btnConsentOk" style="flex:1;justify-content:center">Acepto</button><button class="btn ghost" id="btnPolicy2">Política</button></div></div></div></div>
 <div class="overlay" id="editModal"><div class="modal"><div class="m-head"><div class="m-ico">✏️</div><div><h2>Justificar marcación</h2><small>El dato original no se borra</small></div><button class="m-close" id="regClose">✕</button></div><div class="m-body"><div class="fld"><label>Persona *</label><select id="regEmp"></select></div><div class="fld"><label>Marcación *</label><select id="regTipo"><option>Ingreso</option><option>Salida a refrigerio</option><option>Retorno de refrigerio</option><option>Salida</option></select></div><div class="fld"><label>Nueva hora *</label><input type="text" class="tp-manual" id="tpManual" maxlength="5" inputmode="numeric" placeholder="HH:MM"><div style="font-size:12px;color:var(--dim);margin-top:6px">Hora: <b id="tpPrev">—</b> · escribe 4 dígitos, ej. 0805</div></div><div class="fld"><label>Motivo *</label><select id="regJust"><option value="">— Seleccionar —</option><option>Olvido de marcación</option><option>Permiso de la jefatura</option><option>Salud / enfermedad</option><option>Trabajo en ruta</option><option>Otro</option></select></div><div class="fld"><label>Detalle (opcional)</label><textarea id="regDesc"></textarea></div><div class="form-err" id="regErr"></div><div style="display:flex;gap:10px"><button class="btn" id="regCancel" style="flex:1;justify-content:center">Cancelar</button><button class="btn primary" id="regSubmit" style="flex:1.4;justify-content:center">Guardar</button></div></div></div></div>
-<div class="overlay" id="userModal"><div class="modal"><div class="m-head"><div class="m-ico">👤</div><div><h2 id="userTitle">Nueva persona</h2></div><button class="m-close" id="userClose">✕</button></div><div class="m-body"><div class="fld"><label>Nombre completo *</label><input type="text" id="uNom"></div><div class="fld"><label>DNI *</label><input type="text" id="uDni" maxlength="8" inputmode="numeric"></div><div class="fld"><label>Tipo *</label><select id="uTipo"></select></div><div class="fld"><label>Refrigerio</label><select id="uRefri"><option value="13-14">13:00–14:00</option><option value="14-15">14:00–15:00</option></select></div><div class="fld"><label>Dispositivo autorizado</label><div style="display:flex;gap:8px;align-items:center"><small id="uDevTxt" style="color:var(--dim);flex:1">Sin dispositivo</small><button class="btn sm" id="uResetDev">Restablecer dispositivo</button></div></div><div class="form-err" id="userErr"></div><div style="display:flex;gap:10px"><button class="btn" id="userDelete" style="color:var(--danger);border-color:var(--danger)" hidden>Eliminar</button><button class="btn" id="userCancel" style="flex:1;justify-content:center">Cancelar</button><button class="btn primary" id="userSave" style="flex:1.4;justify-content:center">Guardar</button></div></div></div></div>
+<div class="overlay" id="userModal"><div class="modal"><div class="m-head"><div class="m-ico">👤</div><div><h2 id="userTitle">Nueva persona</h2></div><button class="m-close" id="userClose">✕</button></div><div class="m-body"><div class="fld"><label>Nombre completo *</label><input type="text" id="uNom"></div><div class="fld"><label>DNI *</label><input type="text" id="uDni" maxlength="8" inputmode="numeric"></div><div class="fld"><label>Tipo *</label><select id="uTipo"></select></div><div class="fld"><label>Refrigerio</label><select id="uRefri"><option value="13-14">13:00–14:00</option><option value="14-15">14:00–15:00</option></select></div><div class="fld"><label>Dispositivo (informativo)</label><div style="display:flex;gap:8px;align-items:center"><small id="uDevTxt" style="color:var(--dim);flex:1">Sin registro</small></div></div><div class="form-err" id="userErr"></div><div style="display:flex;gap:10px"><button class="btn" id="userDelete" style="color:var(--danger);border-color:var(--danger)" hidden>Eliminar</button><button class="btn" id="userCancel" style="flex:1;justify-content:center">Cancelar</button><button class="btn primary" id="userSave" style="flex:1.4;justify-content:center">Guardar</button></div></div></div></div>
 <div class="overlay" id="kioskModal"><div class="modal" style="max-width:420px"><div class="m-head"><div class="m-ico">🔳</div><div><h2>Kiosco QR</h2><small>Código de la oficina</small></div><button class="m-close" id="kioskClose">✕</button></div><div class="m-body" style="text-align:center"><canvas id="kioskCanvas" style="width:260px;height:260px;margin:0 auto;background:#fff;border-radius:12px"></canvas><div class="kiosk-code num" id="kioskCode">······</div><div class="micro" id="kioskSecs">Cambia en 30 s</div><p style="font-size:12px;color:var(--dim);margin-top:8px">Mantén esta pantalla visible. Cada persona la escanea al marcar.</p></div></div></div>
 <div class="loading-ov" id="loadingOv"><div class="spinner"></div><p>Procesando…</p></div>
 <div class="toast-host" id="toastHost"></div><div class="popover" id="popover"></div>
 <script src="core.js"></script><script src="ruta.js"></script><script src="panel.js"></script>
 <script>
-/* ---- Instalación PWA ---- */
 var deferredPrompt=null;
-window.addEventListener('beforeinstallprompt',function(e){
-  e.preventDefault();deferredPrompt=e;
-  var b=$('#btnInstall');if(b){b.hidden=false;b.textContent='Instalar';}
-});
-window.addEventListener('appinstalled',function(){
-  deferredPrompt=null;
-  var b=$('#btnInstall');if(b)b.hidden=true;
-  var m=$('#installedMsg');if(m)m.hidden=false;
-  toast('ok','Aplicación instalada. Ábrela desde el ícono del escritorio.');
-});
-on('#btnInstall',async function(){
-  if(!deferredPrompt){toast('info','La app ya está instalada o este navegador no permite instalación.');return;}
-  deferredPrompt.prompt();
-  var result=await deferredPrompt.userChoice;
-  if(result.outcome==='accepted')toast('ok','Instalando…');
-  deferredPrompt=null;
-  $('#btnInstall').hidden=true;
-});
-if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){
-  var b=$('#btnInstall');if(b)b.hidden=true;
-  var m=$('#installedMsg');if(m)m.hidden=false;
-}
-/* ---- Service Worker ---- */
-if('serviceWorker' in navigator){
-  window.addEventListener('load',function(){
-    navigator.serviceWorker.register('/sw.js').then(function(reg){
-      console.log('SW registrado:',reg.scope);
-    }).catch(function(err){
-      console.warn('SW falló:',err);
-    });
-  });
-}
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;var b=$('#btnInstall');if(b){b.hidden=false;b.textContent='Instalar';}});
+window.addEventListener('appinstalled',function(){deferredPrompt=null;var b=$('#btnInstall');if(b)b.hidden=true;var m=$('#installedMsg');if(m)m.hidden=false;toast('ok','Aplicación instalada.');});
+on('#btnInstall',async function(){if(!deferredPrompt){toast('info','Este navegador no permite instalación ahora.');return;}deferredPrompt.prompt();var r=await deferredPrompt.userChoice;if(r.outcome==='accepted')toast('ok','Instalando…');deferredPrompt=null;$('#btnInstall').hidden=true;});
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(e){console.warn('SW:',e);});});}
 </script>
 </body></html>
