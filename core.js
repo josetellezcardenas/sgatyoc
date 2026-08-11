@@ -49,33 +49,15 @@ $('#tbTitle').textContent=TITLES[v];hidePopover();window.scrollTo({top:0});
 if(v==='historial')renderHistory();if(v==='admin')renderAdmin();if(v==='ruta')renderRuta();}
 $('#sideNav').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(b)go(b.getAttribute('data-view'));});
 $('#botNav').addEventListener('click',function(e){var b=e.target.closest('[data-view]');if(b)go(b.getAttribute('data-view'));});
-var apiBusy=false;
-function api(payload,timeout){
-  timeout=timeout||15000;
-  var t0=Date.now();
-  return fetch(CONFIG.GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
-    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-    .then(function(j){if(!j||!j.ok)throw new Error((j&&j.error)||'error');return j;})
-    .catch(function(e){if(Date.now()-t0>timeout)throw new Error('timeout');throw e;});
-}
-function syncAll(){
-  return Promise.all([api({action:'getUsers'}),api({action:'getMarks'}),api({action:'getJust'}),api({action:'getIncidents'})])
-    .then(function(arr){
-      USUARIOS=(arr[0].users||[]).map(function(u){return{dni:String(u.DNI),nom:String(u.Nombre||''),tipo:String(u.Tipo||'Oficina'),refri:String(u.Refrigerio||'13-14'),device:String(u.DeviceID||''),estado:String(u.Estado||'Activo')};});
-      S.allMarks=arr[1].marks||[];
-      REGHIST=(arr[2].list||[]).map(function(a){return{id:String(a.ID||''),admin:String(a.DNI_Admin||''),emp:String(a.DNI_Afectado||''),campo:String(a.Campo||''),ahora:String(a.Hora_Nueva||''),motivo:String(a.Motivo||''),fecha:String(a.Fecha_Registro||'')};});
-      S.incidents=(arr[3].list||[]).map(function(i){return{id:String(i.ID_Reporte||''),dni:String(i.DNI||''),fecha:String(i.Fecha||''),ts:String(i.Hora||''),tipo:String(i.Tipo||''),desc:String(i.Detalle||''),geo:(i.Lat&&i.Lng)?{lat:+i.Lat,lng:+i.Lng}:null,msgs:[]};});
-      store.set('sgatyoc_users',JSON.stringify(USUARIOS));
-      store.set('sgatyoc_marks_all',JSON.stringify(S.allMarks));
-      store.set('sgatyoc_reghist',JSON.stringify(REGHIST));
-      store.set('sgatyoc_incidents',JSON.stringify(S.incidents));
-      return true;
-    }).catch(function(e){
-      console.warn('syncAll offline:',e);
-      try{USUARIOS=JSON.parse(store.get('sgatyoc_users',''))||[];REGHIST=JSON.parse(store.get('sgatyoc_reghist',''))||[];S.incidents=JSON.parse(store.get('sgatyoc_incidents',''))||[];}catch(e){}
-      return false;
-    });
-}
+function api(payload){return fetch(CONFIG.GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).then(function(j){if(!j||!j.ok)throw new Error((j&&j.error)||'error');return j;});}
+function syncAll(){return Promise.all([api({action:'getUsers'}),api({action:'getMarks'}),api({action:'getJust'}),api({action:'getIncidents'})]).then(function(arr){
+USUARIOS=(arr[0].users||[]).map(function(u){return{dni:String(u.DNI),nom:String(u.Nombre||''),tipo:String(u.Tipo||'Oficina'),refri:String(u.Refrigerio||'13-14'),device:String(u.DeviceID||''),estado:String(u.Estado||'Activo')};});
+S.allMarks=arr[1].marks||[];
+REGHIST=(arr[2].list||[]).map(function(a){return{id:String(a.ID||''),admin:String(a.DNI_Admin||''),emp:String(a.DNI_Afectado||''),campo:String(a.Campo||''),ahora:String(a.Hora_Nueva||''),motivo:String(a.Motivo||''),fecha:String(a.Fecha_Registro||'')};});
+S.incidents=(arr[3].list||[]).map(function(i){return{id:String(i.ID_Reporte||''),dni:String(i.DNI||''),fecha:String(i.Fecha||''),ts:String(i.Hora||''),tipo:String(i.Tipo||''),desc:String(i.Detalle||''),geo:(i.Lat&&i.Lng)?{lat:+i.Lat,lng:+i.Lng}:null,msgs:[]};});
+store.set('sgatyoc_users',JSON.stringify(USUARIOS));store.set('sgatyoc_marks_all',JSON.stringify(S.allMarks));store.set('sgatyoc_reghist',JSON.stringify(REGHIST));store.set('sgatyoc_incidents',JSON.stringify(S.incidents));return true;
+}).catch(function(e){console.warn('syncAll offline:',e);
+try{USUARIOS=JSON.parse(store.get('sgatyoc_users',''))||[];REGHIST=JSON.parse(store.get('sgatyoc_reghist',''))||[];S.incidents=JSON.parse(store.get('sgatyoc_incidents',''))||[];}catch(e){}return false;});}
 function currentTotp(){var w=Math.floor(Date.now()/30000),h=(w*2654435761)>>>0;h=(h^(h>>>13))>>>0;var s=String(h%1000000);while(s.length<6)s='0'+s;return s;}
 function tick(){var d=new Date();var hh=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
 var bc=$('#bigClock');if(bc)bc.textContent=hh;var t=$('#tbClock');if(t&&t.firstChild&&t.firstChild.nodeType===3)t.firstChild.textContent=hh;
@@ -84,24 +66,15 @@ var td=$('#tbDate');if(td)td.textContent=pad(d.getDate())+'/'+pad(d.getMonth()+1
 if(S.qr){var rest=Math.max(0,Math.round((S.qr.exp-Date.now())/1000));var ts=$('#tokenSecs');if(ts)ts.textContent=rest+' s';
 if(rest<=0){S.qr=null;var c=$('#tokenChip');if(c)c.classList.remove('show');updateActionUI();}}}
 setInterval(tick,1000);
-function getFix(){
-  return new Promise(function(res,rej){
-    if(!navigator.geolocation){
-      res({lat:CONFIG.OFICINA.lat+(Math.random()-.5)*1.2e-4,lng:CONFIG.OFICINA.lng+(Math.random()-.5)*1.2e-4,acc:Math.round(6+Math.random()*9),sim:true});
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(function(pos){
-      res({lat:pos.coords.latitude,lng:pos.coords.longitude,acc:Math.round(pos.coords.accuracy),sim:false});
-    },function(err){
-      console.warn('GPS error:',err);
-      res({lat:CONFIG.OFICINA.lat+(Math.random()-.5)*1.2e-4,lng:CONFIG.OFICINA.lng+(Math.random()-.5)*1.2e-4,acc:Math.round(6+Math.random()*9),sim:true,err:err.message||'desconocido'});
-    },{enableHighAccuracy:true,timeout:15000,maximumAge:60000});
-  });
-}
+function getFix(){return new Promise(function(res){
+if(!navigator.geolocation){res({lat:CONFIG.OFICINA.lat+(Math.random()-.5)*1.2e-4,lng:CONFIG.OFICINA.lng+(Math.random()-.5)*1.2e-4,acc:Math.round(6+Math.random()*9),sim:true});return;}
+navigator.geolocation.getCurrentPosition(function(pos){res({lat:pos.coords.latitude,lng:pos.coords.longitude,acc:Math.round(pos.coords.accuracy),sim:false});},
+function(err){console.warn('GPS:',err);res({lat:CONFIG.OFICINA.lat+(Math.random()-.5)*1.2e-4,lng:CONFIG.OFICINA.lng+(Math.random()-.5)*1.2e-4,acc:Math.round(6+Math.random()*9),sim:true});},
+{enableHighAccuracy:true,timeout:15000,maximumAge:60000});});}
 function stabilizeGPS(){S.geo.fix=null;var g=$('#gpsRow');if(g)g.innerHTML='<span>Obteniendo ubicación…</span>';var f=$('#fenceTxt');if(f)f.textContent='Verificando distancia…';
 getFix().then(function(x){x.dist=Math.round(hav(x.lat,x.lng,CONFIG.OFICINA.lat,CONFIG.OFICINA.lng));S.geo.fix=x;renderGeo();});}
 function renderGeo(){var f=S.geo.fix;if(!f)return;var dentro=f.dist<=CONFIG.RADIO_M;
-$('#gpsRow').innerHTML='<span>Ubicación obtenida · ±'+f.acc+' m'+(f.sim?' (simulada)':'')+'</span>';
+$('#gpsRow').innerHTML='<span>Ubicación obtenida · ±'+f.acc+' m'+(f.sim?' (aprox.)':'')+'</span>';
 $('#fenceTxt').textContent=dentro?'En la oficina · '+f.dist+' m':'Fuera del punto de marcado · +'+f.dist+' m';
 $('#geoViz').classList.toggle('out',!dentro);var a=38*Math.PI/180,r=Math.min(f.dist,140)/140*44;
 $('#userDot').style.transform='translate('+(Math.cos(a)*r).toFixed(1)+'px,'+(-Math.sin(a)*r).toFixed(1)+'px)';}
@@ -154,7 +127,7 @@ updateActionUI();refreshSyncUI();
 if(mk.offline)toast('warn','<b>'+MINI[st]+'</b> guardado en el teléfono.');
 else toast('ok','<b>'+MINI[st]+'</b> registrado a las <b class="num">'+mk.hora+'</b>.',{undo:undoLast});});})
 .catch(function(e){console.error(e);toast('danger','Error al marcar. Reintenta.');}).then(function(){$('#loadingOv').classList.remove('show');updateActionUI();});});
-function undoLast(){if(!S.lastMark)return;var m=S.lastMark;S.today=S.today.filter(function(x){return x.id!==m.id;});S.allMarks=S.allMarks.filter(function(x){return x.id!==m.id;});saveToday();saveAllMarks();S.lastMark=null;updateActionUI();refreshSyncUI();toast('info','Marcación deshecha (local). La copia en el sistema queda registrada.');}
+function undoLast(){if(!S.lastMark)return;var m=S.lastMark;S.today=S.today.filter(function(x){return x.id!==m.id;});S.allMarks=S.allMarks.filter(function(x){return x.id!==m.id;});saveToday();saveAllMarks();S.lastMark=null;updateActionUI();refreshSyncUI();toast('info','Marcación deshecha (local).');}
 var Cola={db:null,idb:false,init:function(){return new Promise(function(res){try{if(!window.indexedDB)throw 0;var r=indexedDB.open('sgatyoc_q',1);r.onupgradeneeded=function(e){var d=e.target.result;if(!d.objectStoreNames.contains('cola'))d.createObjectStore('cola',{keyPath:'id',autoIncrement:true});};r.onsuccess=function(e){Cola.db=e.target.result;Cola.idb=true;res();};r.onerror=function(){res();};}catch(e){res();}});},
 push:function(i){if(this.idb)return new Promise(function(res){var t=Cola.db.transaction('cola','readwrite');t.objectStore('cola').add(i);t.oncomplete=res;t.onerror=res;});var a=this.ls();a.push(i);store.set('sgatyoc_cola',JSON.stringify(a));return Promise.resolve();},
 all:function(){if(this.idb)return new Promise(function(res){try{var q=Cola.db.transaction('cola','readonly').objectStore('cola').getAll();q.onsuccess=function(){res(q.result||[]);};q.onerror=function(){res([]);};}catch(e){res([]);}});return Promise.resolve(this.ls());},
@@ -165,40 +138,45 @@ function flushQueue(){if(S.flushing)return;Cola.all().then(function(it){if(!it.l
 it.forEach(function(x){c=c.then(function(){return api(x);}).then(function(){return Cola.rm(x.id);}).then(refreshSyncUI);});
 c.then(function(){S.flushing=false;toast('ok',it.length+' marca(s) enviadas al sistema.');});});}
 window.addEventListener('online',function(){refreshSyncUI();flushQueue();});window.addEventListener('offline',refreshSyncUI);
+/* ---- LOGIN con Enter y teclado visible ---- */
 var pendingUser=null;
-var elDni=$('#loginDni'),elPin=$('#loginPin');
-if(elDni)elDni.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,8);
+var elDni=$('#loginDni'),elPin=$('#loginPin'),pinNewEl=$('#pinNew'),pinNew2El=$('#pinNew2');
+function kbScroll(el){if(!el)return;el.addEventListener('focus',function(){setTimeout(function(){el.scrollIntoView({block:'center',behavior:'smooth'});},250);});}
+kbScroll(elDni);kbScroll(elPin);kbScroll(pinNewEl);kbScroll(pinNew2El);
+if(elDni){elDni.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,8);
 var ok=e.target.value.length===8;$('#fldPin').hidden=!ok;$('#loginErr').classList.remove('show');
 if(ok&&USUARIOS.length&&!USUARIOS.some(function(u){return u.dni===e.target.value;})){$('#loginErr').textContent='El DNI no está registrado. Verifica los dígitos.';$('#loginErr').classList.add('show');$('#fldPin').hidden=true;}
 else if(ok&&elPin)elPin.focus();});
-if(elPin)elPin.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
+elDni.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();
+if(elDni.value.length===8){$('#fldPin').hidden=false;elPin.focus();}
+else{$('#loginErr').textContent='Ingresa tu DNI (8 dígitos).';$('#loginErr').classList.add('show');}}});}
+if(elPin){elPin.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
+elPin.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();$('#loginNext').click();}});}
 on('#loginNext',function(){var dni=elDni?elDni.value:'',pin=elPin?elPin.value:'';var box=$('#loginErr');box.classList.remove('show');
 if(dni.length!==8){box.textContent='Ingresa tu DNI (8 dígitos).';box.classList.add('show');return;}
 if(pin.length<4){box.textContent='Ingresa tu PIN.';box.classList.add('show');return;}
 $('#loginNext').disabled=true;$('#loginNext').textContent='Verificando…';
 api({action:'login',dni:dni,pin:pin}).then(function(r){
-  var u=r.user;if(!u){box.textContent='Credenciales inválidas.';box.classList.add('show');return;}
-  if(u.tipo!=='Kiosco'){
-    if(u.device&&u.device!==devId()){box.textContent='Dispositivo no autorizado. Coordina el restablecimiento.';box.classList.add('show');return;}
-    if(!u.device){api({action:'setDevice',dni:dni,dev:devId()}).catch(function(){});}
-  }
-  pendingUser={dni:u.dni,nom:u.nom,tipo:u.tipo,refri:u.refri,device:u.device||devId(),_isNewPin:(pin==='0000'&&u.tipo!=='Kiosco')};
-  if(pendingUser._isNewPin){$('#loginForm').hidden=true;$('#pinChange').hidden=false;}
-  else finishLogin(pendingUser);
-}).catch(function(e){
-  console.error('login err:',e);
-  box.textContent='No se pudo verificar. Revisa tu conexión o intenta de nuevo.';box.classList.add('show');
+var u=r.user;if(!u){box.textContent='Credenciales inválidas.';box.classList.add('show');return;}
+if(u.tipo!=='Kiosco'){
+if(u.device&&u.device!==devId()){box.textContent='PIN correcto, pero este dispositivo no está autorizado. Usa “Restablecer dispositivo” desde el Panel o el enlace de recuperación.';box.classList.add('show');return;}
+if(!u.device){api({action:'setDevice',dni:dni,dev:devId()}).catch(function(){});}}
+pendingUser={dni:u.dni,nom:u.nom,tipo:u.tipo,refri:u.refri,device:u.device||devId(),_isNewPin:(pin==='0000'&&u.tipo!=='Kiosco')};
+if(pendingUser._isNewPin){$('#loginForm').hidden=true;$('#pinChange').hidden=false;setTimeout(function(){pinNewEl&&pinNewEl.focus();},150);}
+else finishLogin(pendingUser);
+}).catch(function(e){console.error('login:',e);box.textContent='No se pudo verificar. Revisa tu conexión e intenta de nuevo.';box.classList.add('show');
 }).then(function(){$('#loginNext').disabled=false;$('#loginNext').textContent='Continuar';});});
-var pinNewEl=$('#pinNew'),pinNew2El=$('#pinNew2');
-if(pinNewEl)pinNewEl.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
-if(pinNew2El)pinNew2El.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
-on('#pinSave',function(){var a=pinNewEl.value,b=pinNew2El.value,box=$('#pinErr');box.classList.remove('show');
+if(pinNewEl){pinNewEl.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
+pinNewEl.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();pinNew2El&&pinNew2El.focus();}});}
+if(pinNew2El){pinNew2El.addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
+pinNew2El.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();$('#pinSave').click();}});}
+on('#pinSave',function(){var a=pinNewEl?pinNewEl.value:'',b=pinNew2El?pinNew2El.value:'';var box=$('#pinErr');box.classList.remove('show');
 if(a.length<4){box.textContent='El PIN debe tener 4 a 6 dígitos.';box.classList.add('show');return;}
 if(a!==b){box.textContent='Los PIN no coinciden.';box.classList.add('show');return;}
 $('#pinSave').disabled=true;$('#pinSave').textContent='Guardando…';
 api({action:'setPin',dni:pendingUser.dni,pin:a}).then(function(){
-  pendingUser.pin=a;pendingUser._isNewPin=false;finishLogin(pendingUser);
-}).catch(function(e){box.textContent='No se pudo guardar el PIN. Reintenta.';box.classList.add('show');
+pendingUser._isNewPin=false;finishLogin(pendingUser);toast('ok','PIN actualizado correctamente.');
+}).catch(function(e){console.error('setPin:',e);box.textContent='No se pudo guardar el PIN. Reintenta.';box.classList.add('show');
 }).then(function(){$('#pinSave').disabled=false;$('#pinSave').textContent='Guardar y entrar';});});
 function finishLogin(u){USER=u;
 if($('#loginRemember').checked||u.tipo==='Kiosco')store.set('sgatyoc_session',u.dni);else{try{sessionStorage.setItem('sgatyoc_session',u.dni);}catch(e){}}
