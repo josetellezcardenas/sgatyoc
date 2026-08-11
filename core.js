@@ -4,7 +4,9 @@ var store={get:function(k,d){try{var v=localStorage.getItem(k);return v===null?d
 var CONFIG={GAS_URL:'https://script.google.com/macros/s/AKfycbz58EsLuBObgRlsobdTJyxCmv4wYdlG42u13j3bYpdlfjf0xhpxhh8hqBTr50urtIxl/exec',OFICINA:{lat:-11.99361,lng:-77.09778,nombre:'MD San Martín de Porres'},RADIO_M:30,TOKEN_VIDA_S:30};
 function $(s){return document.querySelector(s);}function $$(s){return Array.prototype.slice.call(document.querySelectorAll(s));}
 function on(s,f){var el=$(s);if(el)el.addEventListener('click',f);return el;}
-function pad(n){return (n<10?'0':'')+n;}function fmtHM(m){return pad(Math.floor(m/60)%24)+':'+pad(m%60);}
+function pad(n){return (n<10?'0':'')+n;}
+function fmtHM(m){return pad(Math.floor(m/60)%24)+':'+pad(m%60);}
+function parseHM(t){if(t==null)return null;var p=String(t).split(':');if(p.length<2)return null;var h=+p[0],m=+p[1];if(isNaN(h)||isNaN(m))return null;return h*60+m;}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 function hav(a,b,c,d){var R=6371000,r=function(x){return x*Math.PI/180;};var q=Math.sin(r(c-a)/2)*Math.sin(r(c-a)/2)+Math.cos(r(a))*Math.cos(r(c))*Math.sin(r(d-b)/2)*Math.sin(r(d-b)/2);return 2*R*Math.asin(Math.sqrt(q));}
