@@ -102,3 +102,5 @@ select.ctl,input.ctl{background:var(--surface2);border:1px solid var(--border);b
 .popover b.p-t{display:block;color:var(--primary);margin-bottom:2px}.popover .p-row{color:var(--dim);margin-top:4px}
 @media (min-width:920px){.sidebar{display:flex}.bottomnav{display:none!important}.content{padding:24px 28px}.modal{border-radius:18px;margin:auto}.overlay{padding:24px;align-items:center}.toast-host{left:auto;right:24px;transform:none;bottom:24px}}
 @media (max-width:700px){.hrow{grid-template-columns:1fr 1fr;gap:8px}.hrow.head{display:none}.hcell::before{content:attr(data-l);font-size:9px;font-weight:800;text-transform:uppercase;color:var(--dim)}.hcell{flex-direction:column;align-items:flex-start}.hdate{grid-column:1/-1;flex-direction:row;gap:8px}.tb-clock{display:none}}
+#loginBox{align-items:center;padding:14px}
+#loginBox .modal{max-height:88dvh;margin:auto}
