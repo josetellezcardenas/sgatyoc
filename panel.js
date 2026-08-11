@@ -1,7 +1,6 @@
 'use strict';
 function estadoDe(u){if(u.dni==='54784385')return{k:'FAL',t:'Falta'};var h=parseInt(u.dni.slice(-2),10);if(h%9===0)return{k:'TAR',t:'Tarde'};return{k:'PRE',t:'Presente'};}
-function horaIng(u){var s=estadoDe(u).k;if(s!=='PRE')return '—';var r=mulberry32(parseInt(u.dni,10))();return fmtHM(472+Math.floor(r*16));}
-function renderAdmin(){$('#adminLocked').hidden=canManage();$('#adminContent').hidden=!canManage();if(!canManage())return;
+function renderAdmin(){var L=$('#adminLocked'),C=$('#adminContent');if(!L||!C)return;L.hidden=canManage();C.hidden=!canManage();if(!canManage())return;
 var q=$('#admSearch').value.trim().toLowerCase();
 var list=USUARIOS.filter(function(u){return u.tipo!=='Kiosco'&&(!q||u.dni.indexOf(q)!==-1||u.nom.toLowerCase().indexOf(q)!==-1);});
 $('#admCount').textContent=list.length+' personas';
@@ -30,7 +29,7 @@ $('#userDelete').hidden=!u;$('#userErr').classList.remove('show');$('#userModal'
 function closeUserModal(){$('#userModal').classList.remove('show');}
 $('#btnNuevoUser').addEventListener('click',function(){openUserModal(null);});
 $('#userClose').addEventListener('click',closeUserModal);$('#userCancel').addEventListener('click',closeUserModal);
-$('#uResetDev').addEventListener('click',function(){if(!editingDni)return;var u=USUARIOS.filter(function(x){return x.dni===editingDni;})[0];if(!u)return;u.device='';saveUsers();$('#uDevTxt').textContent='Sin dispositivo autorizado';toast('info','Dispositivo restablecido. Podrá vincularse de nuevo al iniciar sesión.');});
+$('#uResetDev').addEventListener('click',function(){if(!editingDni)return;var u=USUARIOS.filter(function(x){return x.dni===editingDni;})[0];if(!u)return;u.device='';saveUsers();$('#uDevTxt').textContent='Sin dispositivo autorizado';toast('info','Dispositivo restablecido.');});
 $('#userSave').addEventListener('click',function(){var nom=$('#uNom').value.trim(),dni=$('#uDni').value.trim();var errs=[];
 if(nom.length<5)errs.push('Escribe el nombre completo.');if(!/^\d{8}$/.test(dni))errs.push('DNI: 8 dígitos.');
 if(!editingDni&&USUARIOS.some(function(u){return u.dni===dni;}))errs.push('Ya existe ese DNI.');
@@ -73,31 +72,6 @@ $('#btnPolicy').addEventListener('click',function(){$('#policyBox').classList.ad
 $('#btnPolicy2').addEventListener('click',function(){$('#policyBox').classList.toggle('show');});
 $('#btnConsentOk').addEventListener('click',function(){S.consent=true;store.set('sgatyoc_consent','1');$('#consentModal').classList.remove('show');stabilizeGPS();toast('ok','Consentimiento registrado.');});
 $('#consentClose').addEventListener('click',function(){$('#consentModal').classList.remove('show');});
-/* ---- Login / sesión / dispositivo ---- */
-var pendingUser=null;
-$('#loginDni').addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,8);
-var ok=e.target.value.length===8;$('#fldPin').hidden=!ok;$('#loginErr').classList.remove('show');
-if(ok&&!USUARIOS.some(function(u){return u.dni===e.target.value;})){$('#loginErr').textContent='El DNI no está registrado. Verifica los dígitos.';$('#loginErr').classList.add('show');$('#fldPin').hidden=true;}
-else if(ok)$('#loginPin').focus();});
-$('#loginPin').addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
-$('#loginNext').addEventListener('click',function(){var dni=$('#loginDni').value,pin=$('#loginPin').value;
-var u=USUARIOS.filter(function(x){return x.dni===dni;})[0];var box=$('#loginErr');
-if(!u){box.textContent='Ingresa tu DNI (8 dígitos).';box.classList.add('show');return;}
-if(u.pin!==pin){box.textContent='PIN incorrecto.';box.classList.add('show');return;}
-if(u.tipo!=='Kiosco'){if(u.device&&u.device!==devId()){box.textContent='Dispositivo no reconocido. Coordina el restablecimiento.';box.classList.add('show');return;}
-if(!u.device)u.device=devId();}
-pendingUser=u;saveUsers();
-if(u.pin==='0000'&&u.tipo!=='Kiosco'){$('#loginForm').hidden=true;$('#pinChange').hidden=false;return;}
-finishLogin(u);});
-$('#pinNew').addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
-$('#pinNew2').addEventListener('input',function(e){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);});
-$('#pinSave').addEventListener('click',function(){var a=$('#pinNew').value,b=$('#pinNew2').value,box=$('#pinErr');
-if(a.length<4){box.textContent='El PIN debe tener 4 a 6 dígitos.';box.classList.add('show');return;}
-if(a!==b){box.textContent='Los PIN no coinciden.';box.classList.add('show');return;}
-pendingUser.pin=a;saveUsers();box.classList.remove('show');finishLogin(pendingUser);});
-function finishLogin(u){USER=u;
-if($('#loginRemember').checked||u.tipo==='Kiosco')store.set('sgatyoc_session',u.dni);else sessionStorage.setItem('sgatyoc_session',u.dni);
-$('#loginBox').classList.remove('show');enterApp();}
 function logout(){store.del('sgatyoc_session');try{sessionStorage.removeItem('sgatyoc_session');}catch(e){}
 USER=null;$('#appShell').hidden=true;$('#botNav').hidden=true;$('#loginBox').classList.add('show');
 $('#loginForm').hidden=false;$('#pinChange').hidden=true;$('#loginDni').value='';$('#loginPin').value='';$('#fldPin').hidden=true;}
@@ -109,8 +83,9 @@ $('#pfName').textContent=USER.nom;$('#pfMeta').textContent=USER.tipo+' · DNI '+
 applyTheme(S.theme);buildNav();tick();updateScanUI();updateActionUI();renderHistory();renderAdmin();renderRuta();refreshSyncUI();
 if(USER.tipo==='Kiosco'){openKiosk();return;}
 go('marcacion');if(!S.consent)$('#consentModal').classList.add('show');else stabilizeGPS();}
-/* ---- arranque ---- */
-(function(){var dni=store.get('sgatyoc_session','')||(()=>{try{return sessionStorage.getItem('sgatyoc_session')||'';}catch(e){return '';}})();
+(function(){try{
+var dni=store.get('sgatyoc_session','');if(!dni){try{dni=sessionStorage.getItem('sgatyoc_session')||'';}catch(e){}}
 var u=USUARIOS.filter(function(x){return x.dni===dni;})[0];
-if(u){USER=u;$('#loginBox').classList.remove('show');enterApp();}else{logout();}
-Cola.init().then(refreshSyncUI).then(function(){if(netOk())flushQueue();});})();
+if(u){USER=u;$('#loginBox').classList.remove('show');enterApp();}
+Cola.init().then(refreshSyncUI).then(function(){if(netOk())flushQueue();});
+}catch(err){console.error('boot:',err);toast('danger','Error de arranque: '+err.message);}})();
